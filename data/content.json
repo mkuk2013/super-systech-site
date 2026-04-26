@@ -1,0 +1,225 @@
+{
+  "settings": {
+    "siteName": "Super Sys-Tech Computers Centre Umerkot",
+    "shortName": "STC Umerkot",
+    "tagline": "Where Dreams Are Polished Into Skills",
+    "established": "1997",
+    "phone": "0238-571540",
+    "mobile": "0300-3198050",
+    "email": "info@stcumerkot.com",
+    "address": "1st Floor, Jameel Market, Umerkot, Sindh, Pakistan",
+    "mapUrl": "https://maps.google.com/?q=Jameel+Market+Umerkot",
+    "facebookUrl": "https://www.facebook.com/SuperSysTechComputersUmerkot",
+    "youtubeUrl": "https://www.youtube.com/@stcumerkot",
+    "linkedinUrl": "https://www.linkedin.com/company/stcumerkot",
+    "whatsappNumber": "03003198050",
+    "affiliations": [
+      { "name": "S.B.T.E Karachi", "logo": "/images/sbte.png" },
+      { "name": "NAVTTC", "logo": "/images/navttc.png" },
+      { "name": "STEVTA Sindh", "logo": "/images/stevta.png" },
+      { "name": "TTB Sindh", "logo": "/images/ttb.png" }
+    ]
+  },
+  "hero": {
+    "badge": "YOUR GATEWAY TO IT EXCELLENCE • SINCE 1997",
+    "title": "Where Dreams Are",
+    "titleHighlight": "Polished Into",
+    "titleEnd": "Skills",
+    "subtitle": "Super Sys-Tech Computers Centre Umerkot empowers learners with industry-relevant computer skills and hands-on training. Board-certified diplomas affiliated with SBTE, NAVTTC, STEVTA & TTB Sindh.",
+    "ctaPrimary": "ADMISSION OPEN 2025",
+    "ctaSecondary": "EXPLORE PROGRAMS",
+    "backgroundImage": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1920&q=80",
+    "stats": [
+      { "value": "28+", "label": "Years of Service" },
+      { "value": "8,500+", "label": "Graduated Alumni" },
+      { "value": "15+", "label": "Courses Offered" }
+    ]
+  },
+  "about": {
+    "title": "Leading with Educational Integrity",
+    "titleHighlight": "Educational Integrity",
+    "principalName": "Ramesh Kumar",
+    "principalTitle": "Principal & Director",
+    "principalImage": "/images/ramesh.jpeg",
+    "principalMessage": "Our mission at Super Sys-Tech has always been to bridge the gap between rural potential and global technology standards. After nearly three decades, our success is reflected in the thousands of professionals leading the digital landscape today.",
+    "achievements": [
+      "SBTE & NAVTTC Affiliated Institute",
+      "STEVTA & TTB Sindh Recognized",
+      "28+ Years of IT Excellence in Umerkot",
+      "8,500+ Successful Graduates",
+      "Government-Funded NAVTTC Training Partner",
+      "Career Guidance in IT & Freelancing"
+    ],
+    "description": "Super Sys-Tech Computers Centre Umerkot was founded in 1997 by Ramesh Kumar with a vision to bring quality computer education to the rural areas of Sindh. Over the past 28 years, the institution has grown into Umerkot's premier gateway to IT excellence — producing thousands of skilled graduates who are now contributing to Pakistan's digital economy through freelancing, web development, graphic design, and more.",
+    "mission": "To empower learners with industry-relevant computer skills and hands-on training — whether you're a beginner or looking to upgrade your tech skills.",
+    "vision": "To be the leading institution in Sindh for vocational and technical education, where dreams are polished into skills."
+  },
+  "courses": [
+    {
+      "id": "1",
+      "title": "D.I.T (Diploma in Information Technology)",
+      "board": "S.B.T.E Karachi",
+      "duration": "1 Year",
+      "description": "Our flagship 1-year diploma officially affiliated with the Sindh Board of Technical Education. Covers software, hardware, networking & office tools.",
+      "icon": "GraduationCap",
+      "featured": true
+    },
+    {
+      "id": "2",
+      "title": "C.I.T (Certificate in IT)",
+      "board": "S.B.T.E Karachi",
+      "duration": "6 Months",
+      "description": "Fast-track certificate program focusing on essential computer applications and foundation technology skills.",
+      "icon": "ShieldCheck",
+      "featured": true
+    },
+    {
+      "id": "3",
+      "title": "Web Development",
+      "board": "Professional Certificate",
+      "duration": "6 Months",
+      "description": "Complete web development training covering HTML, CSS, JavaScript & WordPress. Build responsive websites from scratch.",
+      "icon": "Code",
+      "featured": true
+    },
+    {
+      "id": "4",
+      "title": "Graphic Design & Video Editing",
+      "board": "T.T.B Sindh / Professional",
+      "duration": "6 Months",
+      "description": "Master Adobe Photoshop, Illustrator, Premiere Pro and Canva. Create professional designs and edit videos for social media.",
+      "icon": "Palette",
+      "featured": true
+    },
+    {
+      "id": "5",
+      "title": "E-Commerce",
+      "board": "Professional Certificate",
+      "duration": "3 Months",
+      "description": "Learn to sell on Daraz, Amazon & Shopify. Complete training in product listing, inventory management & online store setup.",
+      "icon": "ShoppingCart",
+      "featured": true
+    },
+    {
+      "id": "6",
+      "title": "Freelancing & Digital Marketing",
+      "board": "Professional Certificate",
+      "duration": "3 Months",
+      "description": "Start earning online through freelancing platforms. Learn digital marketing, SEO, social media marketing & client handling.",
+      "icon": "Briefcase",
+      "featured": true
+    },
+    {
+      "id": "7",
+      "title": "Programming (Python, C/C++, Java)",
+      "board": "Professional Certificate",
+      "duration": "6 Months",
+      "description": "Learn programming from scratch. Master Python, C/C++ and Java with hands-on projects and real-world applications.",
+      "icon": "Code",
+      "featured": false
+    },
+    {
+      "id": "8",
+      "title": "Office Tools (MS Word, Excel, PowerPoint)",
+      "board": "Institutional Certificate",
+      "duration": "3 Months",
+      "description": "Professional training in Microsoft Office Suite — Word, Excel, PowerPoint. Essential skills for every office job.",
+      "icon": "BookOpen",
+      "featured": false
+    },
+    {
+      "id": "9",
+      "title": "NAVTTC / PM Youth Programs",
+      "board": "Federal Government",
+      "duration": "Varies",
+      "description": "Official implementing partner for government-funded free skill development initiatives including NAVTTC and BBSHRRDB programs.",
+      "icon": "ShieldCheck",
+      "featured": false
+    }
+  ],
+  "team": [
+    {
+      "id": "1",
+      "name": "Ramesh Kumar",
+      "role": "Principal & Director",
+      "image": "/images/ramesh.jpeg",
+      "bio": "Founder of STC Umerkot with 28+ years of experience in technical education."
+    },
+    {
+      "id": "2",
+      "name": "Faculty Member",
+      "role": "Senior Instructor - DIT",
+      "image": "",
+      "bio": "Experienced IT professional specializing in hardware and networking."
+    },
+    {
+      "id": "3",
+      "name": "Faculty Member",
+      "role": "Graphic Design Instructor",
+      "image": "",
+      "bio": "Expert in Adobe Creative Suite and modern digital design."
+    }
+  ],
+  "gallery": [
+    {
+      "id": "1",
+      "title": "Computer Lab",
+      "image": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600",
+      "category": "Campus"
+    },
+    {
+      "id": "2",
+      "title": "Students in Class",
+      "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600",
+      "category": "Classes"
+    },
+    {
+      "id": "3",
+      "title": "Certificate Distribution",
+      "image": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600",
+      "category": "Events"
+    },
+    {
+      "id": "4",
+      "title": "Annual Day Ceremony",
+      "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600",
+      "category": "Events"
+    },
+    {
+      "id": "5",
+      "title": "Practical Session",
+      "image": "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600",
+      "category": "Classes"
+    },
+    {
+      "id": "6",
+      "title": "Campus Building",
+      "image": "https://images.unsplash.com/photo-1562774053-701939374585?w=600",
+      "category": "Campus"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "1",
+      "name": "Ahmed Ali",
+      "course": "D.I.T Graduate 2023",
+      "message": "STC Umerkot transformed my career. The practical training and certified diploma helped me land my first IT job within months of graduating.",
+      "rating": 5
+    },
+    {
+      "id": "2",
+      "name": "Saira Banu",
+      "course": "Graphic Design 2022",
+      "message": "The graphic design course at STC gave me skills that are in demand everywhere. I now work as a freelance designer on international platforms.",
+      "rating": 5
+    },
+    {
+      "id": "3",
+      "name": "Zubair Khan",
+      "course": "Web Development 2024",
+      "message": "Amazing faculty and hands-on approach to learning. The web development course covered everything from basics to advanced frameworks.",
+      "rating": 5
+    }
+  ],
+  "admissions": []
+}
