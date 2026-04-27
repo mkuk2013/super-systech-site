@@ -14,10 +14,22 @@
     "linkedinUrl": "https://www.linkedin.com/company/stcumerkot",
     "whatsappNumber": "03003198050",
     "affiliations": [
-      { "name": "S.B.T.E Karachi", "logo": "/images/sbte.png" },
-      { "name": "NAVTTC", "logo": "/images/navttc.png" },
-      { "name": "STEVTA Sindh", "logo": "/images/stevta.png" },
-      { "name": "TTB Sindh", "logo": "/images/ttb.png" }
+      {
+        "name": "S.B.T.E Karachi",
+        "logo": "/images/sbte.png"
+      },
+      {
+        "name": "NAVTTC",
+        "logo": "/images/navttc.png"
+      },
+      {
+        "name": "STEVTA Sindh",
+        "logo": "/images/stevta.png"
+      },
+      {
+        "name": "TTB Sindh",
+        "logo": "/images/ttb.png"
+      }
     ]
   },
   "hero": {
@@ -30,9 +42,18 @@
     "ctaSecondary": "EXPLORE PROGRAMS",
     "backgroundImage": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1920&q=80",
     "stats": [
-      { "value": "28+", "label": "Years of Service" },
-      { "value": "8,500+", "label": "Graduated Alumni" },
-      { "value": "15+", "label": "Courses Offered" }
+      {
+        "value": "28+",
+        "label": "Years of Service"
+      },
+      {
+        "value": "8,500+",
+        "label": "Graduated Alumni"
+      },
+      {
+        "value": "15+",
+        "label": "Courses Offered"
+      }
     ]
   },
   "about": {
