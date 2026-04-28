@@ -78,84 +78,84 @@
   "courses": [
     {
       "id": "1",
-      "title": "D.I.T (Diploma in Information Technology)",
-      "board": "S.B.T.E Karachi",
-      "duration": "1 Year",
-      "description": "Our flagship 1-year diploma officially affiliated with the Sindh Board of Technical Education. Covers software, hardware, networking & office tools.",
+      "title": "Diploma in Information Technology (D.I.T)",
+      "board": "S.B.T.E & T.T.B @ Sindh",
+      "duration": "12 Months",
+      "description": "Comprehensive 1-year diploma covering ICT, Office Automation, Web Designing, C/C++ Programming, Networking, Hardware (A+), Desktop Publishing, and Databases (SQL/MySQL).",
       "icon": "GraduationCap",
       "featured": true
     },
     {
       "id": "2",
-      "title": "C.I.T (Certificate in IT)",
-      "board": "S.B.T.E Karachi",
-      "duration": "6 Months",
-      "description": "Fast-track certificate program focusing on essential computer applications and foundation technology skills.",
+      "title": "Certificate in Information Technology (C.I.T)",
+      "board": "S.B.T.E & T.T.B @ Sindh",
+      "duration": "06 Months",
+      "description": "Fast-track 6-months certificate program focusing on essential computer applications, office automation, and foundation technology skills.",
       "icon": "ShieldCheck",
       "featured": true
     },
     {
       "id": "3",
-      "title": "Web Development",
-      "board": "Professional Certificate",
-      "duration": "6 Months",
-      "description": "Complete web development training covering HTML, CSS, JavaScript & WordPress. Build responsive websites from scratch.",
-      "icon": "Code",
-      "featured": true
-    },
-    {
-      "id": "4",
-      "title": "Graphic Design & Video Editing",
-      "board": "T.T.B Sindh / Professional",
-      "duration": "6 Months",
-      "description": "Master Adobe Photoshop, Illustrator, Premiere Pro and Canva. Create professional designs and edit videos for social media.",
+      "title": "Graphics Designing",
+      "board": "T.T.B @ Sindh",
+      "duration": "06 Months",
+      "description": "Master professional design tools like Adobe Photoshop, Corel Draw, and Inpage for desktop publishing and digital media.",
       "icon": "Palette",
       "featured": true
     },
     {
-      "id": "5",
-      "title": "E-Commerce",
-      "board": "Professional Certificate",
-      "duration": "3 Months",
-      "description": "Learn to sell on Daraz, Amazon & Shopify. Complete training in product listing, inventory management & online store setup.",
-      "icon": "ShoppingCart",
-      "featured": true
-    },
-    {
-      "id": "6",
-      "title": "Freelancing & Digital Marketing",
-      "board": "Professional Certificate",
-      "duration": "3 Months",
-      "description": "Start earning online through freelancing platforms. Learn digital marketing, SEO, social media marketing & client handling.",
-      "icon": "Briefcase",
-      "featured": true
-    },
-    {
-      "id": "7",
-      "title": "Programming (Python, C/C++, Java)",
-      "board": "Professional Certificate",
-      "duration": "6 Months",
-      "description": "Learn programming from scratch. Master Python, C/C++ and Java with hands-on projects and real-world applications.",
+      "id": "4",
+      "title": "Website Designing & Development",
+      "board": "T.T.B @ Sindh",
+      "duration": "06 Months",
+      "description": "Complete web development training from front-end design to back-end logic, building responsive and dynamic websites.",
       "icon": "Code",
+      "featured": true
+    },
+    {
+      "id": "5",
+      "title": "Computerized Accounting",
+      "board": "T.T.B @ Sindh",
+      "duration": "06 Months",
+      "description": "Learn modern computerized accounting techniques to manage finances, ledgers, and accounts for businesses.",
+      "icon": "Briefcase",
       "featured": false
     },
     {
-      "id": "8",
-      "title": "Office Tools (MS Word, Excel, PowerPoint)",
-      "board": "Institutional Certificate",
-      "duration": "3 Months",
-      "description": "Professional training in Microsoft Office Suite — Word, Excel, PowerPoint. Essential skills for every office job.",
+      "id": "6",
+      "title": "One Year Composing Course",
+      "board": "Institutional",
+      "duration": "12 Months",
+      "description": "Extensive training in typing, document composing, and advanced office publishing.",
       "icon": "BookOpen",
       "featured": false
     },
     {
-      "id": "9",
-      "title": "NAVTTC / PM Youth Programs",
-      "board": "Federal Government",
-      "duration": "Varies",
-      "description": "Official implementing partner for government-funded free skill development initiatives including NAVTTC and BBSHRRDB programs.",
-      "icon": "ShieldCheck",
+      "id": "7",
+      "title": "Office Automation Advance",
+      "board": "Institutional",
+      "duration": "04 Months",
+      "description": "Advanced training in Microsoft Word, Excel, PowerPoint, Internet handling, and operating systems.",
+      "icon": "Monitor",
       "featured": false
+    },
+    {
+      "id": "8",
+      "title": "Digital Marketing & SEO",
+      "board": "Institutional",
+      "duration": "04 Months",
+      "description": "Learn to optimize websites for search engines (SEO) and execute successful digital marketing campaigns.",
+      "icon": "TrendingUp",
+      "featured": true
+    },
+    {
+      "id": "9",
+      "title": "Freelancing Course",
+      "board": "Institutional",
+      "duration": "04 Months",
+      "description": "Start earning online! Learn how to get clients and work on platforms like Fiverr, Upwork, Guru, and Freelancer.",
+      "icon": "DollarSign",
+      "featured": true
     }
   ],
   "team": [
