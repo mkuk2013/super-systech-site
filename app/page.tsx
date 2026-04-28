@@ -82,16 +82,22 @@ export default async function Home() {
             </AnimatedSection>
           </div>
 
-          {/* Affiliations & Stats bar */}
           <div className="mt-20 space-y-12">
             <AnimatedSection delay={0.35}>
-              <div className="flex flex-wrap justify-center gap-4">
-                {settings.affiliations.map((a: any, i: number) => (
-                  <div key={i} className="flex flex-col items-center justify-center gap-2 bg-white/5 border border-white/10 rounded-xl p-3 min-w-[140px] text-center hover:bg-white/10 transition-colors">
-                    <img src={a.logo} alt={a.name} className="w-10 h-10 object-contain drop-shadow-md" />
-                    <span className="text-slate-300 text-[10px] sm:text-xs font-bold leading-tight">{a.name}</span>
-                  </div>
-                ))}
+              <div className="relative overflow-hidden py-4">
+                {/* Gradient Masks for smooth fade edges */}
+                <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-navy to-transparent z-10" />
+                <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-navy to-transparent z-10" />
+                
+                <div className="flex animate-marquee hover:[animation-play-state:paused] whitespace-nowrap gap-6 items-center w-max">
+                  {/* Double the items for seamless infinite loop */}
+                  {[...settings.affiliations, ...settings.affiliations].map((a: any, i: number) => (
+                    <div key={i} className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-3 hover:bg-white/10 transition-colors cursor-pointer">
+                      <img src={a.logo} alt={a.name} className="w-8 h-8 object-contain drop-shadow-md" />
+                      <span className="text-slate-300 text-xs font-bold tracking-wide">{a.name}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </AnimatedSection>
 

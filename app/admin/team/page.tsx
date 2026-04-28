@@ -164,7 +164,7 @@ export default function AdminTeamPage() {
                 {uploading ? "Uploading..." : "Upload Photo from Computer"}
                 <input type="file" hidden accept="image/*" onChange={handleFileUpload} />
               </Button>
-              <Typography variant="caption" display="block" sx={{ mt: 1, color: 'text.secondary' }}>
+              <Typography variant="caption" sx={{ mt: 1, color: 'text.secondary', display: 'block' }}>
                 Recommended: Square image (500x500px)
               </Typography>
             </Box>
