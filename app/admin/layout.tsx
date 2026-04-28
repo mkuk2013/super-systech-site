@@ -62,7 +62,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
           </Avatar>
           <Box>
             <Typography variant="h6" color="text.primary" fontSize="1.1rem">STC Admin</Typography>
-            <Typography variant="caption" color="text.secondary" fontWeight={700}>CONTROL PANEL</Typography>
+            <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 700 }}>CONTROL PANEL</Typography>
           </Box>
         </Box>
       </Toolbar>

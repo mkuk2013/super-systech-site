@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from "react";
 import {
-  Box, Typography, Grid, Card, CardContent, TextField, Button, IconButton,
+  Box, Typography, Card, CardContent, TextField, Button, IconButton,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   Chip, CircularProgress, Paper, InputAdornment, ToggleButton, ToggleButtonGroup,
   Tooltip
 } from "@mui/material";
 import {
-  Trash2, CheckCircle, XCircle, Clock, Search, Delete, Check, Close
+  CheckCircle, Search, Delete, Check, Close, AccessTime
 } from "@mui/icons-material";
 
 export default function AdminAdmissionsPage() {
@@ -68,16 +68,16 @@ export default function AdminAdmissionsPage() {
       {/* Stats Cards */}
       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' }, gap: 3, mb: 4 }}>
         {[
-          { label: "Total", value: stats.total, color: "primary.main", bg: "primary.light" },
-          { label: "Pending", value: stats.pending, color: "warning.main", bg: "warning.light" },
-          { label: "Approved", value: stats.approved, color: "success.main", bg: "success.light" },
-          { label: "Rejected", value: stats.rejected, color: "error.main", bg: "error.light" },
+          { label: "Total", value: stats.total, color: "primary.main" },
+          { label: "Pending", value: stats.pending, color: "warning.main" },
+          { label: "Approved", value: stats.approved, color: "success.main" },
+          { label: "Rejected", value: stats.rejected, color: "error.main" },
         ].map((s, i) => (
           <Box key={i}>
             <Card sx={{ textAlign: 'center', borderTop: '4px solid', borderTopColor: s.color }}>
               <CardContent>
-                <Typography variant="h4" fontWeight={700} color="text.primary">{s.value}</Typography>
-                <Typography variant="caption" color="text.secondary" fontWeight={700} sx={{ textTransform: 'uppercase' }}>
+                <Typography variant="h4" color="text.primary" sx={{ fontWeight: 700 }}>{s.value}</Typography>
+                <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 700, textTransform: 'uppercase' }}>
                   {s.label}
                 </Typography>
               </CardContent>
@@ -96,12 +96,14 @@ export default function AdminAdmissionsPage() {
               size="small"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search fontSize="small" color="disabled" />
-                  </InputAdornment>
-                ),
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search fontSize="small" color="disabled" />
+                    </InputAdornment>
+                  ),
+                }
               }}
             />
             <ToggleButtonGroup
@@ -125,18 +127,18 @@ export default function AdminAdmissionsPage() {
         <Table sx={{ minWidth: 800 }}>
           <TableHead sx={{ bgcolor: 'grey.50' }}>
             <TableRow>
-              <TableCell><Typography variant="caption" fontWeight={700} color="text.secondary">STUDENT</Typography></TableCell>
-              <TableCell><Typography variant="caption" fontWeight={700} color="text.secondary">COURSE</Typography></TableCell>
-              <TableCell><Typography variant="caption" fontWeight={700} color="text.secondary">PHONE / CNIC</Typography></TableCell>
-              <TableCell><Typography variant="caption" fontWeight={700} color="text.secondary">STATUS</Typography></TableCell>
-              <TableCell align="right"><Typography variant="caption" fontWeight={700} color="text.secondary">ACTIONS</Typography></TableCell>
+              <TableCell><Typography variant="caption" color="text.secondary" sx={{ fontWeight: 700 }}>STUDENT</Typography></TableCell>
+              <TableCell><Typography variant="caption" color="text.secondary" sx={{ fontWeight: 700 }}>COURSE</Typography></TableCell>
+              <TableCell><Typography variant="caption" color="text.secondary" sx={{ fontWeight: 700 }}>PHONE / CNIC</Typography></TableCell>
+              <TableCell><Typography variant="caption" color="text.secondary" sx={{ fontWeight: 700 }}>STATUS</Typography></TableCell>
+              <TableCell align="right"><Typography variant="caption" color="text.secondary" sx={{ fontWeight: 700 }}>ACTIONS</Typography></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filtered.map((a: any) => (
               <TableRow key={a.id} hover>
                 <TableCell>
-                  <Typography variant="body2" fontWeight={700}>{a.studentName}</Typography>
+                  <Typography variant="body2" sx={{ fontWeight: 700 }}>{a.studentName}</Typography>
                   <Typography variant="caption" color="text.secondary">S/O {a.fatherName}</Typography>
                 </TableCell>
                 <TableCell>
@@ -149,7 +151,7 @@ export default function AdminAdmissionsPage() {
                 <TableCell>
                   <Chip
                     size="small"
-                    icon={a.status === "Approved" ? <CheckCircle /> : a.status === "Rejected" ? <XCircle /> : <Clock />}
+                    icon={a.status === "Approved" ? <CheckCircle /> : a.status === "Rejected" ? <Close /> : <AccessTime />}
                     label={a.status}
                     color={a.status === "Approved" ? "success" : a.status === "Rejected" ? "error" : "warning"}
                     variant="outlined"

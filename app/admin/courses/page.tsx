@@ -99,7 +99,7 @@ export default function AdminCoursesPage() {
               <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <Box>
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}>
-                    <Typography variant="subtitle1" fontWeight={700} color="text.primary">
+                    <Typography variant="subtitle1" sx={{ fontWeight: 700 }} color="text.primary">
                       {course.title}
                     </Typography>
                     {course.featured && (
@@ -185,7 +185,7 @@ export default function AdminCoursesPage() {
                     onChange={(e) => setEditing({ ...editing, featured: e.target.checked })}
                   />
                 }
-                label={<Typography variant="body2" fontWeight={700}>Featured on Home</Typography>}
+                label={<Typography variant="body2" sx={{ fontWeight: 700 }}>Featured on Home</Typography>}
               />
             </Box>
           </Box>

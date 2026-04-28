@@ -118,7 +118,7 @@ export default function AdminGalleryPage() {
                 sx={{ bgcolor: 'grey.100' }}
               />
               <CardContent sx={{ flexGrow: 1 }}>
-                <Typography variant="subtitle2" fontWeight={700} noWrap>{item.title || "Untitled"}</Typography>
+                <Typography variant="subtitle2" sx={{ fontWeight: 700 }} noWrap>{item.title || "Untitled"}</Typography>
                 <Typography variant="caption" color="text.secondary">{item.category}</Typography>
               </CardContent>
               <CardActions sx={{ justifyContent: 'flex-end', p: 1 }}>

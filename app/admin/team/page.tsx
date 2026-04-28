@@ -116,8 +116,8 @@ export default function AdminTeamPage() {
                 >
                   <Person sx={{ fontSize: 60, color: 'grey.300' }} />
                 </Avatar>
-                <Typography variant="h6" fontWeight={700} gutterBottom>{member.name}</Typography>
-                <Typography variant="caption" color="primary" fontWeight={700} sx={{ textTransform: 'uppercase', tracking: 1, display: 'block', mb: 2 }}>
+                <Typography variant="h6" sx={{ fontWeight: 700 }} gutterBottom>{member.name}</Typography>
+                <Typography variant="caption" color="primary" sx={{ fontWeight: 700, textTransform: 'uppercase', tracking: 1, display: 'block', mb: 2 }}>
                   {member.role}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 3, minHeight: 40 }}>

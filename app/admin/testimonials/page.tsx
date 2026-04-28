@@ -87,7 +87,7 @@ export default function AdminTestimonialsPage() {
               <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                 <Box sx={{ flexGrow: 1 }}>
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}>
-                    <Typography variant="subtitle1" fontWeight={700} color="text.primary">
+                    <Typography variant="subtitle1" sx={{ fontWeight: 700 }} color="text.primary">
                       {item.name}
                     </Typography>
                     <Typography variant="caption" color="text.secondary">
