@@ -61,7 +61,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
             <School />
           </Avatar>
           <Box>
-            <Typography variant="h6" color="text.primary" fontSize="1.1rem">STC Admin</Typography>
+            <Typography variant="h6" color="text.primary" sx={{ fontSize: "1.1rem" }}>STC Admin</Typography>
             <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 700 }}>CONTROL PANEL</Typography>
           </Box>
         </Box>
@@ -91,7 +91,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                   <ListItemIcon sx={{ minWidth: 40, color: active ? '#fff' : 'inherit' }}>
                     {link.icon}
                   </ListItemIcon>
-                  <ListItemText primary={link.label} primaryTypographyProps={{ fontSize: '0.875rem', fontWeight: 600 }} />
+                  <ListItemText primary={link.label} slotProps={{ primary: { sx: { fontSize: '0.875rem', fontWeight: 600 } } }} />
                 </ListItemButton>
               </ListItem>
             );
