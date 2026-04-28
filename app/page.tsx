@@ -90,8 +90,8 @@ export default async function Home() {
                 <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-navy to-transparent z-10" />
                 
                 <div className="flex animate-marquee hover:[animation-play-state:paused] whitespace-nowrap gap-6 items-center w-max">
-                  {/* Double the items for seamless infinite loop */}
-                  {[...settings.affiliations, ...settings.affiliations].map((a: any, i: number) => (
+                  {/* Multiple copies to ensure seamless infinite loop regardless of screen size */}
+                  {[...settings.affiliations, ...settings.affiliations, ...settings.affiliations, ...settings.affiliations].map((a: any, i: number) => (
                     <div key={i} className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-3 hover:bg-white/10 transition-colors cursor-pointer">
                       <img src={a.logo} alt={a.name} className="w-8 h-8 object-contain drop-shadow-md" />
                       <span className="text-slate-300 text-xs font-bold tracking-wide">{a.name}</span>
