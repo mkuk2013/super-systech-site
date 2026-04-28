@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "STC Umerkot - Where Dreams Are Polished Into Skills. SBTE, NAVTTC, STEVTA certified programs in IT, Graphic Design, Web Development, E-Commerce, Freelancing and more.",
   keywords: "STC Umerkot, Super Sys-Tech, computer institute, DIT, SBTE, NAVTTC, Umerkot, computer courses, freelancing, ecommerce",
   icons: {
-    icon: "/images/logo.png",
-    shortcut: "/images/logo.png",
+    icon: "/images/logo_ssc.png",
+    shortcut: "/images/logo_ssc.png",
   },
 };
 
