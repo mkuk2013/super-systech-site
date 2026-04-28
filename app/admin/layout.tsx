@@ -4,31 +4,43 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
-  LayoutDashboard, FileText, Users, Image, MessageSquare,
-  Settings, LogOut, GraduationCap, Menu, X, Home,
-  BookOpen, Star, ChevronRight,
-} from "lucide-react";
+  AppBar, Box, CssBaseline, Drawer, IconButton, List, ListItem, ListItemButton,
+  ListItemIcon, ListItemText, Toolbar, Typography, Button, Avatar, Divider, useMediaQuery, useTheme
+} from "@mui/material";
+import {
+  Menu as MenuIcon, Dashboard, Home, Info, Book, Group, Photo, Star,
+  School, Settings, Logout
+} from "@mui/icons-material";
+import ThemeProviderRegistry from "./ThemeProviderRegistry";
+
+const drawerWidth = 260;
 
 const sidebarLinks = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/hero", label: "Hero Section", icon: Home },
-  { href: "/admin/about", label: "About / Principal", icon: FileText },
-  { href: "/admin/courses", label: "Courses", icon: BookOpen },
-  { href: "/admin/team", label: "Faculty / Team", icon: Users },
-  { href: "/admin/gallery", label: "Gallery", icon: Image },
-  { href: "/admin/testimonials", label: "Testimonials", icon: Star },
-  { href: "/admin/admissions", label: "Admissions", icon: GraduationCap },
-  { href: "/admin/settings", label: "Site Settings", icon: Settings },
+  { href: "/admin", label: "Dashboard", icon: <Dashboard /> },
+  { href: "/admin/hero", label: "Hero Section", icon: <Home /> },
+  { href: "/admin/about", label: "About / Principal", icon: <Info /> },
+  { href: "/admin/courses", label: "Courses", icon: <Book /> },
+  { href: "/admin/team", label: "Faculty / Team", icon: <Group /> },
+  { href: "/admin/gallery", label: "Gallery", icon: <Photo /> },
+  { href: "/admin/testimonials", label: "Testimonials", icon: <Star /> },
+  { href: "/admin/admissions", label: "Admissions", icon: <School /> },
+  { href: "/admin/settings", label: "Site Settings", icon: <Settings /> },
 ];
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   if (pathname === "/admin/login") {
     return <>{children}</>;
   }
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
   const handleLogout = async () => {
     await fetch("/api/auth", { method: "DELETE" });
@@ -41,107 +53,146 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return pathname.startsWith(href);
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* Mobile Overlay */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
-      <aside
-        className={`fixed top-0 left-0 bottom-0 w-72 bg-navy z-50 transform transition-transform duration-300 lg:translate-x-0 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <div className="flex flex-col h-full">
-          {/* Logo */}
-          <div className="p-6 border-b border-white/10">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gold rounded-lg flex items-center justify-center">
-                  <GraduationCap className="text-navy" size={22} />
-                </div>
-                <div>
-                  <h2 className="text-white font-bold text-sm">STC Admin</h2>
-                  <p className="text-gold text-[10px] font-bold tracking-widest">CONTROL PANEL</p>
-                </div>
-              </div>
-              <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white/50 hover:text-white">
-                <X size={20} />
-              </button>
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
-            {sidebarLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <Link
-                  key={link.href}
+  const drawer = (
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <Toolbar sx={{ px: 3, pt: 2, pb: 1 }}>
+        <Box display="flex" alignItems="center" gap={2}>
+          <Avatar sx={{ bgcolor: 'primary.main', width: 40, height: 40, borderRadius: '8px' }}>
+            <School />
+          </Avatar>
+          <Box>
+            <Typography variant="h6" color="text.primary" fontSize="1.1rem">STC Admin</Typography>
+            <Typography variant="caption" color="text.secondary" fontWeight={700}>CONTROL PANEL</Typography>
+          </Box>
+        </Box>
+      </Toolbar>
+      
+      <Box sx={{ overflow: 'auto', px: 2, mt: 2, flex: 1 }}>
+        <List>
+          {sidebarLinks.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <ListItem key={link.href} disablePadding sx={{ mb: 1 }}>
+                <ListItemButton
+                  component={Link}
                   href={link.href}
-                  onClick={() => setSidebarOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold no-underline transition-all ${
-                    isActive(link.href)
-                      ? "bg-gold text-navy"
-                      : "text-white/60 hover:bg-white/5 hover:text-white"
-                  }`}
+                  onClick={() => isMobile && setMobileOpen(false)}
+                  sx={{
+                    borderRadius: '8px',
+                    bgcolor: active ? 'primary.main' : 'transparent',
+                    color: active ? '#fff' : 'text.secondary',
+                    '&:hover': {
+                      bgcolor: active ? 'primary.dark' : 'primary.light',
+                      color: active ? '#fff' : 'primary.main',
+                      '& .MuiListItemIcon-root': { color: active ? '#fff' : 'primary.main' }
+                    }
+                  }}
                 >
-                  <Icon size={18} />
-                  {link.label}
-                  {isActive(link.href) && <ChevronRight size={14} className="ml-auto" />}
-                </Link>
-              );
-            })}
-          </nav>
+                  <ListItemIcon sx={{ minWidth: 40, color: active ? '#fff' : 'inherit' }}>
+                    {link.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={link.label} primaryTypographyProps={{ fontSize: '0.875rem', fontWeight: 600 }} />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Box>
 
-          {/* Footer */}
-          <div className="p-4 border-t border-white/10">
-            <Link
-              href="/"
-              className="flex items-center gap-2 px-4 py-2 text-white/40 text-xs font-bold no-underline hover:text-gold transition-colors mb-2"
-            >
-              <Home size={14} /> View Website
-            </Link>
-            <button
-              onClick={handleLogout}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-500/10 text-red-400 rounded-lg text-sm font-bold hover:bg-red-500/20 transition-colors"
-            >
-              <LogOut size={16} /> Logout
-            </button>
-          </div>
-        </div>
-      </aside>
+      <Box p={2}>
+        <Divider sx={{ mb: 2 }} />
+        <Button 
+          fullWidth 
+          variant="outlined" 
+          color="error" 
+          startIcon={<Logout />} 
+          onClick={handleLogout}
+          sx={{ mb: 1 }}
+        >
+          Logout
+        </Button>
+        <Button 
+          component={Link} 
+          href="/" 
+          fullWidth 
+          variant="text" 
+          sx={{ color: 'text.secondary' }}
+        >
+          View Website
+        </Button>
+      </Box>
+    </Box>
+  );
 
-      {/* Main Content */}
-      <div className="flex-1 lg:ml-72">
-        {/* Top Bar */}
-        <header className="bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-30">
-          <div className="flex items-center justify-between">
-            <button
-              onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 text-gray-500 hover:text-navy"
-            >
-              <Menu size={22} />
-            </button>
-            <h1 className="text-lg font-bold text-navy hidden lg:block">
-              Super Systech Computers — Admin Panel
-            </h1>
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-bold text-gray-400 bg-gray-100 px-3 py-1 rounded-full">
-                Admin
-              </span>
-            </div>
-          </div>
-        </header>
+  return (
+    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        elevation={0}
+        sx={{
+          width: { lg: `calc(100% - ${drawerWidth}px)` },
+          ml: { lg: `${drawerWidth}px` },
+          bgcolor: 'background.paper',
+          borderBottom: '1px solid',
+          borderColor: 'divider',
+        }}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { lg: 'none' }, color: 'text.primary' }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div" color="text.primary" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+            Super Systech Computers — Admin Panel
+          </Typography>
+          <Box flexGrow={1} display={{ xs: 'block', sm: 'none' }} />
+          <Avatar sx={{ bgcolor: 'secondary.light', color: 'secondary.main', width: 36, height: 36 }}>A</Avatar>
+        </Toolbar>
+      </AppBar>
+      
+      <Box component="nav" sx={{ width: { lg: drawerWidth }, flexShrink: { lg: 0 } }}>
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            display: { xs: 'block', lg: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, borderRight: 'none', boxShadow: '2px 0 20px rgba(0,0,0,0.05)' },
+          }}
+        >
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: 'none', lg: 'block' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, borderRight: '1px solid #EAEFF4' },
+          }}
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Box>
 
-        {/* Page Content */}
-        <div className="p-6">{children}</div>
-      </div>
-    </div>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, width: { lg: `calc(100% - ${drawerWidth}px)` }, mt: '64px' }}>
+        {children}
+      </Box>
+    </Box>
+  );
+}
+
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProviderRegistry>
+      <AdminLayoutContent>{children}</AdminLayoutContent>
+    </ThemeProviderRegistry>
   );
 }

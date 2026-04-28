@@ -1,12 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Save, CheckCircle, Plus, Trash2 } from "lucide-react";
+import {
+  Box, Typography, Card, CardContent, Grid, TextField, Button, IconButton,
+  Divider, CircularProgress, Alert, Snackbar
+} from "@mui/material";
+import { Save, Add, Delete } from "@mui/icons-material";
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<any>(null);
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const [toast, setToast] = useState({ open: false, message: "", severity: "success" as "success" | "error" });
 
   useEffect(() => {
     fetch("/api/content?section=settings").then((r) => r.json()).then(setSettings);
@@ -14,134 +18,178 @@ export default function AdminSettingsPage() {
 
   const save = async () => {
     setSaving(true);
-    await fetch("/api/content", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ section: "settings", data: settings }),
-    });
+    try {
+      const res = await fetch("/api/content", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ section: "settings", data: settings }),
+      });
+      if (res.ok) {
+        setToast({ open: true, message: "Settings saved successfully!", severity: "success" });
+      } else {
+        throw new Error("Failed to save");
+      }
+    } catch (error) {
+      setToast({ open: true, message: "Error saving settings", severity: "error" });
+    }
     setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
   };
 
   const updateField = (field: string, value: any) => {
     setSettings((prev: any) => ({ ...prev, [field]: value }));
   };
 
-  const updateAffiliation = (index: number, value: string) => {
-    const arr = [...settings.affiliations];
-    arr[index] = value;
+  const updateAffiliation = (index: number, field: string, value: string) => {
+    const arr = [...(settings.affiliations || [])];
+    if (typeof arr[index] === "string") {
+      arr[index] = { name: arr[index], logo: "" }; // Migration from old string format
+    }
+    arr[index] = { ...arr[index], [field]: value };
     updateField("affiliations", arr);
   };
 
   const addAffiliation = () => {
-    updateField("affiliations", [...settings.affiliations, "New Affiliation"]);
+    updateField("affiliations", [...(settings.affiliations || []), { name: "New Affiliation", logo: "" }]);
   };
 
   const removeAffiliation = (index: number) => {
     updateField("affiliations", settings.affiliations.filter((_: any, i: number) => i !== index));
   };
 
-  if (!settings) return <div className="text-center py-20 text-gray-400">Loading...</div>;
+  if (!settings) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-2xl font-bold text-navy">Site Settings</h1>
-          <p className="text-gray-400 text-sm mt-1">General website configuration</p>
-        </div>
-        <button onClick={save} disabled={saving} className="admin-btn bg-navy text-white hover:bg-navy-700 disabled:opacity-50">
-          {saved ? <><CheckCircle size={16} /> Saved!</> : <><Save size={16} /> {saving ? "Saving..." : "Save Changes"}</>}
-        </button>
-      </div>
+    <Box>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
+        <Box>
+          <Typography variant="h4" color="text.primary" gutterBottom>Site Settings</Typography>
+          <Typography variant="body2" color="text.secondary">Manage general website configuration and details.</Typography>
+        </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<Save />}
+          onClick={save}
+          disabled={saving}
+          sx={{ px: 3, py: 1.5 }}
+        >
+          {saving ? "Saving..." : "Save Changes"}
+        </Button>
+      </Box>
 
-      <div className="space-y-6">
-        <div className="admin-card">
-          <h2 className="text-lg font-bold text-navy mb-4">Institute Information</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-bold text-gray-400 mb-1">Full Name</label>
-              <input className="admin-input" value={settings.siteName} onChange={(e) => updateField("siteName", e.target.value)} />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-gray-400 mb-1">Short Name</label>
-              <input className="admin-input" value={settings.shortName} onChange={(e) => updateField("shortName", e.target.value)} />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-gray-400 mb-1">Tagline</label>
-              <input className="admin-input" value={settings.tagline} onChange={(e) => updateField("tagline", e.target.value)} />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-gray-400 mb-1">Established Year</label>
-              <input className="admin-input" value={settings.established} onChange={(e) => updateField("established", e.target.value)} />
-            </div>
-          </div>
-        </div>
+      <Grid container spacing={3}>
+        {/* Institute Information */}
+        <Grid item xs={12}>
+          <Card>
+            <CardContent sx={{ p: 3 }}>
+              <Typography variant="h6" mb={3} color="primary.main">Institute Information</Typography>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={6}>
+                  <TextField fullWidth label="Full Name" variant="outlined" size="medium" value={settings.siteName || ""} onChange={(e) => updateField("siteName", e.target.value)} />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField fullWidth label="Short Name" variant="outlined" size="medium" value={settings.shortName || ""} onChange={(e) => updateField("shortName", e.target.value)} />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField fullWidth label="Tagline" variant="outlined" size="medium" value={settings.tagline || ""} onChange={(e) => updateField("tagline", e.target.value)} />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField fullWidth label="Established Year" variant="outlined" size="medium" value={settings.established || ""} onChange={(e) => updateField("established", e.target.value)} />
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
 
-        <div className="admin-card">
-          <h2 className="text-lg font-bold text-navy mb-4">Contact Details</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-bold text-gray-400 mb-1">Phone</label>
-              <input className="admin-input" value={settings.phone} onChange={(e) => updateField("phone", e.target.value)} />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-gray-400 mb-1">Mobile</label>
-              <input className="admin-input" value={settings.mobile} onChange={(e) => updateField("mobile", e.target.value)} />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-gray-400 mb-1">Email</label>
-              <input className="admin-input" value={settings.email} onChange={(e) => updateField("email", e.target.value)} />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-gray-400 mb-1">WhatsApp Number</label>
-              <input className="admin-input" value={settings.whatsappNumber} onChange={(e) => updateField("whatsappNumber", e.target.value)} />
-            </div>
-          </div>
-          <div className="mt-4">
-            <label className="block text-xs font-bold text-gray-400 mb-1">Full Address</label>
-            <input className="admin-input" value={settings.address} onChange={(e) => updateField("address", e.target.value)} />
-          </div>
-        </div>
+        {/* Contact Details */}
+        <Grid item xs={12}>
+          <Card>
+            <CardContent sx={{ p: 3 }}>
+              <Typography variant="h6" mb={3} color="primary.main">Contact Details</Typography>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={6} lg={3}>
+                  <TextField fullWidth label="Phone" variant="outlined" size="medium" value={settings.phone || ""} onChange={(e) => updateField("phone", e.target.value)} />
+                </Grid>
+                <Grid item xs={12} md={6} lg={3}>
+                  <TextField fullWidth label="Mobile" variant="outlined" size="medium" value={settings.mobile || ""} onChange={(e) => updateField("mobile", e.target.value)} />
+                </Grid>
+                <Grid item xs={12} md={6} lg={3}>
+                  <TextField fullWidth label="Email" variant="outlined" size="medium" value={settings.email || ""} onChange={(e) => updateField("email", e.target.value)} />
+                </Grid>
+                <Grid item xs={12} md={6} lg={3}>
+                  <TextField fullWidth label="WhatsApp Number" variant="outlined" size="medium" value={settings.whatsappNumber || ""} onChange={(e) => updateField("whatsappNumber", e.target.value)} />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField fullWidth label="Full Address" variant="outlined" size="medium" value={settings.address || ""} onChange={(e) => updateField("address", e.target.value)} />
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
 
-        <div className="admin-card">
-          <h2 className="text-lg font-bold text-navy mb-4">Social Links</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-bold text-gray-400 mb-1">Facebook URL</label>
-              <input className="admin-input" value={settings.facebookUrl} onChange={(e) => updateField("facebookUrl", e.target.value)} />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-gray-400 mb-1">YouTube URL</label>
-              <input className="admin-input" value={settings.youtubeUrl} onChange={(e) => updateField("youtubeUrl", e.target.value)} />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-gray-400 mb-1">Google Maps URL</label>
-              <input className="admin-input" value={settings.mapUrl} onChange={(e) => updateField("mapUrl", e.target.value)} />
-            </div>
-          </div>
-        </div>
+        {/* Social Links */}
+        <Grid item xs={12}>
+          <Card>
+            <CardContent sx={{ p: 3 }}>
+              <Typography variant="h6" mb={3} color="primary.main">Social Links</Typography>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <TextField fullWidth label="Facebook URL" variant="outlined" size="medium" value={settings.facebookUrl || ""} onChange={(e) => updateField("facebookUrl", e.target.value)} />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField fullWidth label="YouTube URL" variant="outlined" size="medium" value={settings.youtubeUrl || ""} onChange={(e) => updateField("youtubeUrl", e.target.value)} />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField fullWidth label="Google Maps URL" variant="outlined" size="medium" value={settings.mapUrl || ""} onChange={(e) => updateField("mapUrl", e.target.value)} />
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
 
-        <div className="admin-card">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-navy">Affiliations</h2>
-            <button onClick={addAffiliation} className="admin-btn bg-gold/10 text-gold hover:bg-gold/20 text-xs">
-              <Plus size={14} /> Add
-            </button>
-          </div>
-          <div className="space-y-3">
-            {settings.affiliations.map((a: string, i: number) => (
-              <div key={i} className="flex items-center gap-3">
-                <input className="admin-input flex-1" value={a} onChange={(e) => updateAffiliation(i, e.target.value)} />
-                <button onClick={() => removeAffiliation(i)} className="p-2 text-red-400 hover:text-red-600">
-                  <Trash2 size={16} />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+        {/* Affiliations */}
+        <Grid item xs={12}>
+          <Card>
+            <CardContent sx={{ p: 3 }}>
+              <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+                <Typography variant="h6" color="primary.main">Affiliations</Typography>
+                <Button variant="outlined" startIcon={<Add />} onClick={addAffiliation} size="small">Add Affiliation</Button>
+              </Box>
+              <Box display="flex" flexDirection="column" gap={2}>
+                {(settings.affiliations || []).map((a: any, i: number) => {
+                  const isString = typeof a === "string";
+                  const name = isString ? a : a.name;
+                  const logo = isString ? "" : a.logo;
+                  return (
+                    <Box key={i} display="flex" gap={2} alignItems="center">
+                      <TextField fullWidth label="Affiliation Name" variant="outlined" size="small" value={name} onChange={(e) => updateAffiliation(i, "name", e.target.value)} />
+                      <TextField fullWidth label="Logo Image URL" variant="outlined" size="small" value={logo} onChange={(e) => updateAffiliation(i, "logo", e.target.value)} />
+                      <IconButton color="error" onClick={() => removeAffiliation(i)}><Delete /></IconButton>
+                    </Box>
+                  );
+                })}
+              </Box>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
+      <Snackbar 
+        open={toast.open} 
+        autoHideDuration={4000} 
+        onClose={() => setToast({ ...toast, open: false })}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert severity={toast.severity} variant="filled" sx={{ width: '100%' }}>
+          {toast.message}
+        </Alert>
+      </Snackbar>
+    </Box>
   );
 }
