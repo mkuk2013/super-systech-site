@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import {
-  Box, Typography, Card, CardContent, Grid, TextField, Button, IconButton,
+  Box, Typography, Card, CardContent, TextField, Button, IconButton,
   Divider, CircularProgress, Alert, Snackbar
 } from "@mui/material";
 import { Save, Add, Delete } from "@mui/icons-material";
@@ -58,7 +58,7 @@ export default function AdminSettingsPage() {
 
   if (!settings) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh" }}>
         <CircularProgress />
       </Box>
     );
@@ -66,7 +66,7 @@ export default function AdminSettingsPage() {
 
   return (
     <Box>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
         <Box>
           <Typography variant="h4" color="text.primary" gutterBottom>Site Settings</Typography>
           <Typography variant="body2" color="text.secondary">Manage general website configuration and details.</Typography>
@@ -83,102 +83,72 @@ export default function AdminSettingsPage() {
         </Button>
       </Box>
 
-      <Grid container spacing={3}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         {/* Institute Information */}
-        <Grid item xs={12}>
-          <Card>
-            <CardContent sx={{ p: 3 }}>
-              <Typography variant="h6" mb={3} color="primary.main">Institute Information</Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
-                  <TextField fullWidth label="Full Name" variant="outlined" size="medium" value={settings.siteName || ""} onChange={(e) => updateField("siteName", e.target.value)} />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <TextField fullWidth label="Short Name" variant="outlined" size="medium" value={settings.shortName || ""} onChange={(e) => updateField("shortName", e.target.value)} />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <TextField fullWidth label="Tagline" variant="outlined" size="medium" value={settings.tagline || ""} onChange={(e) => updateField("tagline", e.target.value)} />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <TextField fullWidth label="Established Year" variant="outlined" size="medium" value={settings.established || ""} onChange={(e) => updateField("established", e.target.value)} />
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
+        <Card>
+          <CardContent sx={{ p: 3 }}>
+            <Typography variant="h6" sx={{ mb: 3 }} color="primary.main">Institute Information</Typography>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 3 }}>
+              <TextField fullWidth label="Full Name" variant="outlined" size="medium" value={settings.siteName || ""} onChange={(e) => updateField("siteName", e.target.value)} />
+              <TextField fullWidth label="Short Name" variant="outlined" size="medium" value={settings.shortName || ""} onChange={(e) => updateField("shortName", e.target.value)} />
+              <TextField fullWidth label="Tagline" variant="outlined" size="medium" value={settings.tagline || ""} onChange={(e) => updateField("tagline", e.target.value)} />
+              <TextField fullWidth label="Established Year" variant="outlined" size="medium" value={settings.established || ""} onChange={(e) => updateField("established", e.target.value)} />
+            </Box>
+          </CardContent>
+        </Card>
 
         {/* Contact Details */}
-        <Grid item xs={12}>
-          <Card>
-            <CardContent sx={{ p: 3 }}>
-              <Typography variant="h6" mb={3} color="primary.main">Contact Details</Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6} lg={3}>
-                  <TextField fullWidth label="Phone" variant="outlined" size="medium" value={settings.phone || ""} onChange={(e) => updateField("phone", e.target.value)} />
-                </Grid>
-                <Grid item xs={12} md={6} lg={3}>
-                  <TextField fullWidth label="Mobile" variant="outlined" size="medium" value={settings.mobile || ""} onChange={(e) => updateField("mobile", e.target.value)} />
-                </Grid>
-                <Grid item xs={12} md={6} lg={3}>
-                  <TextField fullWidth label="Email" variant="outlined" size="medium" value={settings.email || ""} onChange={(e) => updateField("email", e.target.value)} />
-                </Grid>
-                <Grid item xs={12} md={6} lg={3}>
-                  <TextField fullWidth label="WhatsApp Number" variant="outlined" size="medium" value={settings.whatsappNumber || ""} onChange={(e) => updateField("whatsappNumber", e.target.value)} />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField fullWidth label="Full Address" variant="outlined" size="medium" value={settings.address || ""} onChange={(e) => updateField("address", e.target.value)} />
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
+        <Card>
+          <CardContent sx={{ p: 3 }}>
+            <Typography variant="h6" sx={{ mb: 3 }} color="primary.main">Contact Details</Typography>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr', lg: 'repeat(4, 1fr)' }, gap: 3 }}>
+              <TextField fullWidth label="Phone" variant="outlined" size="medium" value={settings.phone || ""} onChange={(e) => updateField("phone", e.target.value)} />
+              <TextField fullWidth label="Mobile" variant="outlined" size="medium" value={settings.mobile || ""} onChange={(e) => updateField("mobile", e.target.value)} />
+              <TextField fullWidth label="Email" variant="outlined" size="medium" value={settings.email || ""} onChange={(e) => updateField("email", e.target.value)} />
+              <TextField fullWidth label="WhatsApp Number" variant="outlined" size="medium" value={settings.whatsappNumber || ""} onChange={(e) => updateField("whatsappNumber", e.target.value)} />
+              <Box sx={{ gridColumn: '1 / -1' }}>
+                <TextField fullWidth label="Full Address" variant="outlined" size="medium" value={settings.address || ""} onChange={(e) => updateField("address", e.target.value)} />
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
 
         {/* Social Links */}
-        <Grid item xs={12}>
-          <Card>
-            <CardContent sx={{ p: 3 }}>
-              <Typography variant="h6" mb={3} color="primary.main">Social Links</Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={4}>
-                  <TextField fullWidth label="Facebook URL" variant="outlined" size="medium" value={settings.facebookUrl || ""} onChange={(e) => updateField("facebookUrl", e.target.value)} />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <TextField fullWidth label="YouTube URL" variant="outlined" size="medium" value={settings.youtubeUrl || ""} onChange={(e) => updateField("youtubeUrl", e.target.value)} />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <TextField fullWidth label="Google Maps URL" variant="outlined" size="medium" value={settings.mapUrl || ""} onChange={(e) => updateField("mapUrl", e.target.value)} />
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
+        <Card>
+          <CardContent sx={{ p: 3 }}>
+            <Typography variant="h6" sx={{ mb: 3 }} color="primary.main">Social Links</Typography>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 3 }}>
+              <TextField fullWidth label="Facebook URL" variant="outlined" size="medium" value={settings.facebookUrl || ""} onChange={(e) => updateField("facebookUrl", e.target.value)} />
+              <TextField fullWidth label="YouTube URL" variant="outlined" size="medium" value={settings.youtubeUrl || ""} onChange={(e) => updateField("youtubeUrl", e.target.value)} />
+              <TextField fullWidth label="Google Maps URL" variant="outlined" size="medium" value={settings.mapUrl || ""} onChange={(e) => updateField("mapUrl", e.target.value)} />
+            </Box>
+          </CardContent>
+        </Card>
 
         {/* Affiliations */}
-        <Grid item xs={12}>
-          <Card>
-            <CardContent sx={{ p: 3 }}>
-              <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-                <Typography variant="h6" color="primary.main">Affiliations</Typography>
-                <Button variant="outlined" startIcon={<Add />} onClick={addAffiliation} size="small">Add Affiliation</Button>
-              </Box>
-              <Box display="flex" flexDirection="column" gap={2}>
-                {(settings.affiliations || []).map((a: any, i: number) => {
-                  const isString = typeof a === "string";
-                  const name = isString ? a : a.name;
-                  const logo = isString ? "" : a.logo;
-                  return (
-                    <Box key={i} display="flex" gap={2} alignItems="center">
-                      <TextField fullWidth label="Affiliation Name" variant="outlined" size="small" value={name} onChange={(e) => updateAffiliation(i, "name", e.target.value)} />
-                      <TextField fullWidth label="Logo Image URL" variant="outlined" size="small" value={logo} onChange={(e) => updateAffiliation(i, "logo", e.target.value)} />
-                      <IconButton color="error" onClick={() => removeAffiliation(i)}><Delete /></IconButton>
-                    </Box>
-                  );
-                })}
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+        <Card>
+          <CardContent sx={{ p: 3 }}>
+            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
+              <Typography variant="h6" color="primary.main">Affiliations</Typography>
+              <Button variant="outlined" startIcon={<Add />} onClick={addAffiliation} size="small">Add Affiliation</Button>
+            </Box>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              {(settings.affiliations || []).map((a: any, i: number) => {
+                const isString = typeof a === "string";
+                const name = isString ? a : a.name;
+                const logo = isString ? "" : a.logo;
+                return (
+                  <Box key={i} sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                    <TextField fullWidth label="Affiliation Name" variant="outlined" size="small" value={name} onChange={(e) => updateAffiliation(i, "name", e.target.value)} />
+                    <TextField fullWidth label="Logo Image URL" variant="outlined" size="small" value={logo} onChange={(e) => updateAffiliation(i, "logo", e.target.value)} />
+                    <IconButton color="error" onClick={() => removeAffiliation(i)}><Delete /></IconButton>
+                  </Box>
+                );
+              })}
+            </Box>
+          </CardContent>
+        </Card>
+      </Box>
 
       <Snackbar 
         open={toast.open} 

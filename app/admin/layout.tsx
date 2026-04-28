@@ -56,7 +56,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
   const drawer = (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Toolbar sx={{ px: 3, pt: 2, pb: 1 }}>
-        <Box display="flex" alignItems="center" gap={2}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <Avatar sx={{ bgcolor: 'primary.main', width: 40, height: 40, borderRadius: '8px' }}>
             <School />
           </Avatar>
@@ -99,7 +99,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
         </List>
       </Box>
 
-      <Box p={2}>
+      <Box sx={{ p: 2 }}>
         <Divider sx={{ mb: 2 }} />
         <Button 
           fullWidth 
@@ -151,7 +151,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
           <Typography variant="h6" noWrap component="div" color="text.primary" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
             Super Systech Computers — Admin Panel
           </Typography>
-          <Box flexGrow={1} display={{ xs: 'block', sm: 'none' }} />
+          <Box sx={{ flexGrow: 1, display: { xs: 'block', sm: 'none' } }} />
           <Avatar sx={{ bgcolor: 'secondary.light', color: 'secondary.main', width: 36, height: 36 }}>A</Avatar>
         </Toolbar>
       </AppBar>

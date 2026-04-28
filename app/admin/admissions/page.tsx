@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Trash2, CheckCircle, XCircle, Clock, Search, Download } from "lucide-react";
+import {
+  Box, Typography, Grid, Card, CardContent, TextField, Button, IconButton,
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  Chip, CircularProgress, Paper, InputAdornment, ToggleButton, ToggleButtonGroup,
+  Tooltip
+} from "@mui/material";
+import {
+  Trash2, CheckCircle, XCircle, Clock, Search, Delete, Check, Close
+} from "@mui/icons-material";
 
 export default function AdminAdmissionsPage() {
   const [admissions, setAdmissions] = useState<any[]>([]);
@@ -49,126 +57,140 @@ export default function AdminAdmissionsPage() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-2xl font-bold text-navy">Admissions</h1>
-          <p className="text-gray-400 text-sm mt-1">Manage student applications</p>
-        </div>
-      </div>
+    <Box>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
+        <Box>
+          <Typography variant="h4" color="text.primary" gutterBottom>Admissions</Typography>
+          <Typography variant="body2" color="text.secondary">Review and manage student applications.</Typography>
+        </Box>
+      </Box>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className="admin-card text-center">
-          <p className="text-2xl font-bold text-navy">{stats.total}</p>
-          <p className="text-xs font-bold text-gray-400">Total</p>
-        </div>
-        <div className="admin-card text-center border-l-4 border-yellow-400">
-          <p className="text-2xl font-bold text-yellow-600">{stats.pending}</p>
-          <p className="text-xs font-bold text-gray-400">Pending</p>
-        </div>
-        <div className="admin-card text-center border-l-4 border-green-400">
-          <p className="text-2xl font-bold text-green-600">{stats.approved}</p>
-          <p className="text-xs font-bold text-gray-400">Approved</p>
-        </div>
-        <div className="admin-card text-center border-l-4 border-red-400">
-          <p className="text-2xl font-bold text-red-600">{stats.rejected}</p>
-          <p className="text-xs font-bold text-gray-400">Rejected</p>
-        </div>
-      </div>
+      {/* Stats Cards */}
+      <Grid container spacing={3} mb={4}>
+        {[
+          { label: "Total", value: stats.total, color: "primary.main", bg: "primary.light" },
+          { label: "Pending", value: stats.pending, color: "warning.main", bg: "warning.light" },
+          { label: "Approved", value: stats.approved, color: "success.main", bg: "success.light" },
+          { label: "Rejected", value: stats.rejected, color: "error.main", bg: "error.light" },
+        ].map((s, i) => (
+          <Grid item xs={6} md={3} key={i}>
+            <Card sx={{ textAlign: 'center', borderTop: '4px solid', borderTopColor: s.color }}>
+              <CardContent>
+                <Typography variant="h4" fontWeight={700} color="text.primary">{s.value}</Typography>
+                <Typography variant="caption" color="text.secondary" fontWeight={700} sx={{ textTransform: 'uppercase' }}>
+                  {s.label}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
 
-      {/* Search & Filters */}
-      <div className="admin-card mb-6">
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="relative flex-1">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input
-              className="admin-input pl-10"
+      {/* Search & Filter */}
+      <Card sx={{ mb: 4 }}>
+        <CardContent sx={{ p: 2 }}>
+          <Box display="flex" flexWrap="wrap" gap={2} alignItems="center">
+            <TextField
+              sx={{ flexGrow: 1, minWidth: 250 }}
               placeholder="Search by name, phone, CNIC..."
+              size="small"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search fontSize="small" color="disabled" />
+                  </InputAdornment>
+                ),
+              }}
             />
-          </div>
-          <div className="flex gap-2">
-            {["All", "Pending", "Approved", "Rejected"].map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${
-                  filter === f ? "bg-navy text-white" : "bg-gray-100 text-gray-500 hover:bg-gray-200"
-                }`}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+            <ToggleButtonGroup
+              size="small"
+              value={filter}
+              exclusive
+              onChange={(_, val) => val && setFilter(val)}
+              color="primary"
+            >
+              <ToggleButton value="All">All</ToggleButton>
+              <ToggleButton value="Pending">Pending</ToggleButton>
+              <ToggleButton value="Approved">Approved</ToggleButton>
+              <ToggleButton value="Rejected">Rejected</ToggleButton>
+            </ToggleButtonGroup>
+          </Box>
+        </CardContent>
+      </Card>
 
-      {/* Table */}
-      <div className="admin-card overflow-hidden p-0">
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead className="bg-gray-50 border-b">
-              <tr>
-                <th className="text-left px-6 py-4 text-xs font-bold text-gray-400 uppercase">Student</th>
-                <th className="text-left py-4 text-xs font-bold text-gray-400 uppercase">Course</th>
-                <th className="text-left py-4 text-xs font-bold text-gray-400 uppercase">Phone</th>
-                <th className="text-left py-4 text-xs font-bold text-gray-400 uppercase">CNIC</th>
-                <th className="text-left py-4 text-xs font-bold text-gray-400 uppercase">Status</th>
-                <th className="text-right px-6 py-4 text-xs font-bold text-gray-400 uppercase">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map((a: any) => (
-                <tr key={a.id} className="border-b border-gray-50 hover:bg-gray-50/50">
-                  <td className="px-6 py-4">
-                    <div className="font-semibold text-navy">{a.studentName}</div>
-                    <div className="text-xs text-gray-400">S/O {a.fatherName}</div>
-                  </td>
-                  <td className="py-4 text-gray-500">{a.course}</td>
-                  <td className="py-4 text-gray-500">{a.phone}</td>
-                  <td className="py-4 text-gray-500 font-mono text-xs">{a.cnic}</td>
-                  <td className="py-4">
-                    <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold ${
-                      a.status === "Approved" ? "bg-green-50 text-green-600" :
-                      a.status === "Rejected" ? "bg-red-50 text-red-600" :
-                      "bg-yellow-50 text-yellow-600"
-                    }`}>
-                      {a.status === "Approved" ? <CheckCircle size={10} /> : a.status === "Rejected" ? <XCircle size={10} /> : <Clock size={10} />}
-                      {a.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <div className="flex items-center justify-end gap-1">
-                      {a.status !== "Approved" && (
-                        <button onClick={() => updateStatus(a.id, "Approved")} className="p-1.5 text-green-500 hover:bg-green-50 rounded" title="Approve">
-                          <CheckCircle size={16} />
-                        </button>
-                      )}
-                      {a.status !== "Rejected" && (
-                        <button onClick={() => updateStatus(a.id, "Rejected")} className="p-1.5 text-red-400 hover:bg-red-50 rounded" title="Reject">
-                          <XCircle size={16} />
-                        </button>
-                      )}
-                      <button onClick={() => deleteAdmission(a.id)} className="p-1.5 text-gray-400 hover:bg-gray-100 rounded" title="Delete">
-                        <Trash2 size={16} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-              {filtered.length === 0 && (
-                <tr>
-                  <td colSpan={6} className="text-center py-10 text-gray-400">
-                    No applications found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+      {/* Applications Table */}
+      <TableContainer component={Paper} variant="outlined" sx={{ borderRadius: 2 }}>
+        <Table sx={{ minWidth: 800 }}>
+          <TableHead sx={{ bgcolor: 'grey.50' }}>
+            <TableRow>
+              <TableCell><Typography variant="caption" fontWeight={700} color="text.secondary">STUDENT</Typography></TableCell>
+              <TableCell><Typography variant="caption" fontWeight={700} color="text.secondary">COURSE</Typography></TableCell>
+              <TableCell><Typography variant="caption" fontWeight={700} color="text.secondary">PHONE / CNIC</Typography></TableCell>
+              <TableCell><Typography variant="caption" fontWeight={700} color="text.secondary">STATUS</Typography></TableCell>
+              <TableCell align="right"><Typography variant="caption" fontWeight={700} color="text.secondary">ACTIONS</Typography></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filtered.map((a: any) => (
+              <TableRow key={a.id} hover>
+                <TableCell>
+                  <Typography variant="body2" fontWeight={700}>{a.studentName}</Typography>
+                  <Typography variant="caption" color="text.secondary">S/O {a.fatherName}</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2">{a.course}</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="body2">{a.phone}</Typography>
+                  <Typography variant="caption" color="text.secondary" sx={{ fontFamily: 'monospace' }}>{a.cnic}</Typography>
+                </TableCell>
+                <TableCell>
+                  <Chip
+                    size="small"
+                    icon={a.status === "Approved" ? <CheckCircle /> : a.status === "Rejected" ? <XCircle /> : <Clock />}
+                    label={a.status}
+                    color={a.status === "Approved" ? "success" : a.status === "Rejected" ? "error" : "warning"}
+                    variant="outlined"
+                    sx={{ fontWeight: 600 }}
+                  />
+                </TableCell>
+                <TableCell align="right">
+                  <Box display="flex" justifyContent="flex-end" gap={0.5}>
+                    {a.status !== "Approved" && (
+                      <Tooltip title="Approve">
+                        <IconButton size="small" color="success" onClick={() => updateStatus(a.id, "Approved")}>
+                          <Check fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                    )}
+                    {a.status !== "Rejected" && (
+                      <Tooltip title="Reject">
+                        <IconButton size="small" color="error" onClick={() => updateStatus(a.id, "Rejected")}>
+                          <Close fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                    )}
+                    <Tooltip title="Delete">
+                      <IconButton size="small" color="inherit" onClick={() => deleteAdmission(a.id)} sx={{ color: 'grey.400' }}>
+                        <Delete fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                </TableCell>
+              </TableRow>
+            ))}
+            {filtered.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={5} align="center" sx={{ py: 6 }}>
+                  <Typography color="text.secondary">No applications found.</Typography>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 }

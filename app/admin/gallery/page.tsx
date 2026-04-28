@@ -1,12 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Plus, Trash2, Save, Edit3, X, Image as ImageIcon } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import {
+  Box, Typography, Button, Grid, Card, CardMedia, CardContent, CardActions,
+  Dialog, DialogTitle, DialogContent, DialogActions, TextField, IconButton,
+  CircularProgress, Snackbar, Alert, Paper
+} from "@mui/material";
+import {
+  Add, Delete, Edit, Save, Close, Upload, Image as ImageIcon
+} from "@mui/icons-material";
 
 export default function AdminGalleryPage() {
   const [gallery, setGallery] = useState<any[]>([]);
   const [editing, setEditing] = useState<any>(null);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [toast, setToast] = useState({ open: false, message: "", severity: "success" as any });
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const load = () => {
     fetch("/api/content?section=gallery").then((r) => r.json()).then(setGallery);
@@ -15,108 +25,191 @@ export default function AdminGalleryPage() {
 
   const saveItem = async () => {
     setSaving(true);
-    if (editing.id) {
-      await fetch("/api/items", {
-        method: "PUT",
+    try {
+      const url = editing.id ? "/api/items" : "/api/items";
+      const method = editing.id ? "PUT" : "POST";
+      const body = editing.id 
+        ? { section: "gallery", id: editing.id, updates: editing }
+        : { section: "gallery", item: editing };
+
+      const res = await fetch(url, {
+        method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ section: "gallery", id: editing.id, updates: editing }),
+        body: JSON.stringify(body),
       });
-    } else {
-      await fetch("/api/items", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ section: "gallery", item: editing }),
-      });
+
+      if (res.ok) {
+        setToast({ open: true, message: "Gallery item saved!", severity: "success" });
+        setEditing(null);
+        load();
+      } else {
+        throw new Error("Failed to save");
+      }
+    } catch (err) {
+      setToast({ open: true, message: "Error saving item", severity: "error" });
     }
     setSaving(false);
-    setEditing(null);
-    load();
   };
 
   const deleteItem = async (id: string) => {
     if (!confirm("Delete this photo?")) return;
-    await fetch("/api/items", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ section: "gallery", id }),
-    });
-    load();
+    try {
+      await fetch("/api/items", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ section: "gallery", id }),
+      });
+      setToast({ open: true, message: "Photo deleted", severity: "info" });
+      load();
+    } catch (err) {
+      setToast({ open: true, message: "Error deleting", severity: "error" });
+    }
+  };
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const response = await fetch(`/api/upload?filename=${file.name}`, {
+        method: "POST",
+        body: file,
+      });
+
+      if (response.ok) {
+        const blob = await response.json();
+        setEditing({ ...editing, image: blob.url });
+        setToast({ open: true, message: "Image uploaded!", severity: "success" });
+      } else {
+        throw new Error("Upload failed");
+      }
+    } catch (error) {
+      setToast({ open: true, message: "Upload failed. Check BLOB_READ_WRITE_TOKEN", severity: "error" });
+    }
+    setUploading(false);
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-2xl font-bold text-navy">Gallery</h1>
-          <p className="text-gray-400 text-sm mt-1">Manage gallery photos</p>
-        </div>
-        <button onClick={() => setEditing({ title: "", image: "", category: "Campus" })} className="admin-btn bg-navy text-white hover:bg-navy-700">
-          <Plus size={16} /> Add Photo
-        </button>
-      </div>
+    <Box>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
+        <Box>
+          <Typography variant="h4" color="text.primary" gutterBottom>Gallery</Typography>
+          <Typography variant="body2" color="text.secondary">Manage gallery photos and categories.</Typography>
+        </Box>
+        <Button
+          variant="contained"
+          startIcon={<Add />}
+          onClick={() => setEditing({ title: "", image: "", category: "Campus" })}
+        >
+          Add Photo
+        </Button>
+      </Box>
 
-      {editing && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-navy">{editing.id ? "Edit Photo" : "New Photo"}</h2>
-              <button onClick={() => setEditing(null)} className="text-gray-400 hover:text-gray-600"><X size={20} /></button>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold text-gray-400 mb-1">Title</label>
-                <input className="admin-input" value={editing.title} onChange={(e) => setEditing({ ...editing, title: e.target.value })} />
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-gray-400 mb-1">Image URL</label>
-                <input className="admin-input" value={editing.image} onChange={(e) => setEditing({ ...editing, image: e.target.value })} placeholder="https://..." />
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-gray-400 mb-1">Category</label>
-                <input className="admin-input" value={editing.category} onChange={(e) => setEditing({ ...editing, category: e.target.value })} placeholder="Campus, Events, Classes..." />
-              </div>
-              {editing.image && (
-                <div className="border rounded-lg overflow-hidden">
-                  <img src={editing.image} alt="Preview" className="w-full h-40 object-cover" />
-                </div>
-              )}
-            </div>
-            <div className="flex gap-3 mt-6">
-              <button onClick={saveItem} disabled={saving} className="admin-btn bg-navy text-white hover:bg-navy-700 flex-1 disabled:opacity-50">
-                <Save size={16} /> {saving ? "Saving..." : "Save"}
-              </button>
-              <button onClick={() => setEditing(null)} className="admin-btn bg-gray-100 text-gray-600">Cancel</button>
-            </div>
-          </div>
-        </div>
+      <Grid container spacing={3}>
+        {gallery.map((item) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+              <CardMedia
+                component="img"
+                height="180"
+                image={item.image || "/images/placeholder.png"}
+                alt={item.title}
+                sx={{ bgcolor: 'grey.100' }}
+              />
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Typography variant="subtitle2" fontWeight={700} noWrap>{item.title || "Untitled"}</Typography>
+                <Typography variant="caption" color="text.secondary">{item.category}</Typography>
+              </CardContent>
+              <CardActions sx={{ justifyContent: 'flex-end', p: 1 }}>
+                <IconButton size="small" color="primary" onClick={() => setEditing({ ...item })}>
+                  <Edit fontSize="small" />
+                </IconButton>
+                <IconButton size="small" color="error" onClick={() => deleteItem(item.id)}>
+                  <Delete fontSize="small" />
+                </IconButton>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+
+      {gallery.length === 0 && (
+        <Paper sx={{ py: 10, textAlign: 'center', bgcolor: 'transparent', boxShadow: 'none' }}>
+          <ImageIcon sx={{ fontSize: 60, color: 'grey.300', mb: 2 }} />
+          <Typography color="text.secondary">No photos found in gallery.</Typography>
+        </Paper>
       )}
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {gallery.map((item: any) => (
-          <div key={item.id} className="group relative overflow-hidden rounded-lg border">
-            {item.image ? (
-              <img src={item.image} alt={item.title} className="w-full h-40 object-cover" />
-            ) : (
-              <div className="w-full h-40 bg-gray-100 flex items-center justify-center">
-                <ImageIcon size={32} className="text-gray-300" />
-              </div>
-            )}
-            <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/70 transition-all flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100">
-              <button onClick={() => setEditing({ ...item })} className="p-2 bg-white rounded-lg text-blue-500">
-                <Edit3 size={14} />
-              </button>
-              <button onClick={() => deleteItem(item.id)} className="p-2 bg-white rounded-lg text-red-400">
-                <Trash2 size={14} />
-              </button>
-            </div>
-            <div className="p-3 bg-white">
-              <p className="text-xs font-bold text-navy truncate">{item.title}</p>
-              <p className="text-[10px] text-gray-400">{item.category}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      {gallery.length === 0 && <p className="text-center py-10 text-gray-400">No photos yet.</p>}
-    </div>
+      {/* Edit Dialog */}
+      <Dialog open={Boolean(editing)} onClose={() => setEditing(null)} fullWidth maxWidth="sm">
+        <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography variant="h6">{editing?.id ? "Edit Photo" : "Add New Photo"}</Typography>
+          <IconButton onClick={() => setEditing(null)}><Close /></IconButton>
+        </DialogTitle>
+        <DialogContent dividers>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, py: 1 }}>
+            <TextField
+              fullWidth
+              label="Title"
+              value={editing?.title || ""}
+              onChange={(e) => setEditing({ ...editing, title: e.target.value })}
+            />
+            <Box>
+              <Typography variant="caption" color="text.secondary" sx={{ mb: 1, display: 'block', fontWeight: 700 }}>
+                IMAGE (UPLOAD OR URL)
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', mb: 2 }}>
+                <TextField
+                  fullWidth
+                  label="Image URL (Optional)"
+                  placeholder="https://..."
+                  value={editing?.image || ""}
+                  onChange={(e) => setEditing({ ...editing, image: e.target.value })}
+                  size="small"
+                />
+                <Button
+                  variant="outlined"
+                  component="label"
+                  startIcon={uploading ? <CircularProgress size={20} /> : <Upload />}
+                  disabled={uploading}
+                >
+                  Upload
+                  <input type="file" hidden accept="image/*" onChange={handleFileUpload} />
+                </Button>
+              </Box>
+              {editing?.image && (
+                <Box sx={{ mt: 2, borderRadius: 2, overflow: 'hidden', border: '1px solid', borderColor: 'divider' }}>
+                  <img src={editing.image} alt="Preview" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+                </Box>
+              )}
+            </Box>
+            <TextField
+              fullWidth
+              label="Category"
+              placeholder="e.g. Campus, Events, Classes"
+              value={editing?.category || ""}
+              onChange={(e) => setEditing({ ...editing, category: e.target.value })}
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ p: 3 }}>
+          <Button onClick={() => setEditing(null)} color="inherit">Cancel</Button>
+          <Button variant="contained" startIcon={<Save />} onClick={saveItem} disabled={saving || uploading}>
+            {saving ? "Saving..." : "Save Photo"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Snackbar
+        open={toast.open}
+        autoHideDuration={4000}
+        onClose={() => setToast({ ...toast, open: false })}
+      >
+        <Alert severity={toast.severity} sx={{ width: '100%' }} variant="filled">
+          {toast.message}
+        </Alert>
+      </Snackbar>
+    </Box>
   );
 }
