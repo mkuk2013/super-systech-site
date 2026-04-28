@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "All fields are required" }, { status: 400 });
     }
 
-    const data = readContent();
+    const data = await readContent();
     const admission = {
       id: uuidv4(),
       studentName,
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     };
 
     data.admissions.push(admission);
-    writeContent(data);
+    await writeContent(data);
 
     return NextResponse.json({ success: true, message: "Application submitted successfully" });
   } catch {
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
   const payload = await verifyToken(token);
   if (!payload) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const data = readContent();
+  const data = await readContent();
   return NextResponse.json(data.admissions);
 }
 
@@ -52,12 +52,12 @@ export async function PUT(request: NextRequest) {
 
   try {
     const { id, status } = await request.json();
-    const data = readContent();
+    const data = await readContent();
     const index = data.admissions.findIndex((a: any) => a.id === id);
     if (index === -1) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
     data.admissions[index].status = status;
-    writeContent(data);
+    await writeContent(data);
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to update" }, { status: 500 });
@@ -72,9 +72,9 @@ export async function DELETE(request: NextRequest) {
 
   try {
     const { id } = await request.json();
-    const data = readContent();
+    const data = await readContent();
     data.admissions = data.admissions.filter((a: any) => a.id !== id);
-    writeContent(data);
+    await writeContent(data);
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to delete" }, { status: 500 });

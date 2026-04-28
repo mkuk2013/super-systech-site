@@ -13,8 +13,8 @@ const iconMap: Record<string, any> = {
 
 export const dynamic = "force-dynamic";
 
-export default function CoursesPage() {
-  const { courses, settings } = readContent();
+export default async function CoursesPage() {
+  const { courses, settings } = await readContent();
 
   return (
     <div className="bg-white min-h-screen">

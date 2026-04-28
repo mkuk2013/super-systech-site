@@ -4,8 +4,8 @@ import AnimatedSection from "@/components/AnimatedSection";
 
 export const dynamic = "force-dynamic";
 
-export default function AboutPage() {
-  const { about, settings } = readContent();
+export default async function AboutPage() {
+  const { about, settings } = await readContent();
 
   return (
     <div className="bg-white min-h-screen">

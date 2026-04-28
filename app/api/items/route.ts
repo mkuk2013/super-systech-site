@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const section = searchParams.get("section") as ArraySection;
   if (!section) return NextResponse.json({ error: "Section required" }, { status: 400 });
-  const data = getSection(section);
+  const data = await getSection(section);
   return NextResponse.json(data);
 }
 
@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
   try {
     const { section, item } = await request.json();
     const newItem = { ...item, id: uuidv4() };
-    addItem(section as ArraySection, newItem);
+    await addItem(section as ArraySection, newItem);
     return NextResponse.json({ success: true, item: newItem });
   } catch {
     return NextResponse.json({ error: "Failed to add item" }, { status: 500 });
@@ -40,7 +40,7 @@ export async function PUT(request: NextRequest) {
   }
   try {
     const { section, id, updates } = await request.json();
-    const updated = updateItem(section as ArraySection, id, updates);
+    const updated = await updateItem(section as ArraySection, id, updates);
     if (!updated) return NextResponse.json({ error: "Item not found" }, { status: 404 });
     return NextResponse.json({ success: true, item: updated });
   } catch {
@@ -54,7 +54,7 @@ export async function DELETE(request: NextRequest) {
   }
   try {
     const { section, id } = await request.json();
-    deleteItem(section as ArraySection, id);
+    await deleteItem(section as ArraySection, id);
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to delete item" }, { status: 500 });

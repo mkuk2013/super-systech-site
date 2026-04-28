@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const section = searchParams.get("section");
-    const data = readContent();
+    const data = await readContent();
 
     if (section && section in data) {
       return NextResponse.json(data[section as keyof typeof data]);
@@ -29,9 +29,10 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Missing section or data" }, { status: 400 });
     }
 
-    const updated = updateSection(section, data);
+    const updated = await updateSection(section, data);
     return NextResponse.json({ success: true, data: updated });
-  } catch {
-    return NextResponse.json({ error: "Failed to update content" }, { status: 500 });
+  } catch (error) {
+    console.error("PUT Error:", error);
+    return NextResponse.json({ error: "Failed to update content", details: String(error) }, { status: 500 });
   }
 }

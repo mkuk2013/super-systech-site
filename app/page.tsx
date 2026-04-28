@@ -16,8 +16,8 @@ const iconMap: Record<string, any> = {
 
 export const dynamic = "force-dynamic";
 
-export default function Home() {
-  const data = readContent();
+export default async function Home() {
+  const data = await readContent();
   const { hero, about, courses, testimonials, settings } = data;
   const featuredCourses = courses.filter((c: any) => c.featured).slice(0, 6);
 

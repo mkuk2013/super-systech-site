@@ -4,8 +4,8 @@ import AnimatedSection from "@/components/AnimatedSection";
 
 export const dynamic = "force-dynamic";
 
-export default function ContactPage() {
-  const { settings } = readContent();
+export default async function ContactPage() {
+  const { settings } = await readContent();
 
   const contactCards = [
     { icon: MapPin, title: "Our Location", lines: [settings.address] },
