@@ -65,11 +65,11 @@ export default async function Home() {
                 </div>
               </AnimatedSection>
               <AnimatedSection delay={0.35}>
-                <div className="flex flex-wrap items-center gap-5">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
                   {settings.affiliations.map((a: any, i: number) => (
-                    <div key={i} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
-                      <img src={a.logo} alt={a.name} className="w-7 h-7 object-contain" />
-                      <span className="text-slate-300 text-xs font-medium">{a.name}</span>
+                    <div key={i} className="flex flex-col items-center justify-center gap-2 bg-white/5 border border-white/10 rounded-xl p-3 text-center hover:bg-white/10 transition-colors">
+                      <img src={a.logo} alt={a.name} className="w-10 h-10 object-contain drop-shadow-md" />
+                      <span className="text-slate-300 text-[10px] sm:text-xs font-bold leading-tight">{a.name}</span>
                     </div>
                   ))}
                 </div>
@@ -78,7 +78,7 @@ export default async function Home() {
 
             <AnimatedSection delay={0.2} direction="right">
               <div className="hidden lg:block relative">
-                <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8">
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 shadow-2xl">
                   <Image
                     src="/images/logo_ssc.png"
                     alt="Super Sys-Tech Computers"
@@ -93,10 +93,12 @@ export default async function Home() {
 
           {/* Stats bar */}
           <AnimatedSection delay={0.4}>
-            <div className="mt-16 grid grid-cols-3 max-w-2xl gap-8">
-              {hero.stats.map((stat: any, i: number) => (
-                <AnimatedCounter key={i} target={stat.value} label={stat.label} />
-              ))}
+            <div className="mt-20 border-t border-white/10 pt-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center max-w-5xl mx-auto">
+                {hero.stats.map((stat: any, i: number) => (
+                  <AnimatedCounter key={i} target={stat.value} label={stat.label} />
+                ))}
+              </div>
             </div>
           </AnimatedSection>
         </div>
