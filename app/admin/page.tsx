@@ -18,7 +18,7 @@ export default function AdminDashboard() {
   }, []);
 
   if (!data) return (
-    <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh" }}>
       <CircularProgress />
     </Box>
   );
@@ -41,55 +41,53 @@ export default function AdminDashboard() {
 
   return (
     <Box>
-      <Box mb={4}>
+      <Box sx={{ mb: 4 }}>
         <Typography variant="h4" color="text.primary" gutterBottom>Dashboard</Typography>
         <Typography variant="body2" color="text.secondary">Welcome to STC Umerkot Admin Panel</Typography>
       </Box>
 
       {/* Stats Grid */}
-      <Grid container spacing={3} mb={4}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(3, 1fr)' }, gap: 3, mb: 4 }}>
         {stats.map((stat, i) => (
-          <Grid item xs={12} sm={6} md={4} key={i}>
-            <Card sx={{ height: '100%' }}>
-              <CardContent>
-                <Box display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
-                  <Typography variant="subtitle2" color="text.secondary" fontWeight={600} textTransform="uppercase">
-                    {stat.label}
-                  </Typography>
-                  <Box sx={{ bgcolor: stat.bg, color: stat.color, p: 1, borderRadius: '8px', display: 'flex' }}>
-                    {stat.icon}
-                  </Box>
-                </Box>
-                <Typography variant="h4" color="text.primary" fontWeight={700}>
-                  {stat.value}
+          <Card key={i} sx={{ height: '100%' }}>
+            <CardContent>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 600, textTransform: "uppercase" }}>
+                  {stat.label}
                 </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+                <Box sx={{ bgcolor: stat.bg, color: stat.color, p: 1, borderRadius: '8px', display: 'flex' }}>
+                  {stat.icon}
+                </Box>
+              </Box>
+              <Typography variant="h4" color="text.primary" sx={{ fontWeight: 700 }}>
+                {stat.value}
+              </Typography>
+            </CardContent>
+          </Card>
         ))}
-      </Grid>
+      </Box>
 
       {/* Recent Admissions */}
       <Card>
         <CardContent sx={{ p: 3 }}>
-          <Typography variant="h6" color="primary.main" mb={3}>Recent Applications</Typography>
+          <Typography variant="h6" color="primary.main" sx={{ mb: 3 }}>Recent Applications</Typography>
           {recentAdmissions.length === 0 ? (
-            <Typography variant="body2" color="text.secondary" py={2}>No applications yet.</Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ py: 2 }}>No applications yet.</Typography>
           ) : (
             <TableContainer>
               <Table sx={{ minWidth: 600 }}>
                 <TableHead>
                   <TableRow>
-                    <TableCell><Typography variant="subtitle2" color="text.secondary" fontWeight={600}>Name</Typography></TableCell>
-                    <TableCell><Typography variant="subtitle2" color="text.secondary" fontWeight={600}>Course</Typography></TableCell>
-                    <TableCell><Typography variant="subtitle2" color="text.secondary" fontWeight={600}>Phone</Typography></TableCell>
-                    <TableCell><Typography variant="subtitle2" color="text.secondary" fontWeight={600}>Status</Typography></TableCell>
+                    <TableCell><Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 600 }}>Name</Typography></TableCell>
+                    <TableCell><Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 600 }}>Course</Typography></TableCell>
+                    <TableCell><Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 600 }}>Phone</Typography></TableCell>
+                    <TableCell><Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: 600 }}>Status</Typography></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {recentAdmissions.map((a: any) => (
                     <TableRow key={a.id} hover>
-                      <TableCell><Typography variant="body2" fontWeight={600}>{a.studentName}</Typography></TableCell>
+                      <TableCell><Typography variant="body2" sx={{ fontWeight: 600 }}>{a.studentName}</Typography></TableCell>
                       <TableCell><Typography variant="body2" color="text.secondary">{a.course}</Typography></TableCell>
                       <TableCell><Typography variant="body2" color="text.secondary">{a.phone}</Typography></TableCell>
                       <TableCell>
