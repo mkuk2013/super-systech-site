@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import {
   Box, Typography, Button, Card, CardContent, TextField,
   IconButton, CircularProgress, Snackbar, Alert, Avatar,
-  Divider, Tooltip
+  Divider, Tooltip, Paper
 } from "@mui/material";
 import {
   Save, Add, Delete, CheckCircle, Upload, Person, Close
@@ -73,7 +73,7 @@ export default function AdminAboutPage() {
       if (response.ok) {
         const blob = await response.json();
         updateField("principalImage", blob.url);
-        setToast({ open: true, message: "Photo uploaded!", severity: "success" });
+        setToast({ open: true, message: "Principal photo uploaded!", severity: "success" });
       } else {
         throw new Error("Upload failed");
       }
@@ -112,7 +112,7 @@ export default function AdminAboutPage() {
         {/* About Info */}
         <Card>
           <CardContent sx={{ p: 3 }}>
-            <Typography variant="h6" sx={{ mb: 3 }} color="primary.main">Story & Mission</Typography>
+            <Typography variant="h6" sx={{ mb: 3, fontWeight: 700 }} color="primary.main">Story & Mission</Typography>
             <Box sx={{ display: 'grid', gridTemplateColumns: '1fr', gap: 3 }}>
               <TextField fullWidth multiline rows={4} label="Description" value={about.description || ""} onChange={(e) => updateField("description", e.target.value)} />
               <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 3 }}>
@@ -126,27 +126,37 @@ export default function AdminAboutPage() {
         {/* Principal Info */}
         <Card>
           <CardContent sx={{ p: 3 }}>
-            <Typography variant="h6" sx={{ mb: 3 }} color="primary.main">Principal Information</Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, mb: 4 }}>
-              <Avatar src={about.principalImage} sx={{ width: 100, height: 100, bgcolor: 'grey.100' }}>
-                <Person sx={{ fontSize: 60, color: 'grey.300' }} />
+            <Typography variant="h6" sx={{ mb: 3, fontWeight: 700 }} color="primary.main">Principal Information</Typography>
+            
+            <Paper variant="outlined" sx={{ p: 3, mb: 4, bgcolor: 'grey.50', borderRadius: 2, textAlign: 'center' }}>
+              <Avatar src={about.principalImage} sx={{ width: 120, height: 120, mx: 'auto', mb: 2, bgcolor: 'white', border: '3px solid white', boxShadow: 2 }}>
+                <Person sx={{ fontSize: 80, color: 'grey.200' }} />
               </Avatar>
               <Button
-                variant="outlined"
+                variant="contained"
                 component="label"
-                startIcon={uploading ? <CircularProgress size={20} /> : <Upload />}
+                startIcon={uploading ? <CircularProgress size={20} color="inherit" /> : <Upload />}
                 disabled={uploading}
               >
-                Upload Photo
+                {uploading ? "Uploading..." : "Upload Principal Photo from Device"}
                 <input type="file" hidden accept="image/*" onChange={handleFileUpload} />
               </Button>
-            </Box>
+            </Paper>
+
+            <Divider sx={{ my: 3 }}>ADDITIONAL DETAILS</Divider>
+
             <Box sx={{ display: 'grid', gridTemplateColumns: '1fr', gap: 3 }}>
               <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 3 }}>
                 <TextField fullWidth label="Principal Name" value={about.principalName || ""} onChange={(e) => updateField("principalName", e.target.value)} />
                 <TextField fullWidth label="Title / Qualification" value={about.principalTitle || ""} onChange={(e) => updateField("principalTitle", e.target.value)} />
               </Box>
-              <TextField fullWidth label="Photo URL (Optional)" value={about.principalImage || ""} onChange={(e) => updateField("principalImage", e.target.value)} />
+              <TextField 
+                fullWidth 
+                label="Photo URL (Optional)" 
+                value={about.principalImage || ""} 
+                onChange={(e) => updateField("principalImage", e.target.value)} 
+                helperText="Link an image URL if not uploading from device"
+              />
               <TextField fullWidth multiline rows={5} label="Principal's Message" value={about.principalMessage || ""} onChange={(e) => updateField("principalMessage", e.target.value)} />
             </Box>
           </CardContent>
@@ -156,7 +166,7 @@ export default function AdminAboutPage() {
         <Card>
           <CardContent sx={{ p: 3 }}>
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
-              <Typography variant="h6" color="primary.main">Key Achievements</Typography>
+              <Typography variant="h6" color="primary.main" sx={{ fontWeight: 700 }}>Key Achievements</Typography>
               <Button variant="outlined" size="small" startIcon={<Add />} onClick={addAchievement}>Add Achievement</Button>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>

@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import {
-  Box, Typography, Button, Grid, Card, CardContent, IconButton,
+  Box, Typography, Button, Card, CardContent, IconButton,
   Dialog, DialogTitle, DialogContent, DialogActions, TextField,
-  Avatar, CircularProgress, Snackbar, Alert, Paper
+  Avatar, CircularProgress, Snackbar, Alert, Paper, Divider
 } from "@mui/material";
 import {
   Add, Delete, Edit, Save, Close, Person, Upload
@@ -79,12 +79,12 @@ export default function AdminTeamPage() {
       if (response.ok) {
         const blob = await response.json();
         setEditing({ ...editing, image: blob.url });
-        setToast({ open: true, message: "Photo uploaded!", severity: "success" });
+        setToast({ open: true, message: "Photo uploaded successfully!", severity: "success" });
       } else {
         throw new Error("Upload failed");
       }
     } catch (error) {
-      setToast({ open: true, message: "Upload failed. Check BLOB_READ_WRITE_TOKEN", severity: "error" });
+      setToast({ open: true, message: "Upload failed. Check your connection.", severity: "error" });
     }
     setUploading(false);
   };
@@ -143,25 +143,43 @@ export default function AdminTeamPage() {
       {/* Edit Dialog */}
       <Dialog open={Boolean(editing)} onClose={() => setEditing(null)} fullWidth maxWidth="sm">
         <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="h6">{editing?.id ? "Edit Member" : "Add New Member"}</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>{editing?.id ? "Edit Member" : "Add New Member"}</Typography>
           <IconButton onClick={() => setEditing(null)}><Close /></IconButton>
         </DialogTitle>
         <DialogContent dividers>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, py: 1 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-              <Avatar src={editing?.image} sx={{ width: 80, height: 80, bgcolor: 'grey.100' }}>
-                <Person sx={{ fontSize: 40, color: 'grey.300' }} />
+            
+            {/* Upload Section */}
+            <Box sx={{ textAlign: 'center', p: 3, bgcolor: 'grey.50', borderRadius: 2, border: '1px dashed', borderColor: 'primary.main' }}>
+              <Avatar src={editing?.image} sx={{ width: 100, height: 100, mx: 'auto', mb: 2, bgcolor: 'white', border: '2px solid white', boxShadow: 1 }}>
+                <Person sx={{ fontSize: 60, color: 'grey.200' }} />
               </Avatar>
               <Button
-                variant="outlined"
+                variant="contained"
                 component="label"
-                startIcon={uploading ? <CircularProgress size={20} /> : <Upload />}
+                startIcon={uploading ? <CircularProgress size={20} color="inherit" /> : <Upload />}
                 disabled={uploading}
+                size="small"
               >
-                Upload Photo
+                {uploading ? "Uploading..." : "Upload Photo from Computer"}
                 <input type="file" hidden accept="image/*" onChange={handleFileUpload} />
               </Button>
+              <Typography variant="caption" display="block" sx={{ mt: 1, color: 'text.secondary' }}>
+                Recommended: Square image (500x500px)
+              </Typography>
             </Box>
+
+            <Divider>OR</Divider>
+
+            <TextField
+              fullWidth
+              label="Photo URL (Optional)"
+              placeholder="https://..."
+              value={editing?.image || ""}
+              onChange={(e) => setEditing({ ...editing, image: e.target.value })}
+              helperText="Link an image from the web instead"
+            />
+
             <TextField
               fullWidth
               label="Full Name"
@@ -177,13 +195,6 @@ export default function AdminTeamPage() {
             />
             <TextField
               fullWidth
-              label="Photo URL (Optional)"
-              placeholder="https://..."
-              value={editing?.image || ""}
-              onChange={(e) => setEditing({ ...editing, image: e.target.value })}
-            />
-            <TextField
-              fullWidth
               multiline
               rows={3}
               label="Bio"
@@ -194,7 +205,7 @@ export default function AdminTeamPage() {
         </DialogContent>
         <DialogActions sx={{ p: 3 }}>
           <Button onClick={() => setEditing(null)} color="inherit">Cancel</Button>
-          <Button variant="contained" startIcon={<Save />} onClick={saveItem} disabled={saving || uploading}>
+          <Button variant="contained" startIcon={<Save />} onClick={saveItem} disabled={saving || uploading} sx={{ px: 4 }}>
             {saving ? "Saving..." : "Save Member"}
           </Button>
         </DialogActions>

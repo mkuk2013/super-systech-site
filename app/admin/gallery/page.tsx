@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import {
   Box, Typography, Button, Grid, Card, CardMedia, CardContent, CardActions,
   Dialog, DialogTitle, DialogContent, DialogActions, TextField, IconButton,
-  CircularProgress, Snackbar, Alert, Paper
+  CircularProgress, Snackbar, Alert, Paper, Tooltip
 } from "@mui/material";
 import {
   Add, Delete, Edit, Save, Close, Upload, Image as ImageIcon
@@ -26,7 +26,7 @@ export default function AdminGalleryPage() {
   const saveItem = async () => {
     setSaving(true);
     try {
-      const url = editing.id ? "/api/items" : "/api/items";
+      const url = "/api/items";
       const method = editing.id ? "PUT" : "POST";
       const body = editing.id 
         ? { section: "gallery", id: editing.id, updates: editing }
@@ -80,12 +80,12 @@ export default function AdminGalleryPage() {
       if (response.ok) {
         const blob = await response.json();
         setEditing({ ...editing, image: blob.url });
-        setToast({ open: true, message: "Image uploaded!", severity: "success" });
+        setToast({ open: true, message: "Image uploaded successfully!", severity: "success" });
       } else {
         throw new Error("Upload failed");
       }
     } catch (error) {
-      setToast({ open: true, message: "Upload failed. Check BLOB_READ_WRITE_TOKEN", severity: "error" });
+      setToast({ open: true, message: "Upload failed. Check your connection or BLOB_READ_WRITE_TOKEN.", severity: "error" });
     }
     setUploading(false);
   };
@@ -109,7 +109,7 @@ export default function AdminGalleryPage() {
       <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }, gap: 3 }}>
         {gallery.map((item) => (
           <Box key={item.id}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', borderRadius: 3 }}>
               <CardMedia
                 component="img"
                 height="180"
@@ -122,12 +122,16 @@ export default function AdminGalleryPage() {
                 <Typography variant="caption" color="text.secondary">{item.category}</Typography>
               </CardContent>
               <CardActions sx={{ justifyContent: 'flex-end', p: 1 }}>
-                <IconButton size="small" color="primary" onClick={() => setEditing({ ...item })}>
-                  <Edit fontSize="small" />
-                </IconButton>
-                <IconButton size="small" color="error" onClick={() => deleteItem(item.id)}>
-                  <Delete fontSize="small" />
-                </IconButton>
+                <Tooltip title="Edit">
+                  <IconButton size="small" color="primary" onClick={() => setEditing({ ...item })}>
+                    <Edit fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <IconButton size="small" color="error" onClick={() => deleteItem(item.id)}>
+                    <Delete fontSize="small" />
+                  </IconButton>
+                </Tooltip>
               </CardActions>
             </Card>
           </Box>
@@ -144,46 +148,78 @@ export default function AdminGalleryPage() {
       {/* Edit Dialog */}
       <Dialog open={Boolean(editing)} onClose={() => setEditing(null)} fullWidth maxWidth="sm">
         <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="h6">{editing?.id ? "Edit Photo" : "Add New Photo"}</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 700 }}>{editing?.id ? "Edit Photo" : "Add New Photo"}</Typography>
           <IconButton onClick={() => setEditing(null)}><Close /></IconButton>
         </DialogTitle>
         <DialogContent dividers>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, py: 1 }}>
+            
+            {/* Image Upload Area */}
+            <Box>
+              <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 700 }}>
+                PHOTO UPLOAD (FROM DEVICE)
+              </Typography>
+              <Paper 
+                variant="outlined" 
+                sx={{ 
+                  p: 3, 
+                  textAlign: 'center', 
+                  bgcolor: 'grey.50', 
+                  borderStyle: 'dashed', 
+                  borderColor: 'primary.main',
+                  borderRadius: 2,
+                  position: 'relative'
+                }}
+              >
+                {uploading ? (
+                  <CircularProgress size={24} sx={{ my: 2 }} />
+                ) : editing?.image ? (
+                  <Box sx={{ position: 'relative' }}>
+                    <img src={editing.image} alt="Preview" style={{ width: '100%', maxHeight: '200px', objectFit: 'contain', borderRadius: '8px' }} />
+                    <Button 
+                      variant="contained" 
+                      size="small" 
+                      component="label" 
+                      startIcon={<Upload />}
+                      sx={{ position: 'absolute', bottom: 10, right: 10 }}
+                    >
+                      Change Photo
+                      <input type="file" hidden accept="image/*" onChange={handleFileUpload} />
+                    </Button>
+                  </Box>
+                ) : (
+                  <Box sx={{ py: 2 }}>
+                    <ImageIcon sx={{ fontSize: 48, color: 'grey.400', mb: 1 }} />
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                      Select a photo from your computer or device
+                    </Typography>
+                    <Button variant="contained" component="label" startIcon={<Upload />}>
+                      Choose File
+                      <input type="file" hidden accept="image/*" onChange={handleFileUpload} />
+                    </Button>
+                  </Box>
+                )}
+              </Paper>
+            </Box>
+
+            <Divider>OR</Divider>
+
             <TextField
               fullWidth
-              label="Title"
+              label="Image URL (Optional)"
+              placeholder="https://example.com/image.jpg"
+              value={editing?.image || ""}
+              onChange={(e) => setEditing({ ...editing, image: e.target.value })}
+              helperText="You can also paste a direct image link here"
+            />
+
+            <TextField
+              fullWidth
+              label="Photo Title"
               value={editing?.title || ""}
               onChange={(e) => setEditing({ ...editing, title: e.target.value })}
             />
-            <Box>
-              <Typography variant="caption" color="text.secondary" sx={{ mb: 1, display: 'block', fontWeight: 700 }}>
-                IMAGE (UPLOAD OR URL)
-              </Typography>
-              <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', mb: 2 }}>
-                <TextField
-                  fullWidth
-                  label="Image URL (Optional)"
-                  placeholder="https://..."
-                  value={editing?.image || ""}
-                  onChange={(e) => setEditing({ ...editing, image: e.target.value })}
-                  size="small"
-                />
-                <Button
-                  variant="outlined"
-                  component="label"
-                  startIcon={uploading ? <CircularProgress size={20} /> : <Upload />}
-                  disabled={uploading}
-                >
-                  Upload
-                  <input type="file" hidden accept="image/*" onChange={handleFileUpload} />
-                </Button>
-              </Box>
-              {editing?.image && (
-                <Box sx={{ mt: 2, borderRadius: 2, overflow: 'hidden', border: '1px solid', borderColor: 'divider' }}>
-                  <img src={editing.image} alt="Preview" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-                </Box>
-              )}
-            </Box>
+            
             <TextField
               fullWidth
               label="Category"
@@ -195,7 +231,7 @@ export default function AdminGalleryPage() {
         </DialogContent>
         <DialogActions sx={{ p: 3 }}>
           <Button onClick={() => setEditing(null)} color="inherit">Cancel</Button>
-          <Button variant="contained" startIcon={<Save />} onClick={saveItem} disabled={saving || uploading}>
+          <Button variant="contained" startIcon={<Save />} onClick={saveItem} disabled={saving || uploading} sx={{ px: 4 }}>
             {saving ? "Saving..." : "Save Photo"}
           </Button>
         </DialogActions>
