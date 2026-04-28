@@ -84,9 +84,9 @@ export default function AdminTestimonialsPage() {
         {items.map((item) => (
           <Card key={item.id} variant="outlined" sx={{ borderRadius: 2 }}>
             <CardContent sx={{ py: 2, '&:last-child': { pb: 2 } }}>
-              <Box display="flex" justifyContent="space-between" alignItems="flex-start">
+              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                 <Box sx={{ flexGrow: 1 }}>
-                  <Box display="flex" alignItems="center" gap={1} mb={0.5}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}>
                     <Typography variant="subtitle1" fontWeight={700} color="text.primary">
                       {item.name}
                     </Typography>

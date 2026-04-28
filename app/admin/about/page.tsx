@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 import {
-  Box, Typography, Button, Grid, Card, CardContent, TextField,
-  IconButton, CircularProgress, Snackbar, Alert, Paper, Avatar,
+  Box, Typography, Button, Card, CardContent, TextField,
+  IconButton, CircularProgress, Snackbar, Alert, Avatar,
   Divider, Tooltip
 } from "@mui/material";
 import {
-  Save, Plus, Delete, CheckCircle, Upload, Person
+  Save, Add, Delete, CheckCircle, Upload, Person, Close
 } from "@mui/icons-material";
 
 export default function AdminAboutPage() {
@@ -46,7 +46,7 @@ export default function AdminAboutPage() {
   };
 
   const addAchievement = () => {
-    updateField("achievements", [...about.achievements, "New Achievement"]);
+    updateField("achievements", [...(about.achievements || []), "New Achievement"]);
   };
 
   const updateAchievement = (index: number, value: string) => {
@@ -85,7 +85,7 @@ export default function AdminAboutPage() {
 
   if (!about) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh" }}>
         <CircularProgress />
       </Box>
     );
@@ -113,17 +113,13 @@ export default function AdminAboutPage() {
         <Card>
           <CardContent sx={{ p: 3 }}>
             <Typography variant="h6" sx={{ mb: 3 }} color="primary.main">Story & Mission</Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <TextField fullWidth multiline rows={4} label="Description" value={about.description} onChange={(e) => updateField("description", e.target.value)} />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField fullWidth multiline rows={3} label="Mission" value={about.mission} onChange={(e) => updateField("mission", e.target.value)} />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField fullWidth multiline rows={3} label="Vision" value={about.vision} onChange={(e) => updateField("vision", e.target.value)} />
-              </Grid>
-            </Grid>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr', gap: 3 }}>
+              <TextField fullWidth multiline rows={4} label="Description" value={about.description || ""} onChange={(e) => updateField("description", e.target.value)} />
+              <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 3 }}>
+                <TextField fullWidth multiline rows={3} label="Mission" value={about.mission || ""} onChange={(e) => updateField("mission", e.target.value)} />
+                <TextField fullWidth multiline rows={3} label="Vision" value={about.vision || ""} onChange={(e) => updateField("vision", e.target.value)} />
+              </Box>
+            </Box>
           </CardContent>
         </Card>
 
@@ -145,32 +141,26 @@ export default function AdminAboutPage() {
                 <input type="file" hidden accept="image/*" onChange={handleFileUpload} />
               </Button>
             </Box>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6}>
-                <TextField fullWidth label="Principal Name" value={about.principalName} onChange={(e) => updateField("principalName", e.target.value)} />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField fullWidth label="Title / Qualification" value={about.principalTitle} onChange={(e) => updateField("principalTitle", e.target.value)} />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField fullWidth label="Photo URL (Optional)" value={about.principalImage} onChange={(e) => updateField("principalImage", e.target.value)} />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField fullWidth multiline rows={5} label="Principal's Message" value={about.principalMessage} onChange={(e) => updateField("principalMessage", e.target.value)} />
-              </Grid>
-            </Grid>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr', gap: 3 }}>
+              <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 3 }}>
+                <TextField fullWidth label="Principal Name" value={about.principalName || ""} onChange={(e) => updateField("principalName", e.target.value)} />
+                <TextField fullWidth label="Title / Qualification" value={about.principalTitle || ""} onChange={(e) => updateField("principalTitle", e.target.value)} />
+              </Box>
+              <TextField fullWidth label="Photo URL (Optional)" value={about.principalImage || ""} onChange={(e) => updateField("principalImage", e.target.value)} />
+              <TextField fullWidth multiline rows={5} label="Principal's Message" value={about.principalMessage || ""} onChange={(e) => updateField("principalMessage", e.target.value)} />
+            </Box>
           </CardContent>
         </Card>
 
         {/* Achievements */}
         <Card>
           <CardContent sx={{ p: 3 }}>
-            <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
               <Typography variant="h6" color="primary.main">Key Achievements</Typography>
-              <Button variant="outlined" size="small" startIcon={<Plus />} onClick={addAchievement}>Add Achievement</Button>
+              <Button variant="outlined" size="small" startIcon={<Add />} onClick={addAchievement}>Add Achievement</Button>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {about.achievements.map((a: string, i: number) => (
+              {(about.achievements || []).map((a: string, i: number) => (
                 <Box key={i} sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                   <TextField size="small" fullWidth value={a} onChange={(e) => updateAchievement(i, e.target.value)} />
                   <IconButton color="error" onClick={() => removeAchievement(i)}>

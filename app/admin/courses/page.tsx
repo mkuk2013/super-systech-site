@@ -96,9 +96,9 @@ export default function AdminCoursesPage() {
         {courses.map((course) => (
           <Card key={course.id} variant="outlined" sx={{ borderRadius: 2 }}>
             <CardContent sx={{ py: 2, '&:last-child': { pb: 2 } }}>
-              <Box display="flex" justifyContent="space-between" alignItems="center">
+              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <Box>
-                  <Box display="flex" alignItems="center" gap={1} mb={0.5}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 0.5 }}>
                     <Typography variant="subtitle1" fontWeight={700} color="text.primary">
                       {course.title}
                     </Typography>

@@ -66,14 +66,14 @@ export default function AdminAdmissionsPage() {
       </Box>
 
       {/* Stats Cards */}
-      <Grid container spacing={3} mb={4}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' }, gap: 3, mb: 4 }}>
         {[
           { label: "Total", value: stats.total, color: "primary.main", bg: "primary.light" },
           { label: "Pending", value: stats.pending, color: "warning.main", bg: "warning.light" },
           { label: "Approved", value: stats.approved, color: "success.main", bg: "success.light" },
           { label: "Rejected", value: stats.rejected, color: "error.main", bg: "error.light" },
         ].map((s, i) => (
-          <Grid item xs={6} md={3} key={i}>
+          <Box key={i}>
             <Card sx={{ textAlign: 'center', borderTop: '4px solid', borderTopColor: s.color }}>
               <CardContent>
                 <Typography variant="h4" fontWeight={700} color="text.primary">{s.value}</Typography>
@@ -82,14 +82,14 @@ export default function AdminAdmissionsPage() {
                 </Typography>
               </CardContent>
             </Card>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
 
       {/* Search & Filter */}
       <Card sx={{ mb: 4 }}>
         <CardContent sx={{ p: 2 }}>
-          <Box display="flex" flexWrap="wrap" gap={2} alignItems="center">
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, alignItems: "center" }}>
             <TextField
               sx={{ flexGrow: 1, minWidth: 250 }}
               placeholder="Search by name, phone, CNIC..."
@@ -157,7 +157,7 @@ export default function AdminAdmissionsPage() {
                   />
                 </TableCell>
                 <TableCell align="right">
-                  <Box display="flex" justifyContent="flex-end" gap={0.5}>
+                  <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 0.5 }}>
                     {a.status !== "Approved" && (
                       <Tooltip title="Approve">
                         <IconButton size="small" color="success" onClick={() => updateStatus(a.id, "Approved")}>

@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import {
-  Box, Typography, Button, Grid, Card, CardContent, TextField,
+  Box, Typography, Button, Card, CardContent, TextField,
   IconButton, CircularProgress, Snackbar, Alert, Paper, Divider
 } from "@mui/material";
 import {
-  Save, Plus, Delete, CheckCircle, Warning
+  Save, Add, Delete, CheckCircle, Warning
 } from "@mui/icons-material";
 
 export default function AdminHeroPage() {
@@ -59,7 +59,7 @@ export default function AdminHeroPage() {
 
   if (!hero) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "50vh" }}>
         <CircularProgress />
       </Box>
     );
@@ -87,20 +87,14 @@ export default function AdminHeroPage() {
         <Card>
           <CardContent sx={{ p: 3 }}>
             <Typography variant="h6" sx={{ mb: 3 }} color="primary.main">Header Content</Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <TextField fullWidth label="Badge Text" value={hero.badge} onChange={(e) => updateField("badge", e.target.value)} />
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <TextField fullWidth label="Title Start" value={hero.title} onChange={(e) => updateField("title", e.target.value)} />
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <TextField fullWidth label="Highlighted Text" value={hero.titleHighlight} onChange={(e) => updateField("titleHighlight", e.target.value)} />
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <TextField fullWidth label="Title End" value={hero.titleEnd} onChange={(e) => updateField("titleEnd", e.target.value)} />
-              </Grid>
-            </Grid>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr', gap: 3 }}>
+              <TextField fullWidth label="Badge Text" value={hero.badge || ""} onChange={(e) => updateField("badge", e.target.value)} />
+              <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 3 }}>
+                <TextField fullWidth label="Title Start" value={hero.title || ""} onChange={(e) => updateField("title", e.target.value)} />
+                <TextField fullWidth label="Highlighted Text" value={hero.titleHighlight || ""} onChange={(e) => updateField("titleHighlight", e.target.value)} />
+                <TextField fullWidth label="Title End" value={hero.titleEnd || ""} onChange={(e) => updateField("titleEnd", e.target.value)} />
+              </Box>
+            </Box>
           </CardContent>
         </Card>
 
@@ -108,14 +102,10 @@ export default function AdminHeroPage() {
         <Card>
           <CardContent sx={{ p: 3 }}>
             <Typography variant="h6" sx={{ mb: 3 }} color="primary.main">Description & Visuals</Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <TextField fullWidth multiline rows={3} label="Subtitle" value={hero.subtitle} onChange={(e) => updateField("subtitle", e.target.value)} />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField fullWidth label="Background Image URL" value={hero.backgroundImage} onChange={(e) => updateField("backgroundImage", e.target.value)} />
-              </Grid>
-            </Grid>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr', gap: 3 }}>
+              <TextField fullWidth multiline rows={3} label="Subtitle" value={hero.subtitle || ""} onChange={(e) => updateField("subtitle", e.target.value)} />
+              <TextField fullWidth label="Background Image URL" value={hero.backgroundImage || ""} onChange={(e) => updateField("backgroundImage", e.target.value)} />
+            </Box>
           </CardContent>
         </Card>
 
@@ -123,26 +113,22 @@ export default function AdminHeroPage() {
         <Card>
           <CardContent sx={{ p: 3 }}>
             <Typography variant="h6" sx={{ mb: 3 }} color="primary.main">Call to Action Buttons</Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6}>
-                <TextField fullWidth label="Primary Button Text" value={hero.ctaPrimary} onChange={(e) => updateField("ctaPrimary", e.target.value)} />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField fullWidth label="Secondary Button Text" value={hero.ctaSecondary} onChange={(e) => updateField("ctaSecondary", e.target.value)} />
-              </Grid>
-            </Grid>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 3 }}>
+              <TextField fullWidth label="Primary Button Text" value={hero.ctaPrimary || ""} onChange={(e) => updateField("ctaPrimary", e.target.value)} />
+              <TextField fullWidth label="Secondary Button Text" value={hero.ctaSecondary || ""} onChange={(e) => updateField("ctaSecondary", e.target.value)} />
+            </Box>
           </CardContent>
         </Card>
 
         {/* Statistics */}
         <Card>
           <CardContent sx={{ p: 3 }}>
-            <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
               <Typography variant="h6" color="primary.main">Counter Statistics</Typography>
-              <Button variant="outlined" size="small" startIcon={<Plus />} onClick={addStat}>Add Stat</Button>
+              <Button variant="outlined" size="small" startIcon={<Add />} onClick={addStat}>Add Stat</Button>
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {hero.stats.map((stat: any, i: number) => (
+              {(hero.stats || []).map((stat: any, i: number) => (
                 <Box key={i} sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                   <TextField size="small" sx={{ flexGrow: 1 }} label="Value" value={stat.value} onChange={(e) => updateStat(i, "value", e.target.value)} />
                   <TextField size="small" sx={{ flexGrow: 2 }} label="Label" value={stat.label} onChange={(e) => updateStat(i, "label", e.target.value)} />

@@ -105,9 +105,9 @@ export default function AdminTeamPage() {
         </Button>
       </Box>
 
-      <Grid container spacing={3}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: 'repeat(3, 1fr)' }, gap: 3 }}>
         {team.map((member) => (
-          <Grid item xs={12} sm={6} lg={4} key={member.id}>
+          <Box key={member.id}>
             <Card sx={{ textAlign: 'center', height: '100%', borderRadius: 3 }}>
               <CardContent sx={{ p: 4 }}>
                 <Avatar 
@@ -123,15 +123,15 @@ export default function AdminTeamPage() {
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 3, minHeight: 40 }}>
                   {member.bio}
                 </Typography>
-                <Box display="flex" justifyContent="center" gap={1}>
+                <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
                   <Button size="small" startIcon={<Edit />} onClick={() => setEditing({ ...member })}>Edit</Button>
                   <Button size="small" color="error" startIcon={<Delete />} onClick={() => deleteItem(member.id)}>Delete</Button>
                 </Box>
               </CardContent>
             </Card>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
 
       {team.length === 0 && (
         <Paper sx={{ py: 10, textAlign: 'center', bgcolor: 'transparent', boxShadow: 'none' }}>
