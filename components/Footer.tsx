@@ -41,12 +41,12 @@ export default function Footer() {
             {/* Brand */}
             <div>
               <div className="flex items-center gap-3 mb-5">
-                <Image src="/images/logo_ssc.png" alt="STC" width={56} height={56} className="rounded-lg bg-white p-1" />
-                <div className="flex flex-col">
-                  <h3 className="text-sm sm:text-lg font-bold text-white leading-tight font-heading">
+                <Image src="/images/logo_ssc.png" alt="STC" width={60} height={60} className="rounded-lg bg-white p-1" />
+                <div className="flex flex-col justify-center">
+                  <h3 className="text-base sm:text-lg font-bold text-white leading-none font-heading mb-1">
                     {settings?.siteName || "Super Sys-Tech"}
                   </h3>
-                  <p className="text-[9px] sm:text-xs text-gray-500 font-bold uppercase tracking-wider">
+                  <p className="text-[10px] sm:text-xs text-gray-500 font-bold uppercase tracking-wider leading-tight">
                     {settings?.tagline || "Computers Centre Umerkot"}
                   </p>
                 </div>
