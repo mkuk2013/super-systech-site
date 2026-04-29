@@ -33,16 +33,16 @@ export default async function Home() {
         <div className="absolute top-20 right-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl floating-shape" />
         <div className="absolute bottom-20 left-10 w-72 h-72 bg-amber-500/5 rounded-full blur-3xl floating-shape-delayed" />
 
-        <div className="max-w-7xl mx-auto px-4 lg:px-6 relative z-10 py-20 pt-32">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 relative z-10 py-12 md:py-20 pt-28 md:pt-32">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="text-center lg:text-left">
               <AnimatedSection delay={0}>
                 <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold px-4 py-2 rounded-full mb-6 tracking-wider uppercase">
                   <GraduationCap size={14} /> {hero.badge}
                 </div>
               </AnimatedSection>
               <AnimatedSection delay={0.1}>
-                <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold text-white mb-6 leading-[1.1]">
+                <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold text-white mb-6 leading-tight lg:leading-[1.1]">
                   Where Dreams Are{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
                     Polished Into Skills
@@ -50,12 +50,12 @@ export default async function Home() {
                 </h1>
               </AnimatedSection>
               <AnimatedSection delay={0.2}>
-                <p className="text-lg text-slate-300 mb-8 max-w-lg leading-relaxed">
+                <p className="text-base sm:text-lg text-slate-300 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
                   {hero.subtitle}
                 </p>
               </AnimatedSection>
               <AnimatedSection delay={0.3}>
-                <div className="flex flex-wrap gap-3 mb-8">
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
                   <Link href="/admissions" className="btn-gold px-8 py-3.5 text-sm flex items-center gap-2">
                     Start Your Journey <ArrowRight size={16} />
                   </Link>
