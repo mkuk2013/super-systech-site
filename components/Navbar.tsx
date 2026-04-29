@@ -75,10 +75,10 @@ export default function Navbar() {
                 className="rounded-lg"
               />
               <div className="block">
-                <h1 className="text-base sm:text-xl font-extrabold text-slate-900 leading-tight font-heading">
+                <h1 className="text-sm sm:text-lg font-bold text-slate-900 leading-tight font-heading">
                   {settings?.siteName || "Super Sys-Tech"}
                 </h1>
-                <p className="text-[10px] sm:text-sm text-cyan-700 font-semibold uppercase tracking-wider">
+                <p className="text-[9px] sm:text-xs text-cyan-700 font-bold uppercase tracking-wider">
                   {settings?.tagline || "Computers Centre Umerkot"}
                 </p>
               </div>

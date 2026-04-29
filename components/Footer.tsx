@@ -42,10 +42,14 @@ export default function Footer() {
             <div>
               <div className="flex items-center gap-3 mb-5">
                 <Image src="/images/logo_ssc.png" alt="STC" width={56} height={56} className="rounded-lg bg-white p-1" />
-                <div>
-                  <h3 className="font-bold text-white text-xl font-heading">{settings?.siteName || "Super Sys-Tech"}</h3>
-                  <p className="text-gray-500 text-sm">{settings?.tagline || "Computers Centre Umerkot"}</p>
-                </div>
+                <div className="block">
+                <h1 className="text-sm sm:text-lg font-bold text-white leading-tight font-heading">
+                  {settings?.siteName || "Super Sys-Tech"}
+                </h1>
+                <p className="text-[9px] sm:text-xs text-gray-500 font-bold uppercase tracking-wider">
+                  {settings?.tagline || "Computers Centre Umerkot"}
+                </p>
+              </div>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed mb-5">
                 Where Dreams Are Polished Into Skills. Your Gateway to IT Excellence since 1997.
