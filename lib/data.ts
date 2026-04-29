@@ -66,3 +66,10 @@ export async function writeContent(data: SiteContent): Promise<void> {
     throw error;
   }
 }
+
+export async function updateSection(section: string, sectionData: any): Promise<any> {
+  const content = await readContent();
+  (content as any)[section] = sectionData;
+  await writeContent(content);
+  return sectionData;
+}
