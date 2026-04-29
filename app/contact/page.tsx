@@ -11,7 +11,7 @@ export default async function ContactPage() {
     { icon: MapPin, title: "Our Location", lines: [settings.address] },
     { icon: Phone, title: "Phone", lines: [settings.phone, settings.mobile] },
     { icon: Mail, title: "Email", lines: [settings.email] },
-    { icon: Clock, title: "Working Hours", lines: ["Mon - Sat: 8AM - 5PM", "Sunday: Closed"] },
+    { icon: Clock, title: "Working Hours", lines: [settings.workingHours || "Mon - Sat: 8:00 AM - 5:00 PM"] },
   ];
 
   return (
