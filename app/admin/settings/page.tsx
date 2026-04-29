@@ -5,7 +5,7 @@ import {
   Box, Typography, Card, CardContent, TextField, Button, IconButton,
   Divider, CircularProgress, Alert, Snackbar, Switch, FormControlLabel, Stack
 } from "@mui/material";
-import { Save, Add, Delete, Download, Campaign, Upload } from "@mui/icons-material";
+import { Save, Add, Delete, Download, Campaign, Upload, Restore } from "@mui/icons-material";
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<any>(null);
@@ -298,6 +298,30 @@ export default function AdminSettingsPage() {
                 sx={{ fontWeight: 'bold' }}
               >
                 Force Sync Local Data to Live
+              </Button>
+
+              <Button 
+                variant="contained" 
+                color="success" 
+                startIcon={<Restore />}
+                onClick={async () => {
+                  if (!confirm("This will scan your Blob storage and automatically add ALL images to your Gallery. Continue?")) return;
+                  try {
+                    const res = await fetch("/api/admin/auto-gallery", { method: "POST" });
+                    const result = await res.json();
+                    if (res.ok) {
+                      setToast({ open: true, message: result.message, severity: "success" });
+                      setTimeout(() => window.location.reload(), 1500);
+                    } else {
+                      throw new Error(result.error);
+                    }
+                  } catch (err: any) {
+                    setToast({ open: true, message: "Restore failed: " + err.message, severity: "error" });
+                  }
+                }}
+                sx={{ fontWeight: 'bold', bgcolor: '#2e7d32' }}
+              >
+                Auto-Restore Gallery from Blob
               </Button>
             </Box>
           </CardContent>

@@ -1,60 +1,70 @@
 {
   "settings": {
-    "siteName": "Super Sys-Tech Computers Centre Umerkot",
+    "siteName": "Super Sys-Tech Computers Umerkot",
     "shortName": "STC Umerkot",
-    "tagline": "Where Dreams Are Polished Into Skills",
+    "tagline": "Struggle for Computer Literacy",
     "established": "1997",
-    "phone": "0238-571540",
-    "mobile": "0300-3198050",
-    "email": "info@stcumerkot.com",
+    "phone": "0238-571646",
+    "mobile": "0332-3350790",
+    "email": "stcuk1997@gmail.com",
     "address": "1st Floor, Jameel Market, Umerkot, Sindh, Pakistan",
     "mapUrl": "https://maps.google.com/?q=Jameel+Market+Umerkot",
-    "facebookUrl": "https://www.facebook.com/SuperSysTechComputersUmerkot",
+    "facebookUrl": "facebook.com/SuperSysTechComputersUmerkot",
     "youtubeUrl": "https://www.youtube.com/@stcumerkot",
     "linkedinUrl": "https://www.linkedin.com/company/stcumerkot",
-    "whatsappNumber": "03003198050",
+    "whatsappNumber": "0345-3279790",
     "affiliations": [
       {
-        "name": "S.B.T.E Karachi",
+        "name": "NAVTTC Islamabad",
         "logo": "/images/sbte.png"
       },
       {
-        "name": "NAVTTC",
+        "name": "STEVTA Sindh ",
         "logo": "/images/navttc.png"
       },
       {
-        "name": "STEVTA Sindh",
+        "name": "S.B.T.E Sindh",
         "logo": "/images/stevta.png"
       },
       {
-        "name": "TTB Sindh",
+        "name": "T.T.B Sindh",
         "logo": "/images/ttb.png"
       }
-    ],
-    "marqueeShow": true,
-    "marqueeText": "Enroll for new batch <a href=\"/admissions\" class=\"btn-gold mx-2 px-3 py-1 rounded text-white no-underline text-[10px]\">Apply Now</a> "
+    ]
   },
   "hero": {
-    "badge": "YOUR GATEWAY TO IT EXCELLENCE • SINCE 1997",
-    "title": "Where Dreams Are",
-    "titleHighlight": "Polished Into",
-    "titleEnd": "Skills",
-    "subtitle": "Super Sys-Tech Computers Centre Umerkot empowers learners with industry-relevant computer skills and hands-on training. Board-certified diplomas affiliated with SBTE, NAVTTC, STEVTA & TTB Sindh.",
-    "ctaPrimary": "ADMISSION OPEN 2025",
-    "ctaSecondary": "EXPLORE PROGRAMS",
+    "badge": "Empowering Skills for a Digital Future Since 1997",
+    "title": "Where Ambitions Are",
+    "titleHighlight": "Transformed Into",
+    "titleEnd": "Professional Skills",
+    "subtitle": "Super Sys-Tech Computers Centre Umerkot is committed to delivering industry-relevant computer education with practical, hands-on training. We provide professional diploma and certificate programs affiliated with NAVTTC ISLAMABAD, STEVTA, S.B.T.E, and TTB Sindh, empowering students to build successful careers in IT, freelancing, and digital technologies.",
+    "ctaPrimary": "Apply for Admission 2026",
+    "ctaSecondary": "Explore Courses",
     "backgroundImage": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1920&q=80",
     "stats": [
       {
-        "value": "28+",
+        "value": "29+",
         "label": "Years of Service"
       },
       {
-        "value": "8,500+",
+        "value": "15000+",
         "label": "Graduated Alumni"
       },
       {
-        "value": "15+",
+        "value": "3000+",
+        "label": "Graduated in Government-Funded Training"
+      },
+      {
+        "value": "30+",
         "label": "Courses Offered"
+      },
+      {
+        "value": "60%",
+        "label": "Eployment"
+      },
+      {
+        "value": "600+",
+        "label": "Many Other NGO's Funded Training"
       }
     ]
   },
@@ -62,46 +72,46 @@
     "title": "Leading with Educational Integrity",
     "titleHighlight": "Educational Integrity",
     "principalName": "Ramesh Kumar",
-    "principalTitle": "Principal & Director",
-    "principalImage": "/images/ramesh.jpeg",
-    "principalMessage": "Our mission at Super Sys-Tech has always been to bridge the gap between rural potential and global technology standards. After nearly three decades, our success is reflected in the thousands of professionals leading the digital landscape today.",
+    "principalTitle": "Principal",
+    "principalImage": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/568623761_25061035363513252_4073941760187931949_n.jpg",
+    "principalMessage": "At Super Sys-Tech Computers Centre Umerkot, our mission is to empower students with practical knowledge and modern IT skills that meet today’s digital demands. We believe that education is the key to success, and our focus is on building confidence, creativity, and technical expertise in every student.\nWith a commitment to quality education and discipline, we strive to create a supportive learning environment where students can grow, innovate, and achieve their goals. Our aim is not only to teach technology but to prepare individuals for real-world challenges and opportunities.",
     "achievements": [
-      "SBTE & NAVTTC Affiliated Institute",
-      "STEVTA & TTB Sindh Recognized",
-      "28+ Years of IT Excellence in Umerkot",
-      "8,500+ Successful Graduates",
-      "Government-Funded NAVTTC Training Partner",
-      "Career Guidance in IT & Freelancing"
+      "Affiliated With: (NAVTTC ISLAMABAD) National Vocational & Technical Training Commission  ",
+      "Affiliated With: (STEVTA SINDH) Sindh Technical Education and Vocational Training Authority ",
+      "Affiliated With: (S.B.T.E SINDH) Sindh Board of Technical Education",
+      "Affiliated With: (T.T.B SINDH) Trade Testing Board Sindh",
+      "Government-Funded (NAVTTC ISLAMABAD) Training Partner",
+      "Government-Funded  (BBSHRRDB SINDH) Training Partner"
     ],
-    "description": "Super Sys-Tech Computers Centre Umerkot was founded in 1997 by Ramesh Kumar with a vision to bring quality computer education to the rural areas of Sindh. Over the past 28 years, the institution has grown into Umerkot's premier gateway to IT excellence — producing thousands of skilled graduates who are now contributing to Pakistan's digital economy through freelancing, web development, graphic design, and more.",
-    "mission": "To empower learners with industry-relevant computer skills and hands-on training — whether you're a beginner or looking to upgrade your tech skills.",
-    "vision": "To be the leading institution in Sindh for vocational and technical education, where dreams are polished into skills."
+    "description": "Super Sys-Tech Computers Centre Umerkot was established in 1997 by Sham Lal with a vision to provide quality computer education to the rural areas of Sindh. With over 29 years of experience, the institute has evolved into one of Umerkot’s leading centers for IT education. It has successfully trained thousands of students who are now actively contributing to Pakistan’s digital economy in fields such as freelancing, web development, graphic design, and digital marketing.",
+    "mission": "To provide high-quality, practical, and affordable IT education that equips students with in-demand skills such as web development, graphic design, digital marketing, and e-commerce.\nWe aim to create opportunities for students by fostering innovation, creativity, and professional growth, enabling them to achieve success in freelancing, employment, and entrepreneurship.",
+    "vision": "To become a leading institute of information technology in rural Sindh, empowering youth with modern digital skills and transforming them into confident professionals who contribute to the global digital economy."
   },
   "courses": [
     {
       "id": "1",
-      "title": "Diploma in Information Technology (D.I.T)",
+      "title": "(D.I.T) Diploma in Information Technology ",
       "board": "S.B.T.E & T.T.B @ Sindh",
       "duration": "12 Months",
-      "description": "Comprehensive 1-year diploma covering ICT, Office Automation, Web Designing, C/C++ Programming, Networking, Hardware (A+), Desktop Publishing, and Databases (SQL/MySQL).",
+      "description": "Introduction to Information Technology, Computer Hardware, Operating Systems (Windows), Microsoft Office (Word, Excel, PowerPoint, Access), Internet & Email\nGraphic Designing Basics, Web Designing (HTML & CSS), Programming Fundamentals, Database Management, Digital Marketing Basics, Freelancing & Career Development, Final Project",
       "icon": "GraduationCap",
       "featured": true
     },
     {
       "id": "2",
-      "title": "Certificate in Information Technology (C.I.T)",
-      "board": "S.B.T.E & T.T.B @ Sindh",
+      "title": "(C.I.T) Certificate in Information Technology ",
+      "board": "T.T.B @ Sindh",
       "duration": "06 Months",
-      "description": "Fast-track 6-months certificate program focusing on essential computer applications, office automation, and foundation technology skills.",
+      "description": "Introduction to Computer\nWindows Operating System\nMS Word\nMS Excel\nMS PowerPoint\nInternet & Email\nTyping Skills\nBasic Networking\nBasic Graphic Introduction\nFinal Practical Work",
       "icon": "ShieldCheck",
       "featured": true
     },
     {
       "id": "3",
-      "title": "Graphics Designing",
+      "title": "Graphic Designing Video Editing",
       "board": "T.T.B @ Sindh",
       "duration": "06 Months",
-      "description": "Master professional design tools like Adobe Photoshop, Corel Draw, and Inpage for desktop publishing and digital media.",
+      "description": "Introduction to Graphic Design & Media\nAdobe Photoshop (Image Editing)\nAdobe Illustrator (Vector Design)\nVideo Editing (Premiere Pro / CapCut)\nMotion Graphics (After Effects Basics)\nSocial Media Content Creation\nFreelancing & Portfolio Development",
       "icon": "Palette",
       "featured": true
     },
@@ -110,25 +120,16 @@
       "title": "Website Designing & Development",
       "board": "T.T.B @ Sindh",
       "duration": "06 Months",
-      "description": "Complete web development training from front-end design to back-end logic, building responsive and dynamic websites.",
+      "description": "HTML\nCSS\nBootstrap\nJavaScript\nResponsive Web Design\nUI/UX Basics\nWordPress Development\nPHP Basics\nMySQL Database\nWebsite Hosting & Domain\nFinal Website Project",
       "icon": "Code",
       "featured": true
-    },
-    {
-      "id": "5",
-      "title": "Computerized Accounting",
-      "board": "T.T.B @ Sindh",
-      "duration": "06 Months",
-      "description": "Learn modern computerized accounting techniques to manage finances, ledgers, and accounts for businesses.",
-      "icon": "Briefcase",
-      "featured": false
     },
     {
       "id": "6",
       "title": "One Year Composing Course",
       "board": "Institutional",
       "duration": "12 Months",
-      "description": "Extensive training in typing, document composing, and advanced office publishing.",
+      "description": "Introduction to Computer & Composing Field\nTyping Practice (English & Urdu)\nMS Word Advanced (Professional Documents)\nPage Formatting & Layout Designing\nUrdu InPage Software (Complete Training)\nComposition of Books & Assignments\nCV / Resume Designing\nOfficial Letter Writing\nNewspaper & Magazine Designing (Basic)\nScanning & Image Editing Basics\nAdobe Photoshop for Composing Work\nAdobe Illustrator (Basic Designing Tools)\nPrinting Setup & File Preparation\nBrochure, Flyer & Poster Designing\nFinal Practical Project (Complete Composing Work)",
       "icon": "BookOpen",
       "featured": false
     },
@@ -137,7 +138,7 @@
       "title": "Office Automation Advance",
       "board": "Institutional",
       "duration": "04 Months",
-      "description": "Advanced training in Microsoft Word, Excel, PowerPoint, Internet handling, and operating systems.",
+      "description": "MS Word (Basic to Advanced)\nMS Excel (Formulas, Charts, Pivot Tables)\nMS PowerPoint (Professional Presentation)\nMS Access Database\nData Entry & Office Work\nBusiness Reports Writing\nCloud Tools (Google Drive, OneDrive)\nOffice Management Skills\nFinal Office Project",
       "icon": "Monitor",
       "featured": false
     },
@@ -146,7 +147,7 @@
       "title": "Digital Marketing & SEO",
       "board": "Institutional",
       "duration": "04 Months",
-      "description": "Learn to optimize websites for search engines (SEO) and execute successful digital marketing campaigns.",
+      "description": "Introduction to Digital Marketing\nSEO (On Page & Off Page)\nKeyword Research\nGoogle Ads Basics\nFacebook & Instagram Marketing\nContent Marketing\nYouTube Marketing\nEmail Marketing\nGoogle Analytics\nFinal Marketing Campaign",
       "icon": "TrendingUp",
       "featured": true
     },
@@ -155,70 +156,173 @@
       "title": "Freelancing Course",
       "board": "Institutional",
       "duration": "04 Months",
-      "description": "Start earning online! Learn how to get clients and work on platforms like Fiverr, Upwork, Guru, and Freelancer.",
+      "description": "Introduction to Freelancing\nFreelancing Platforms Overview (Upwork, Fiverr, Freelancer)\nCreating Freelancing Accounts\nProfile Setup & Optimization\nGig Creation (Fiverr)\nProposal Writing Skills (Upwork Jobs)\nFinding Clients & Job Applications\nCommunication Skills with Clients\nPricing Strategy & Service Packages\nSkill Selection (Graphic Design, Writing, Web, etc.)\nOrder Management & Delivery Process\nClient Reviews & Rating System\nPayment Methods (Payoneer, Bank Transfer, etc.)\nTime Management & Project Handling\nHandling Revisions & Client Feedback\nFreelancing Ethics & Professional Behavior\nAvoiding Scams & Platform Rules\nBuilding Portfolio for Freelancing\nPersonal Branding (Social Media & LinkedIn)\nFinal Practical Project (Live Freelancing Profile + First Gig/Proposal)",
       "icon": "DollarSign",
       "featured": true
+    },
+    {
+      "title": "E-Commerce",
+      "board": "Institutional",
+      "duration": "4 Months",
+      "description": "Introduction to E-Commerce\nTypes of E-Commerce (B2B, B2C, C2C, C2B)\nOnline Business Models Overview\nE-Commerce Website Basics\nProduct Research & Selection\nProduct Listing & Optimization\nProduct Description Writing Skills\nPricing Strategy & Profit Calculation\nPayment Methods (Online Payments, COD)\nOrder Management System\nInventory & Stock Management\nShipping & Delivery Process\nCustomer Service & Handling Queries\nDigital Marketing for E-Commerce\nSocial Media Selling (Facebook, Instagram, TikTok)\nMarketplace Training (Daraz, Amazon Basics, Shopify Intro)\nDropshipping Basics\nBranding & Store Management\nReturn & Refund Policies\nFinal Practical Project (Complete E-Commerce Store Setup)",
+      "icon": "BookOpen",
+      "featured": false,
+      "id": "8f1acb30-3213-4c08-a08c-cbcdb679cc7a"
+    },
+    {
+      "title": "Graphics Designing",
+      "board": "Institutional",
+      "duration": "6 Months",
+      "description": "Photoshop Basics\nIllustrator Basics\nColor Theory & Typography\nLogo Design\nBanner & Poster Design\nSocial Media Post Design\nPhoto Editing & Retouching\nBranding Design\nPortfolio Development\nFinal Design Project",
+      "icon": "BookOpen",
+      "featured": false,
+      "id": "37eb8721-c1dc-4356-9727-13ba6142dac5"
+    },
+    {
+      "title": "Computerized Accounting",
+      "board": "T.T.B Sindh",
+      "duration": "6 Months",
+      "description": "Introduction to Computerized Accounting\nBasics of Accounting Concepts\nMS Excel Basics for Accounting\nData Entry in Excel Sheets\nAccounting Spreadsheet Design\nJournal Entries (Manual & Excel Based)\nLedger Preparation in Excel\nCash Book & Bank Book Management\nTrial Balance Preparation\nProfit & Loss Statement (Excel)\nBalance Sheet Preparation\nInventory Management in Excel\nSalary & Payroll Sheet\nInvoice & Billing System\nTax Calculation Basics (Excel Work)\nBank Reconciliation Statement\nAccounting Templates Creation\nOffice Documentation for Accounts\nReporting & Financial Analysis in Excel\nFinal Practical Project (Complete Excel Accounting System)",
+      "icon": "BookOpen",
+      "featured": false,
+      "id": "ae57a7cc-0e69-489d-acba-fe59d027efe7"
+    },
+    {
+      "title": "Basic (AI) Artificial Intelligence  Course ",
+      "board": "Institutional",
+      "duration": "4 Months",
+      "description": "Introduction to AI\nMachine Learning Basics\nData Basics\nAI Tools (ChatGPT, etc.)\nPrompt Engineering\nAutomation Tools\nAI in Business\nEthics of AI\nMini Projects\nFinal AI Project",
+      "icon": "BookOpen",
+      "featured": false,
+      "id": "39aeb14d-c6df-4522-9a59-3e62ace340ce"
     }
   ],
   "team": [
     {
       "id": "1",
-      "name": "Ramesh Kumar",
-      "role": "Principal & Director",
-      "image": "/images/ramesh.jpeg",
-      "bio": "Founder of STC Umerkot with 28+ years of experience in technical education."
+      "name": "Sham Kumar",
+      "role": "Director",
+      "image": "",
+      "bio": "STC Umerkot with 29+ Years of Experience in Technical Education."
     },
     {
       "id": "2",
-      "name": "Faculty Member",
-      "role": "Senior Instructor - DIT",
-      "image": "",
-      "bio": "Experienced IT professional specializing in hardware and networking."
+      "name": "Ramesh Kumar",
+      "role": "Principal",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/55.JPG",
+      "bio": "STC Umerkot with 29+ Years of Experience in Technical Education.\n"
     },
     {
-      "id": "3",
-      "name": "Faculty Member",
-      "role": "Graphic Design Instructor",
-      "image": "",
-      "bio": "Expert in Adobe Creative Suite and modern digital design."
+      "name": "Ramesh Kumar",
+      "role": "Vice-Principal",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/Gemini_Generated_Image_9yj3i59yj3i59yj3.png",
+      "bio": "The Vice-Principal assists the Principal in managing daily academic and administrative operations of the institute.",
+      "id": "2729326f-1944-4728-b435-9e90e5a98fb3"
+    },
+    {
+      "name": "Prem Kumar",
+      "role": "Admin/Finance Manager",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/Gemini_Generated_Image_4ad3c64ad3c64ad3.png",
+      "bio": "Handle financial records, budgeting, and fee management.",
+      "id": "912c1142-1b2b-4765-b738-bd4aa946c650"
     }
   ],
   "gallery": [
     {
-      "id": "1",
-      "title": "Computer Lab",
-      "image": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600",
-      "category": "Campus"
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/37.jpg",
+      "category": "Campus",
+      "id": "b6e024aa-793b-49f2-822b-381c09ebf177"
     },
     {
-      "id": "2",
-      "title": "Students in Class",
-      "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600",
-      "category": "Classes"
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/13.jpg",
+      "category": "Campus",
+      "id": "c3e671ba-f416-43e0-affc-adeea592d547"
     },
     {
-      "id": "3",
-      "title": "Certificate Distribution",
-      "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600",
-      "category": "Events"
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/14.jpg",
+      "category": "Campus",
+      "id": "8ed107e3-bd94-4bec-b274-e7351d75c884"
     },
     {
-      "id": "4",
-      "title": "Annual Day Ceremony",
-      "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600",
-      "category": "Events"
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/1000316510.jpg",
+      "category": "Campus",
+      "id": "b202fef5-d65d-4bff-8824-0fa52eb7a522"
     },
     {
-      "id": "5",
-      "title": "Practical Session",
-      "image": "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600",
-      "category": "Classes"
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-20%20at%205.57.01%20PM.jpeg",
+      "category": "Campus",
+      "id": "c6effc42-7f19-497e-9747-b3cf5abcf413"
     },
     {
-      "id": "6",
-      "title": "Campus Building",
-      "image": "https://images.unsplash.com/photo-1562774053-701939374585?w=600",
-      "category": "Campus"
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-20%20at%205.55.18%20PM.jpeg",
+      "category": "Campus",
+      "id": "d2e9943d-ec05-4f34-a117-9dfc816b5504"
+    },
+    {
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/Certificate%20in%20Office%20Managment%202%20copy.JPG",
+      "category": "Campus",
+      "id": "eb556e87-5021-45a3-8b99-77ed9d5a4a7a"
+    },
+    {
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/Certificate%20in%20Office%20Managment%201%20copy.JPG",
+      "category": "Campus",
+      "id": "3db1e1c9-030d-461e-8fa0-b4dfbdca875d"
+    },
+    {
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/DIgital%20Marketing%201.jpg",
+      "category": "Campus",
+      "id": "f9175d75-3db5-4bb6-b1d5-59272340f97d"
+    },
+    {
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/DIgital%20Marketing%202.jpg",
+      "category": "Campus",
+      "id": "b083e9c1-ebd3-4a12-8f8c-8a59c02578d5"
+    },
+    {
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/E%20Commerce%201%20copy.JPG",
+      "category": "Campus",
+      "id": "4674f01f-7356-4950-b001-f925e42bc07e"
+    },
+    {
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/E%20Commerce%202%20copy.JPG",
+      "category": "Campus",
+      "id": "e25c91d7-34cb-429a-bcf6-3c0ba8c2d215"
+    },
+    {
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/Graphic%20Designing%201%20copy.jpg",
+      "category": "Campus",
+      "id": "99085426-bfe7-44e6-b82a-1ee12d6d128e"
+    },
+    {
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/Graphic%20Designing%202%20copy.jpg",
+      "category": "Campus",
+      "id": "bc8e5e14-0289-4c3f-bd95-3ac0992f190b"
+    },
+    {
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/Certificate%20in%20IT%201%20copy.JPG",
+      "category": "Campus",
+      "id": "0d9b281f-02b6-47ca-9079-e4d63dcf8d8b"
+    },
+    {
+      "title": "",
+      "image": "https://wkrg43aznfbabbl0.public.blob.vercel-storage.com/Certificate%20in%20IT%202%20copy.jpg",
+      "category": "Campus",
+      "id": "cd1cec33-4f2b-49d0-9abb-9a331e561c16"
     }
   ],
   "testimonials": [
