@@ -74,11 +74,11 @@ export default function Navbar() {
                 height={56}
                 className="rounded-lg"
               />
-              <div className="flex flex-col justify-center">
-                <h1 className="text-base sm:text-lg font-bold text-slate-900 leading-none font-heading mb-1">
-                  {settings?.siteName || "Super Sys-Tech"}
+              <div className="flex flex-col justify-center py-0.5">
+                <h1 className="text-base sm:text-xl font-black text-slate-900 leading-tight font-heading">
+                  {settings?.siteName?.split(' ').slice(0, 3).join(' ') || "Super Sys-Tech"}
                 </h1>
-                <p className="text-[10px] sm:text-xs text-cyan-700 font-bold uppercase tracking-wider leading-tight">
+                <p className="text-[10px] sm:text-xs text-cyan-700 font-bold uppercase tracking-widest leading-relaxed">
                   {settings?.tagline || "Computers Centre Umerkot"}
                 </p>
               </div>
