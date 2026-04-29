@@ -70,16 +70,16 @@ export default function Navbar() {
               <Image
                 src="/images/logo_ssc.png"
                 alt="Super Sys-Tech Computers"
-                width={68}
-                height={68}
+                width={48}
+                height={48}
                 className="rounded-lg shadow-sm"
               />
               <div className="flex flex-col justify-center">
-                <h1 className="text-xl sm:text-2xl font-black text-slate-900 leading-[1.1] font-heading mb-1">
-                  {settings?.siteName || "Super Sys-Tech"}
+                <h1 className="text-base sm:text-lg font-bold text-slate-900 leading-tight font-heading">
+                  Super Sys-Tech
                 </h1>
-                <p className="text-[10px] sm:text-xs text-cyan-700 font-bold uppercase tracking-[0.2em] leading-tight">
-                  {settings?.tagline || "Computers Centre Umerkot"}
+                <p className="text-[10px] sm:text-xs text-cyan-700 font-medium uppercase tracking-wider">
+                  Computers Centre Umerkot
                 </p>
               </div>
             </Link>

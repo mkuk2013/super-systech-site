@@ -40,16 +40,14 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
             {/* Brand */}
             <div>
-              <div className="flex items-center gap-5 mb-6">
-                <div className="relative w-20 h-20 flex-shrink-0 bg-white p-2 rounded-2xl flex items-center justify-center shadow-xl">
-                  <Image src="/images/logo_ssc.png" alt="STC" width={72} height={72} className="object-contain" />
-                </div>
+              <div className="flex items-center gap-3 mb-6">
+                <Image src="/images/logo_ssc.png" alt="STC" width={56} height={56} className="rounded-xl bg-white p-1 shadow-sm" />
                 <div className="flex flex-col justify-center">
-                  <h3 className="text-xl sm:text-2xl font-black text-white leading-[1.1] font-heading mb-1">
-                    {settings?.siteName || "Super Sys-Tech"}
+                  <h3 className="text-lg font-bold text-white leading-tight font-heading">
+                    Super Sys-Tech
                   </h3>
-                  <p className="text-[10px] sm:text-xs text-gray-500 font-bold uppercase tracking-[0.2em] leading-tight">
-                    {settings?.tagline || "Computers Centre Umerkot"}
+                  <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">
+                    Computers Centre Umerkot
                   </p>
                 </div>
               </div>
