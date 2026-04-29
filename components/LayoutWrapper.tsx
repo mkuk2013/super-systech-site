@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import FloatingWhatsApp from "./FloatingWhatsApp";
+import FloatingActions from "./FloatingActions";
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -18,7 +18,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />
-      <FloatingWhatsApp />
+      <FloatingActions />
     </>
   );
 }
