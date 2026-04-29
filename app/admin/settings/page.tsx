@@ -5,7 +5,7 @@ import {
   Box, Typography, Card, CardContent, TextField, Button, IconButton,
   Divider, CircularProgress, Alert, Snackbar
 } from "@mui/material";
-import { Save, Add, Delete } from "@mui/icons-material";
+import { Save, Add, Delete, Download } from "@mui/icons-material";
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<any>(null);
@@ -146,6 +146,26 @@ export default function AdminSettingsPage() {
                 );
               })}
             </Box>
+          </CardContent>
+        </Card>
+
+        {/* Data Management */}
+        <Card sx={{ border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(0,0,0,0.02)' }}>
+          <CardContent sx={{ p: 3 }}>
+            <Typography variant="h6" sx={{ mb: 1 }} color="primary.main">Data Management</Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+              Download a complete backup of your website data as a JSON file. This file can be used to restore your data or migrate to another hosting provider.
+            </Typography>
+            <Button 
+              variant="outlined" 
+              color="primary" 
+              startIcon={<Download />}
+              href="/api/admin/export"
+              target="_blank"
+              sx={{ fontWeight: 'bold' }}
+            >
+              Download Database Backup (.json)
+            </Button>
           </CardContent>
         </Card>
       </Box>
