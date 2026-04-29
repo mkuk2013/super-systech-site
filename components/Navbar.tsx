@@ -63,7 +63,7 @@ export default function Navbar() {
             : "bg-white py-3 border-b border-gray-100"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+        <div className="w-full max-w-7xl mx-auto px-4 lg:px-6">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 no-underline">

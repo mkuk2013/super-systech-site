@@ -33,7 +33,7 @@ export default async function Home() {
         <div className="absolute top-20 right-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl floating-shape" />
         <div className="absolute bottom-20 left-10 w-72 h-72 bg-amber-500/5 rounded-full blur-3xl floating-shape-delayed" />
 
-        <div className="max-w-7xl mx-auto px-4 lg:px-6 relative z-10 py-12 md:py-20 pt-28 md:pt-32">
+        <div className="w-full max-w-7xl mx-auto px-4 lg:px-6 relative z-10 py-12 md:py-20 pt-28 md:pt-32">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="text-center lg:text-left">
               <AnimatedSection delay={0}>
@@ -116,7 +116,7 @@ export default async function Home() {
 
       {/* ===== ABOUT / PRINCIPAL ===== */}
       <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+        <div className="w-full max-w-7xl mx-auto px-4 lg:px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection direction="left">
               <div className="relative">
@@ -167,7 +167,7 @@ export default async function Home() {
 
       {/* ===== FEATURED COURSES ===== */}
       <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+        <div className="w-full max-w-7xl mx-auto px-4 lg:px-6">
           <AnimatedSection>
             <div className="text-center mb-16">
               <p className="section-label mb-3">OUR PROGRAMS</p>
@@ -227,7 +227,7 @@ export default async function Home() {
       {/* ===== WHY CHOOSE US ===== */}
       <section className="py-24 mesh-gradient text-white relative overflow-hidden">
         <div className="absolute top-10 right-10 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl" />
-        <div className="max-w-7xl mx-auto px-4 lg:px-6 relative z-10">
+        <div className="w-full max-w-7xl mx-auto px-4 lg:px-6 relative z-10">
           <AnimatedSection>
             <div className="text-center mb-16">
               <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">WHY STC UMERKOT</p>
@@ -260,7 +260,7 @@ export default async function Home() {
       {/* ===== TESTIMONIALS ===== */}
       {testimonials.length > 0 && (
         <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <div className="w-full max-w-7xl mx-auto px-4 lg:px-6">
             <AnimatedSection>
               <div className="text-center mb-16">
                 <p className="section-label mb-3">STUDENT VOICES</p>

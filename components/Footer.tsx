@@ -36,7 +36,7 @@ export default function Footer() {
 
       {/* Main Footer */}
       <div className="bg-slate-900 pt-14 pb-8">
-        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+        <div className="w-full max-w-7xl mx-auto px-4 lg:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
             {/* Brand */}
             <div>
