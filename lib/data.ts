@@ -17,9 +17,12 @@ export interface SiteContent {
 
 export async function readContent(): Promise<SiteContent> {
   try {
-    const data = await kv.get<SiteContent>("site_content");
-    if (data) {
-      return data;
+    // Only attempt to read from KV if environment variables are set
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+      const data = await kv.get<SiteContent>("site_content");
+      if (data) {
+        return data;
+      }
     }
   } catch (error) {
     console.error("Failed to read from KV, falling back to local file:", error);
@@ -32,7 +35,11 @@ export async function readContent(): Promise<SiteContent> {
 
 export async function writeContent(data: SiteContent): Promise<void> {
   try {
-    await kv.set("site_content", data);
+    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+      await kv.set("site_content", data);
+    } else {
+      throw new Error("KV environment variables missing");
+    }
   } catch (error) {
     console.error("Failed to write to KV:", error);
     // Locally, we might want to also write to the file for persistence if KV is not set up
