@@ -114,18 +114,27 @@ export default function Footer() {
               <div className="space-y-3">
                 <div className="flex items-start gap-2.5">
                   <MapPin size={14} className="text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-500 text-sm">{settings?.address || "1st Floor, Jameel Market, Umerkot, Sindh"}</span>
+                  <a 
+                    href={settings?.mapUrl || "https://maps.google.com"} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-gray-500 text-sm hover:text-cyan-400 transition-colors no-underline"
+                  >
+                    {settings?.address || "1st Floor, Jameel Market, Umerkot, Sindh"}
+                  </a>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <Phone size={14} className="text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <div className="text-gray-500 text-sm">
-                    <div>{settings?.phone || "0238-571540"}</div>
-                    <div>{settings?.mobile || "0300-3198050"}</div>
+                  <div className="text-gray-500 text-sm flex flex-col gap-1">
+                    <a href={`tel:${settings?.phone || '0238571540'}`} className="hover:text-cyan-400 transition-colors no-underline">{settings?.phone || "0238-571540"}</a>
+                    <a href={`tel:${settings?.mobile || '03003198050'}`} className="hover:text-cyan-400 transition-colors no-underline">{settings?.mobile || "0300-3198050"}</a>
                   </div>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <Mail size={14} className="text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-500 text-sm">{settings?.email || "supersystechumk@gmail.com"}</span>
+                  <a href={`mailto:${settings?.email || 'supersystechumk@gmail.com'}`} className="text-gray-500 text-sm hover:text-cyan-400 transition-colors no-underline">
+                    {settings?.email || "supersystechumk@gmail.com"}
+                  </a>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <Clock size={14} className="text-cyan-400 mt-0.5 flex-shrink-0" />

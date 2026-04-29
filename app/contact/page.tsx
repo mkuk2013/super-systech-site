@@ -8,10 +8,30 @@ export default async function ContactPage() {
   const { settings } = await readContent();
 
   const contactCards = [
-    { icon: MapPin, title: "Our Location", lines: [settings.address] },
-    { icon: Phone, title: "Phone", lines: [settings.phone, settings.mobile] },
-    { icon: Mail, title: "Email", lines: [settings.email] },
-    { icon: Clock, title: "Working Hours", lines: [settings.workingHours || "Mon - Sat: 8:00 AM - 5:00 PM"] },
+    { 
+      icon: MapPin, 
+      title: "Our Location", 
+      lines: [settings.address],
+      href: settings.mapUrl || "https://maps.google.com"
+    },
+    { 
+      icon: Phone, 
+      title: "Phone", 
+      lines: [settings.phone, settings.mobile],
+      href: `tel:${settings.mobile}` 
+    },
+    { 
+      icon: Mail, 
+      title: "Email", 
+      lines: [settings.email],
+      href: `mailto:${settings.email}` 
+    },
+    { 
+      icon: Clock, 
+      title: "Working Hours", 
+      lines: [settings.workingHours || "Mon - Sat: 8:00 AM - 5:00 PM"],
+      href: null
+    },
   ];
 
   return (
@@ -43,9 +63,23 @@ export default async function ContactPage() {
                     <card.icon size={22} className="text-white" />
                   </div>
                   <h3 className="font-bold text-slate-900 mb-2 font-heading">{card.title}</h3>
-                  {card.lines.map((l, j) => (
-                    <p key={j} className="text-gray-500 text-sm">{l}</p>
-                  ))}
+                  <div className="space-y-1">
+                    {card.lines.map((l, j) => (
+                      card.href ? (
+                        <a 
+                          key={j} 
+                          href={card.href} 
+                          target={card.href.startsWith('http') ? "_blank" : undefined}
+                          rel="noopener noreferrer"
+                          className="block text-gray-500 text-sm hover:text-cyan-600 transition-colors no-underline"
+                        >
+                          {l}
+                        </a>
+                      ) : (
+                        <p key={j} className="text-gray-500 text-sm">{l}</p>
+                      )
+                    ))}
+                  </div>
                 </div>
               </AnimatedSection>
             ))}
