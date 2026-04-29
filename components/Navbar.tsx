@@ -8,6 +8,7 @@ import { Menu, X, Phone, Mail, MapPin } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [settings, setSettings] = useState<any>(null);
   const pathname = usePathname();
 
