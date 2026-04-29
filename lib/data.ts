@@ -73,3 +73,39 @@ export async function updateSection(section: string, sectionData: any): Promise<
   await writeContent(content);
   return sectionData;
 }
+
+export async function getSection(section: string): Promise<any[]> {
+  const content = await readContent();
+  return (content as any)[section] || [];
+}
+
+export async function addItem(section: string, item: any): Promise<void> {
+  const content = await readContent();
+  if (Array.isArray((content as any)[section])) {
+    (content as any)[section].push(item);
+    await writeContent(content);
+  }
+}
+
+export async function updateItem(section: string, id: string, updates: any): Promise<any> {
+  const content = await readContent();
+  const arr = (content as any)[section];
+  if (Array.isArray(arr)) {
+    const idx = arr.findIndex((i: any) => i.id === id);
+    if (idx !== -1) {
+      arr[idx] = { ...arr[idx], ...updates };
+      await writeContent(content);
+      return arr[idx];
+    }
+  }
+  return null;
+}
+
+export async function deleteItem(section: string, id: string): Promise<void> {
+  const content = await readContent();
+  const arr = (content as any)[section];
+  if (Array.isArray(arr)) {
+    (content as any)[section] = arr.filter((i: any) => i.id !== id);
+    await writeContent(content);
+  }
+}
