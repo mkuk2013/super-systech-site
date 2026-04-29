@@ -5,7 +5,7 @@ import {
   Box, Typography, Card, CardContent, TextField, Button, IconButton,
   Divider, CircularProgress, Alert, Snackbar, Switch, FormControlLabel, Stack
 } from "@mui/material";
-import { Save, Add, Delete, Download, Campaign } from "@mui/icons-material";
+import { Save, Add, Delete, Download, Campaign, Upload } from "@mui/icons-material";
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<any>(null);
@@ -232,6 +232,48 @@ export default function AdminSettingsPage() {
                 sx={{ fontWeight: 'bold' }}
               >
                 Download Backup (.json)
+              </Button>
+
+              <Button 
+                variant="outlined" 
+                color="secondary" 
+                startIcon={<Upload />}
+                component="label"
+                sx={{ fontWeight: 'bold' }}
+              >
+                Upload Backup (.json)
+                <input
+                  type="file"
+                  hidden
+                  accept=".json"
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    
+                    if (!confirm("This will completely replace your live data with the content of this file. Are you sure?")) return;
+
+                    try {
+                      const text = await file.text();
+                      const json = JSON.parse(text);
+                      
+                      const res = await fetch("/api/admin/upload-backup", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(json),
+                      });
+                      
+                      const result = await res.json();
+                      if (res.ok) {
+                        setToast({ open: true, message: result.message, severity: "success" });
+                        setTimeout(() => window.location.reload(), 1500);
+                      } else {
+                        throw new Error(result.error);
+                      }
+                    } catch (err: any) {
+                      setToast({ open: true, message: "Upload failed: " + err.message, severity: "error" });
+                    }
+                  }}
+                />
               </Button>
 
               <Button 
