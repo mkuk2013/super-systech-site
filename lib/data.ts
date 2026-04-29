@@ -22,6 +22,7 @@ export interface SiteContent {
     affiliations: any[];
     marqueeShow: boolean;
     marqueeText: string;
+    workingHours?: string;
   };
   hero: any;
   about: any;
