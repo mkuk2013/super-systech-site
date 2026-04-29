@@ -59,19 +59,19 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 lg:px-6">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 no-underline">
+            <Link href="/" className="flex items-center gap-3 no-underline">
               <Image
                 src="/images/logo_ssc.png"
                 alt="Super Sys-Tech Computers"
-                width={42}
-                height={42}
+                width={56}
+                height={56}
                 className="rounded-lg"
               />
               <div className="hidden sm:block">
-                <h1 className="text-sm font-extrabold text-slate-900 leading-tight font-heading">
+                <h1 className="text-xl font-extrabold text-slate-900 leading-tight font-heading">
                   Super Sys-Tech
                 </h1>
-                <p className="text-[10px] text-cyan-700 font-semibold">
+                <p className="text-sm text-cyan-700 font-semibold">
                   Computers Centre Umerkot
                 </p>
               </div>
