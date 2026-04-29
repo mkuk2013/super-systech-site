@@ -8,12 +8,18 @@ import { Menu, X, Phone, Mail, MapPin } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [settings, setSettings] = useState<any>(null);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
+    
+    // Fetch settings
+    fetch("/api/content?section=settings")
+      .then((r) => r.json())
+      .then(setSettings);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -38,12 +44,12 @@ export default function Navbar() {
       <div className="bg-slate-900 text-white/60 text-xs py-2 hidden lg:block">
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5"><Phone size={11} className="text-cyan-400" /> 0300-3198050</span>
-            <span className="flex items-center gap-1.5"><Mail size={11} className="text-cyan-400" /> supersystechumk@gmail.com</span>
-            <span className="flex items-center gap-1.5"><MapPin size={11} className="text-cyan-400" /> Jameel Market, Umerkot</span>
+            <span className="flex items-center gap-1.5"><Phone size={11} className="text-cyan-400" /> {settings?.phone || "0300-3198050"}</span>
+            <span className="flex items-center gap-1.5"><Mail size={11} className="text-cyan-400" /> {settings?.email || "supersystechumk@gmail.com"}</span>
+            <span className="flex items-center gap-1.5"><MapPin size={11} className="text-cyan-400" /> {settings?.address || "Jameel Market, Umerkot"}</span>
           </div>
-          <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-amber-400/70">
-            SBTE &bull; NAVTTC &bull; STEVTA &bull; TTB
+          <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-amber-400/70 uppercase">
+            {settings?.affiliations?.map((a: any) => typeof a === 'string' ? a : a.name).join(" \u2022 ") || "SBTE \u2022 NAVTTC \u2022 STEVTA \u2022 TTB"}
           </div>
         </div>
       </div>
@@ -69,10 +75,10 @@ export default function Navbar() {
               />
               <div className="hidden sm:block">
                 <h1 className="text-xl font-extrabold text-slate-900 leading-tight font-heading">
-                  Super Sys-Tech
+                  {settings?.siteName || "Super Sys-Tech"}
                 </h1>
                 <p className="text-sm text-cyan-700 font-semibold">
-                  Computers Centre Umerkot
+                  {settings?.tagline || "Computers Centre Umerkot"}
                 </p>
               </div>
             </Link>

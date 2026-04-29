@@ -109,6 +109,10 @@ export default function AdminSettingsPage() {
               <Box sx={{ gridColumn: '1 / -1' }}>
                 <TextField fullWidth label="Full Address" variant="outlined" size="medium" value={settings.address || ""} onChange={(e) => updateField("address", e.target.value)} />
               </Box>
+              <TextField fullWidth label="Working Hours" variant="outlined" size="medium" value={settings.workingHours || ""} onChange={(e) => updateField("workingHours", e.target.value)} />
+              <TextField fullWidth label="Copyright Info" variant="outlined" size="medium" value={settings.copyrightInfo || ""} onChange={(e) => updateField("copyrightInfo", e.target.value)} />
+              <TextField fullWidth label="Footer CTA Title" variant="outlined" size="medium" value={settings.ctaTitle || ""} onChange={(e) => updateField("ctaTitle", e.target.value)} />
+              <TextField fullWidth label="Footer CTA Subtitle" variant="outlined" size="medium" value={settings.ctaSubtitle || ""} onChange={(e) => updateField("ctaSubtitle", e.target.value)} />
             </Box>
           </CardContent>
         </Card>

@@ -1,16 +1,32 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Mail, Clock, Facebook, Youtube, Linkedin, ChevronRight } from "lucide-react";
 
 export default function Footer() {
+  const [settings, setSettings] = useState<any>(null);
+  const [courses, setCourses] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("/api/content?section=settings")
+      .then((r) => r.json())
+      .then(setSettings);
+    
+    fetch("/api/content?section=courses")
+      .then((r) => r.json())
+      .then(setCourses);
+  }, []);
+
   return (
     <footer>
       {/* CTA Bar */}
       <div className="bg-gradient-to-r from-cyan-800 via-teal-700 to-emerald-800 py-8">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
-            <h4 className="font-bold text-white text-lg">Ready to Start Your Journey?</h4>
-            <p className="text-white/60 text-sm">Join 8,500+ successful graduates from STC Umerkot</p>
+            <h4 className="font-bold text-white text-lg">{settings?.ctaTitle || "Ready to Start Your Journey?"}</h4>
+            <p className="text-white/60 text-sm">{settings?.ctaSubtitle || "Join 8,500+ successful graduates from STC Umerkot"}</p>
           </div>
           <Link href="/admissions" className="bg-white text-cyan-800 font-bold px-6 py-3 rounded-lg text-sm hover:bg-gray-100 transition-all no-underline flex items-center gap-2 shadow-lg">
             Apply Now <ChevronRight size={14} />
@@ -27,22 +43,22 @@ export default function Footer() {
               <div className="flex items-center gap-3 mb-5">
                 <Image src="/images/logo_ssc.png" alt="STC" width={56} height={56} className="rounded-lg bg-white p-1" />
                 <div>
-                  <h3 className="font-bold text-white text-xl font-heading">Super Sys-Tech</h3>
-                  <p className="text-gray-500 text-sm">Computers Centre Umerkot</p>
+                  <h3 className="font-bold text-white text-xl font-heading">{settings?.siteName || "Super Sys-Tech"}</h3>
+                  <p className="text-gray-500 text-sm">{settings?.tagline || "Computers Centre Umerkot"}</p>
                 </div>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed mb-5">
                 Where Dreams Are Polished Into Skills. Your Gateway to IT Excellence since 1997.
               </p>
               <div className="flex gap-2">
-                <a href="https://www.facebook.com/SuperSysTechComputersUmerkot" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-gray-500 hover:bg-cyan-600 hover:text-white transition-all">
+                <a href={settings?.facebookUrl || "https://www.facebook.com/SuperSysTechComputersUmerkot"} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-gray-500 hover:bg-cyan-600 hover:text-white transition-all">
                   <Facebook size={14} />
                 </a>
-                <a href="https://www.youtube.com/@stcumerkot" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-gray-500 hover:bg-cyan-600 hover:text-white transition-all">
+                <a href={settings?.youtubeUrl || "https://www.youtube.com/@stcumerkot"} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-gray-500 hover:bg-cyan-600 hover:text-white transition-all">
                   <Youtube size={14} />
                 </a>
-                <a href="https://www.linkedin.com/company/stcumerkot" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-gray-500 hover:bg-cyan-600 hover:text-white transition-all">
-                  <Linkedin size={14} />
+                <a href={settings?.mapUrl || "#"} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-gray-500 hover:bg-cyan-600 hover:text-white transition-all">
+                  <MapPin size={14} />
                 </a>
               </div>
             </div>
@@ -72,7 +88,7 @@ export default function Footer() {
             <div>
               <h4 className="font-semibold text-white text-sm mb-5">Programs</h4>
               <ul className="space-y-2.5">
-                {[
+                {(courses.length > 0 ? courses.slice(0, 7) : [
                   "D.I.T (1 Year Diploma)",
                   "C.I.T (6 Months)",
                   "Web Development",
@@ -80,9 +96,9 @@ export default function Footer() {
                   "E-Commerce & Freelancing",
                   "Digital Marketing",
                   "Programming (Python/Java)",
-                ].map((course) => (
-                  <li key={course} className="text-gray-500 text-sm">
-                    {course}
+                ]).map((course: any) => (
+                  <li key={typeof course === 'string' ? course : course.id} className="text-gray-500 text-sm">
+                    {typeof course === 'string' ? course : course.title}
                   </li>
                 ))}
               </ul>
@@ -94,22 +110,22 @@ export default function Footer() {
               <div className="space-y-3">
                 <div className="flex items-start gap-2.5">
                   <MapPin size={14} className="text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-500 text-sm">1st Floor, Jameel Market, Umerkot, Sindh</span>
+                  <span className="text-gray-500 text-sm">{settings?.address || "1st Floor, Jameel Market, Umerkot, Sindh"}</span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <Phone size={14} className="text-cyan-400 mt-0.5 flex-shrink-0" />
                   <div className="text-gray-500 text-sm">
-                    <div>0238-571540</div>
-                    <div>0300-3198050</div>
+                    <div>{settings?.phone || "0238-571540"}</div>
+                    <div>{settings?.mobile || "0300-3198050"}</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <Mail size={14} className="text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-500 text-sm">supersystechumk@gmail.com</span>
+                  <span className="text-gray-500 text-sm">{settings?.email || "supersystechumk@gmail.com"}</span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <Clock size={14} className="text-cyan-400 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-500 text-sm">Mon - Sat: 8:00 AM - 5:00 PM</span>
+                  <span className="text-gray-500 text-sm">{settings?.workingHours || "Mon - Sat: 8:00 AM - 5:00 PM"}</span>
                 </div>
               </div>
             </div>
@@ -118,7 +134,7 @@ export default function Footer() {
           {/* Bottom */}
           <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row justify-between items-center gap-3">
             <p className="text-gray-600 text-xs">
-              © {new Date().getFullYear()} Super Sys-Tech Computers Centre Umerkot. Affiliated with NAVTTC, STEVTA & SBTE.
+              © {new Date().getFullYear()} {settings?.siteName || "Super Sys-Tech Computers Centre Umerkot"}. {settings?.copyrightInfo || "Affiliated with NAVTTC, STEVTA & SBTE."}
             </p>
             <p className="text-gray-700 text-xs">Privacy Policy &bull; Terms of Service</p>
           </div>
