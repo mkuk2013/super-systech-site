@@ -68,14 +68,14 @@ export default async function Home() {
 
 
             <AnimatedSection delay={0.2} direction="right">
-              <div className="hidden lg:block relative">
-                <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8 shadow-2xl">
+              <div className="relative mt-12 lg:mt-0">
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-6 md:p-8 shadow-2xl max-w-sm mx-auto lg:max-w-none">
                   <Image
                     src="/images/logo_ssc.png"
                     alt="Super Sys-Tech Computers"
                     width={350}
                     height={350}
-                    className="mx-auto drop-shadow-2xl"
+                    className="mx-auto drop-shadow-2xl w-48 md:w-64 lg:w-80"
                   />
                 </div>
               </div>
@@ -123,14 +123,15 @@ export default async function Home() {
                 <div className="rounded-2xl overflow-hidden shadow-2xl">
                   <img src={about.principalImage} alt={about.principalName} className="w-full min-h-[450px] object-cover" />
                 </div>
-                <div className="absolute -bottom-5 -right-3 md:right-6 bg-white rounded-xl p-4 shadow-xl border border-gray-100">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-600 to-teal-600 flex items-center justify-center">
-                      <Award size={18} className="text-white" />
+                <div className="absolute -bottom-5 right-2 md:right-6 bg-white rounded-xl p-3 md:p-4 shadow-xl border border-gray-100 max-w-[200px] md:max-w-none">
+                  <div className="flex items-center gap-2 md:gap-3">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-cyan-600 to-teal-600 flex items-center justify-center flex-shrink-0">
+                      <Award size={16} className="text-white md:hidden" />
+                      <Award size={18} className="text-white hidden md:block" />
                     </div>
                     <div>
-                      <p className="font-bold text-slate-900 text-sm">{about.principalName}</p>
-                      <p className="text-cyan-700 text-xs font-medium">{about.principalTitle}</p>
+                      <p className="font-bold text-slate-900 text-[11px] md:text-sm leading-tight">{about.principalName}</p>
+                      <p className="text-cyan-700 text-[9px] md:text-xs font-medium">{about.principalTitle}</p>
                     </div>
                   </div>
                 </div>

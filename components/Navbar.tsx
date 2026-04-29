@@ -74,11 +74,11 @@ export default function Navbar() {
                 height={56}
                 className="rounded-lg"
               />
-              <div className="hidden sm:block">
-                <h1 className="text-xl font-extrabold text-slate-900 leading-tight font-heading">
+              <div className="block">
+                <h1 className="text-base sm:text-xl font-extrabold text-slate-900 leading-tight font-heading">
                   {settings?.siteName || "Super Sys-Tech"}
                 </h1>
-                <p className="text-sm text-cyan-700 font-semibold">
+                <p className="text-[10px] sm:text-sm text-cyan-700 font-semibold uppercase tracking-wider">
                   {settings?.tagline || "Computers Centre Umerkot"}
                 </p>
               </div>
@@ -117,8 +117,8 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
-          <div className="px-4 py-3 space-y-0.5 bg-white border-t border-gray-100">
+        <div className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}>
+          <div className="px-4 py-4 space-y-1 bg-white/90 backdrop-blur-xl border-t border-gray-100 shadow-inner">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
