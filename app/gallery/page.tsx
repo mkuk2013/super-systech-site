@@ -17,7 +17,7 @@ export default function GalleryPage() {
       .catch((err) => console.error("Failed to fetch gallery:", err));
   }, []);
 
-  const categories = ["All", ...Array.from(new Set(gallery.map((g: any) => g.category)))];
+  const categories = ["All", ...Array.from(new Set(gallery?.map((g: any) => g.category) || []))];
   const filtered = activeCategory === "All" ? gallery : gallery.filter((g: any) => g.category === activeCategory);
 
   return (

@@ -38,7 +38,7 @@ export default async function CoursesPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {courses.map((course: any, i: number) => {
+            {courses?.map((course: any, i: number) => {
               const Icon = iconMap[course.icon] || BookOpen;
               const colors = [
                 "from-cyan-600 to-teal-600",

@@ -85,7 +85,7 @@ export default async function AboutPage() {
             </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {about.achievements.map((a: string, i: number) => (
+            {about.achievements?.map((a: string, i: number) => (
               <AnimatedSection key={i} delay={i * 0.05}>
                 <div className="flex items-start gap-4 p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                   <span className="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0">
@@ -109,7 +109,7 @@ export default async function AboutPage() {
             </h2>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5">
-            {settings.affiliations.map((a: any, i: number) => (
+            {settings.affiliations?.map((a: any, i: number) => (
               <AnimatedSection key={i} delay={i * 0.1} direction="scale">
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 text-center hover:bg-white/10 transition-all">
                   <img src={a.logo} alt={a.name} className="w-16 h-16 object-contain mx-auto mb-3" />

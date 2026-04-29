@@ -95,7 +95,7 @@ export default async function Home() {
                 
                 <div className="flex animate-marquee hover:[animation-play-state:paused] whitespace-nowrap gap-6 items-center w-max">
                   {/* Multiple copies to ensure seamless infinite loop regardless of screen size */}
-                  {[...settings.affiliations, ...settings.affiliations, ...settings.affiliations, ...settings.affiliations].map((a: any, i: number) => (
+                  {[... (settings.affiliations || []), ... (settings.affiliations || []), ... (settings.affiliations || []), ... (settings.affiliations || [])]?.map((a: any, i: number) => (
                     <div key={i} className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-3 hover:bg-white/10 transition-colors cursor-pointer">
                       <img src={a.logo} alt={a.name} className="w-8 h-8 object-contain drop-shadow-md" />
                       <span className="text-slate-300 text-xs font-bold tracking-wide">{a.name}</span>
@@ -108,7 +108,7 @@ export default async function Home() {
             <AnimatedSection delay={0.4}>
               <div className="border-t border-white/10 pt-12">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center max-w-5xl mx-auto">
-                  {hero.stats.map((stat: any, i: number) => (
+                  {hero.stats?.map((stat: any, i: number) => (
                     <AnimatedCounter key={i} target={stat.value} label={stat.label} />
                   ))}
                 </div>
@@ -152,7 +152,7 @@ export default async function Home() {
                 &ldquo;{about.principalMessage}&rdquo;
               </blockquote>
               <ul className="space-y-3 mb-8">
-                {about.achievements.slice(0, 4).map((a: string, i: number) => (
+                {about.achievements?.slice(0, 4).map((a: string, i: number) => (
                   <li key={i} className="flex items-center gap-3 text-sm text-gray-700">
                     <span className="w-6 h-6 rounded-md bg-emerald-100 flex items-center justify-center flex-shrink-0">
                       <CheckCircle2 size={14} className="text-emerald-600" />
