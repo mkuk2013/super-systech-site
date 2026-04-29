@@ -54,7 +54,7 @@ export default function Footer() {
                 </div>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed mb-5">
-                Where Dreams Are Polished Into Skills. Your Gateway to IT Excellence since 1997.
+                Your premier gateway to technical excellence and professional IT training in Umerkot.
               </p>
               <div className="flex gap-2">
                 <a href={settings?.facebookUrl || "https://www.facebook.com/SuperSysTechComputersUmerkot"} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-gray-500 hover:bg-cyan-600 hover:text-white transition-all">
