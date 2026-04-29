@@ -22,7 +22,8 @@ export default function AdminCoursesPage() {
   const load = () => {
     fetch("/api/content?section=courses")
       .then((r) => r.json())
-      .then(setCourses);
+      .then(setCourses)
+      .catch((err) => console.error("Failed to load courses:", err));
   };
 
   useEffect(() => { load(); }, []);

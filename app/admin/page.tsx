@@ -14,7 +14,7 @@ export default function AdminDashboard() {
     fetch("/api/content")
       .then((r) => r.json())
       .then(setData)
-      .catch(console.error);
+      .catch((err) => console.error("Failed to fetch dashboard data:", err));
   }, []);
 
   if (!data) return (

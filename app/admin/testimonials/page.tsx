@@ -17,7 +17,10 @@ export default function AdminTestimonialsPage() {
   const [toast, setToast] = useState({ open: false, message: "", severity: "success" as any });
 
   const load = () => {
-    fetch("/api/content?section=testimonials").then((r) => r.json()).then(setItems);
+    fetch("/api/content?section=testimonials")
+      .then((r) => r.json())
+      .then(setItems)
+      .catch((err) => console.error("Failed to load testimonials:", err));
   };
   useEffect(() => { load(); }, []);
 

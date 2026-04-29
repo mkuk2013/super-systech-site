@@ -17,7 +17,8 @@ export default function AdminHeroPage() {
   useEffect(() => {
     fetch("/api/content?section=hero")
       .then((r) => r.json())
-      .then(setHero);
+      .then(setHero)
+      .catch((err) => console.error("Failed to load hero data:", err));
   }, []);
 
   const save = async () => {

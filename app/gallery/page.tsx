@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Image as ImageIcon, ZoomIn } from "lucide-react";
+import { X, Image as ImageIcon, ZoomIn, Sparkles } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import ExpandingGallery from "@/components/ExpandingGallery";
 
 export default function GalleryPage() {
   const [gallery, setGallery] = useState<any[]>([]);
@@ -12,7 +13,8 @@ export default function GalleryPage() {
   useEffect(() => {
     fetch("/api/content?section=gallery")
       .then((r) => r.json())
-      .then(setGallery);
+      .then(setGallery)
+      .catch((err) => console.error("Failed to fetch gallery:", err));
   }, []);
 
   const categories = ["All", ...Array.from(new Set(gallery.map((g: any) => g.category)))];
@@ -35,6 +37,19 @@ export default function GalleryPage() {
           </AnimatedSection>
         </div>
       </section>
+      
+      {/* Featured Expanding Gallery */}
+      {gallery.length > 0 && (
+        <section className="py-12 bg-white -mt-10 relative z-20">
+          <div className="max-w-7xl mx-auto px-4 lg:px-6">
+             <div className="flex items-center gap-2 mb-6 justify-center md:justify-start">
+               <Sparkles className="text-amber-500" size={20} />
+               <h2 className="text-navy font-bold tracking-tight text-xl">Featured Highlights</h2>
+             </div>
+             <ExpandingGallery items={gallery} />
+          </div>
+        </section>
+      )}
 
       {/* Filters + Grid */}
       <section className="py-24 gradient-section">

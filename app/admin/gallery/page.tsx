@@ -19,7 +19,10 @@ export default function AdminGalleryPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const load = () => {
-    fetch("/api/content?section=gallery").then((r) => r.json()).then(setGallery);
+    fetch("/api/content?section=gallery")
+      .then((r) => r.json())
+      .then(setGallery)
+      .catch((err) => console.error("Failed to load gallery:", err));
   };
   useEffect(() => { load(); }, []);
 

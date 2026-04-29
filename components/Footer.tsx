@@ -12,11 +12,13 @@ export default function Footer() {
   useEffect(() => {
     fetch("/api/content?section=settings")
       .then((r) => r.json())
-      .then(setSettings);
+      .then(setSettings)
+      .catch((err) => console.error("Failed to fetch settings:", err));
     
     fetch("/api/content?section=courses")
       .then((r) => r.json())
-      .then(setCourses);
+      .then(setCourses)
+      .catch((err) => console.error("Failed to fetch courses:", err));
   }, []);
 
   return (

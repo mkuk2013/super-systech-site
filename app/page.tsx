@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import Marquee from "@/components/Marquee";
 
 const iconMap: Record<string, any> = {
   GraduationCap, ShieldCheck, BookOpen, Award, Code, Palette, ShoppingCart, Briefcase,
@@ -23,6 +24,9 @@ export default async function Home() {
 
   return (
     <div className="overflow-hidden">
+      {settings.marqueeShow && settings.marqueeText && (
+        <Marquee text={settings.marqueeText} />
+      )}
 
       {/* ===== HERO - Dark dramatic section ===== */}
       <section className="relative min-h-[92vh] flex items-center mesh-gradient overflow-hidden">

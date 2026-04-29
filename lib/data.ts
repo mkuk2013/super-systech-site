@@ -1,11 +1,36 @@
 import fs from "fs";
 import path from "path";
-import { kv } from "@vercel/kv";
+import { Redis } from "@upstash/redis";
+
+const kv = (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) 
+  ? new Redis({
+      url: process.env.KV_REST_API_URL,
+      token: process.env.KV_REST_API_TOKEN,
+    })
+  : null;
 
 const DATA_FILE = path.join(process.cwd(), "data", "content.json");
 
 export interface SiteContent {
-  settings: Record<string, any>;
+  settings: {
+    siteName?: string;
+    shortName?: string;
+    tagline?: string;
+    established?: string;
+    phone?: string;
+    mobile?: string;
+    email?: string;
+    address?: string;
+    mapUrl?: string;
+    facebookUrl?: string;
+    youtubeUrl?: string;
+    linkedinUrl?: string;
+    whatsappNumber?: string;
+    affiliations?: any[];
+    marqueeShow?: boolean;
+    marqueeText?: string;
+    [key: string]: any;
+  };
   hero: Record<string, any>;
   about: Record<string, any>;
   courses: any[];
@@ -17,8 +42,8 @@ export interface SiteContent {
 
 export async function readContent(): Promise<SiteContent> {
   try {
-    // Only attempt to read from KV if environment variables are set
-    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+    // Only attempt to read from KV if client is initialized
+    if (kv) {
       const data = await kv.get<SiteContent>("site_content");
       if (data) {
         return data;
@@ -35,10 +60,10 @@ export async function readContent(): Promise<SiteContent> {
 
 export async function writeContent(data: SiteContent): Promise<void> {
   try {
-    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+    if (kv) {
       await kv.set("site_content", data);
     } else {
-      throw new Error("KV environment variables missing");
+      throw new Error("KV client not initialized");
     }
   } catch (error) {
     console.error("Failed to write to KV:", error);

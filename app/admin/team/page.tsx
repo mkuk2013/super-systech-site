@@ -18,7 +18,10 @@ export default function AdminTeamPage() {
   const [toast, setToast] = useState({ open: false, message: "", severity: "success" as any });
 
   const load = () => {
-    fetch("/api/content?section=team").then((r) => r.json()).then(setTeam);
+    fetch("/api/content?section=team")
+      .then((r) => r.json())
+      .then(setTeam)
+      .catch((err) => console.error("Failed to load team data:", err));
   };
   useEffect(() => { load(); }, []);
 

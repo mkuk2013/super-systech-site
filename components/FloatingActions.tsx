@@ -13,7 +13,7 @@ export default function FloatingActions() {
     fetch("/api/content?section=settings")
       .then((r) => r.json())
       .then((s) => { if (s.whatsappNumber) setNumber(s.whatsappNumber); })
-      .catch(() => {});
+      .catch((err) => console.error("Failed to fetch settings in FloatingActions:", err));
 
     const t = setTimeout(() => setShowWhatsApp(true), 2000);
     const t2 = setTimeout(() => setTooltip(false), 8000);

@@ -21,7 +21,7 @@ export default function AdmissionsPage() {
     fetch("/api/content?section=courses")
       .then((r) => r.json())
       .then(setCourses)
-      .catch(console.error);
+      .catch((err) => console.error("Failed to fetch courses in Admissions:", err));
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {

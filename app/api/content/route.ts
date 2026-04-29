@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { readContent, updateSection } from "@/lib/data";
 import { verifyToken } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
@@ -12,7 +14,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(data[section as keyof typeof data]);
     }
     return NextResponse.json(data);
-  } catch {
+  } catch (error) {
+    console.error("GET API Content Error:", error);
     return NextResponse.json({ error: "Failed to read content" }, { status: 500 });
   }
 }

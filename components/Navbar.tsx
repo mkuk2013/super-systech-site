@@ -19,7 +19,8 @@ export default function Navbar() {
     // Fetch settings
     fetch("/api/content?section=settings")
       .then((r) => r.json())
-      .then(setSettings);
+      .then(setSettings)
+      .catch((err) => console.error("Failed to fetch settings in Navbar:", err));
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);

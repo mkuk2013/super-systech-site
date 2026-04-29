@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import {
   Box, Typography, Card, CardContent, TextField, Button, IconButton,
-  Divider, CircularProgress, Alert, Snackbar
+  Divider, CircularProgress, Alert, Snackbar, Switch, FormControlLabel, Stack
 } from "@mui/material";
-import { Save, Add, Delete, Download } from "@mui/icons-material";
+import { Save, Add, Delete, Download, Campaign } from "@mui/icons-material";
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<any>(null);
@@ -13,7 +13,13 @@ export default function AdminSettingsPage() {
   const [toast, setToast] = useState({ open: false, message: "", severity: "success" as "success" | "error" });
 
   useEffect(() => {
-    fetch("/api/content?section=settings").then((r) => r.json()).then(setSettings);
+    fetch("/api/content?section=settings")
+      .then((r) => r.json())
+      .then(setSettings)
+      .catch((err) => {
+        console.error("Failed to fetch settings:", err);
+        setToast({ open: true, message: "Failed to load settings from server", severity: "error" });
+      });
   }, []);
 
   const save = async () => {
@@ -152,24 +158,106 @@ export default function AdminSettingsPage() {
             </Box>
           </CardContent>
         </Card>
+        
+        {/* Marquee Settings */}
+        <Card sx={{ border: '1px solid', borderColor: 'primary.light', bgcolor: 'primary.main', color: 'white' }}>
+          <CardContent sx={{ p: 3 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
+              <Campaign sx={{ fontSize: 32 }} />
+              <Typography variant="h6">Promotional Marquee (Ticker)</Typography>
+            </Box>
+            
+            <Stack spacing={3}>
+              <FormControlLabel
+                control={
+                  <Switch 
+                    checked={settings.marqueeShow || false} 
+                    onChange={(e) => updateField("marqueeShow", e.target.checked)}
+                    color="secondary"
+                  />
+                }
+                label={
+                  <Typography sx={{ fontWeight: 'bold' }}>
+                    {settings.marqueeShow ? "Marquee is ACTIVE" : "Marquee is HIDDEN"}
+                  </Typography>
+                }
+              />
+              
+              <TextField 
+                fullWidth 
+                label="Marquee Content" 
+                variant="filled" 
+                multiline
+                rows={3}
+                value={settings.marqueeText || ""} 
+                onChange={(e) => updateField("marqueeText", e.target.value)}
+                placeholder="Enter text separated by bullets (•) for best look..."
+                sx={{ 
+                  bgcolor: 'rgba(255,255,255,0.1)', 
+                  '& .MuiInputBase-input': { color: 'white' },
+                  '& .MuiInputLabel-root': { color: 'rgba(255,255,255,0.7)' },
+                  '& .MuiFilledInput-underline:before': { borderBottomColor: 'rgba(255,255,255,0.3)' }
+                }}
+                helperText={
+                  <span>
+                    Tip: Use <b>•</b> to separate items. You can use HTML like: 
+                    <code> &lt;a href="/courses" class="btn-marquee"&gt;Browse Courses&lt;/a&gt;</code>
+                  </span>
+                }
+                slotProps={{ 
+                  formHelperText: { 
+                    sx: { color: 'rgba(255,255,255,0.6)' } 
+                  } 
+                }}
+              />
+            </Stack>
+          </CardContent>
+        </Card>
 
         {/* Data Management */}
         <Card sx={{ border: '1px solid', borderColor: 'divider', bgcolor: 'rgba(0,0,0,0.02)' }}>
           <CardContent sx={{ p: 3 }}>
             <Typography variant="h6" sx={{ mb: 1 }} color="primary.main">Data Management</Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-              Download a complete backup of your website data as a JSON file. This file can be used to restore your data or migrate to another hosting provider.
+              Control how your website data is handled. Use "Force Sync" if your live site isn't showing the latest changes you pushed via code.
             </Typography>
-            <Button 
-              variant="outlined" 
-              color="primary" 
-              startIcon={<Download />}
-              href="/api/admin/export"
-              target="_blank"
-              sx={{ fontWeight: 'bold' }}
-            >
-              Download Database Backup (.json)
-            </Button>
+            
+            <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+              <Button 
+                variant="outlined" 
+                color="primary" 
+                startIcon={<Download />}
+                href="/api/admin/export"
+                target="_blank"
+                sx={{ fontWeight: 'bold' }}
+              >
+                Download Backup (.json)
+              </Button>
+
+              <Button 
+                variant="contained" 
+                color="warning" 
+                startIcon={<Save />}
+                onClick={async () => {
+                  if (!confirm("This will overwrite your LIVE database with the data from your local content.json file. Are you sure?")) return;
+                  try {
+                    const res = await fetch("/api/admin/sync", { method: "POST" });
+                    const result = await res.json();
+                    if (res.ok) {
+                      setToast({ open: true, message: result.message, severity: "success" });
+                      setTimeout(() => window.location.reload(), 1500);
+                    } else {
+                      throw new Error(result.error);
+                    }
+                  } catch (err: any) {
+                    setToast({ open: true, message: "Sync failed: " + err.message, severity: "error" });
+                  }
+                }}
+                sx={{ fontWeight: 'bold' }}
+              >
+                Force Sync Local Data to Live
+              </Button>
+            </Box>
           </CardContent>
         </Card>
       </Box>

@@ -19,7 +19,8 @@ export default function AdminAboutPage() {
   useEffect(() => {
     fetch("/api/content?section=about")
       .then((r) => r.json())
-      .then(setAbout);
+      .then(setAbout)
+      .catch((err) => console.error("Failed to load about data:", err));
   }, []);
 
   const save = async () => {
