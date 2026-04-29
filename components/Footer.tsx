@@ -25,10 +25,10 @@ export default function Footer() {
             {/* Brand */}
             <div>
               <div className="flex items-center gap-3 mb-5">
-                <Image src="/images/logo_ssc.png" alt="STC" width={48} height={48} className="rounded-lg bg-white p-1" />
+                <Image src="/images/logo_ssc.png" alt="STC" width={56} height={56} className="rounded-lg bg-white p-1" />
                 <div>
-                  <h3 className="font-bold text-white text-base font-heading">Super Sys-Tech</h3>
-                  <p className="text-gray-500 text-xs">Computers Centre Umerkot</p>
+                  <h3 className="font-bold text-white text-xl font-heading">Super Sys-Tech</h3>
+                  <p className="text-gray-500 text-sm">Computers Centre Umerkot</p>
                 </div>
               </div>
               <p className="text-gray-500 text-sm leading-relaxed mb-5">
