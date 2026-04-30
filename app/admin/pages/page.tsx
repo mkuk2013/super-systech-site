@@ -101,7 +101,7 @@ export default function AdminPagesHeroPage() {
 
       <Grid container spacing={3}>
         {PAGES.map((page) => (
-          <Grid item xs={12} md={6} key={page.id}>
+          <Grid size={{ xs: 12, md: 6 }} key={page.id}>
             <Card variant="outlined" sx={{ borderRadius: 3, height: '100%' }}>
               <CardContent sx={{ p: 3 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
@@ -115,12 +115,14 @@ export default function AdminPagesHeroPage() {
                     label="Badge / Top Label"
                     value={heroes[page.id]?.badge || ""}
                     onChange={(e) => updateHero(page.id, "badge", e.target.value)}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <Label fontSize="small" sx={{ color: 'text.secondary' }} />
-                        </InputAdornment>
-                      ),
+                    slotProps={{
+                      input: {
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Label fontSize="small" sx={{ color: 'text.secondary' }} />
+                          </InputAdornment>
+                        ),
+                      },
                     }}
                   />
                   <TextField
@@ -128,12 +130,14 @@ export default function AdminPagesHeroPage() {
                     label="Main Title"
                     value={heroes[page.id]?.title || ""}
                     onChange={(e) => updateHero(page.id, "title", e.target.value)}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <Title fontSize="small" sx={{ color: 'text.secondary' }} />
-                        </InputAdornment>
-                      ),
+                    slotProps={{
+                      input: {
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Title fontSize="small" sx={{ color: 'text.secondary' }} />
+                          </InputAdornment>
+                        ),
+                      },
                     }}
                   />
                   <TextField
@@ -143,12 +147,14 @@ export default function AdminPagesHeroPage() {
                     label="Subtitle / Description"
                     value={heroes[page.id]?.subtitle || ""}
                     onChange={(e) => updateHero(page.id, "subtitle", e.target.value)}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <Subtitles fontSize="small" sx={{ color: 'text.secondary', mt: 1, alignSelf: 'flex-start' }} />
-                        </InputAdornment>
-                      ),
+                    slotProps={{
+                      input: {
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Subtitles fontSize="small" sx={{ color: 'text.secondary', mt: 1, alignSelf: 'flex-start' }} />
+                          </InputAdornment>
+                        ),
+                      },
                     }}
                   />
                 </Stack>
