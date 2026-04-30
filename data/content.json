@@ -2,7 +2,7 @@
   "settings": {
     "siteName": "Super Sys-Tech Computers Umerkot",
     "shortName": "STC Umerkot",
-    "tagline": "Struggle for Computer Literacy",
+    "tagline": "Struggle for Computer Literacy!",
     "established": "1997",
     "phone": "0238-571646",
     "mobile": "0332-3350790",
@@ -16,21 +16,28 @@
     "affiliations": [
       {
         "name": "NAVTTC Islamabad",
-        "logo": "/images/sbte.png"
-      },
-      {
-        "name": "STEVTA Sindh ",
         "logo": "/images/navttc.png"
       },
       {
-        "name": "S.B.T.E Sindh",
+        "name": "STEVTA Sindh ",
         "logo": "/images/stevta.png"
+      },
+      {
+        "name": "S.B.T.E Sindh",
+        "logo": "/images/sbte.png"
       },
       {
         "name": "T.T.B Sindh",
         "logo": "/images/ttb.png"
       }
-    ]
+    ],
+    "marqueeShow": true,
+    "marqueeText": "Welcome to Super Sys-Tech Computers Umerkot • Admissions Open for 2026 Batch • Contact us for more details!",
+    "showAdmissionsInMarquee": true,
+    "workingHours": "Mon - Sat: 8:00 AM - 7:00 PM",
+    "copyrightInfo": "",
+    "ctaTitle": "Ready to Start Your Journey?",
+    "ctaSubtitle": "Join 1,5000+ successful graduates from STC Umerkot"
   },
   "hero": {
     "badge": "Empowering Skills for a Digital Future Since 1997",
@@ -95,7 +102,8 @@
       "duration": "12 Months",
       "description": "Introduction to Information Technology, Computer Hardware, Operating Systems (Windows), Microsoft Office (Word, Excel, PowerPoint, Access), Internet & Email\nGraphic Designing Basics, Web Designing (HTML & CSS), Programming Fundamentals, Database Management, Digital Marketing Basics, Freelancing & Career Development, Final Project",
       "icon": "GraduationCap",
-      "featured": true
+      "featured": true,
+      "admissionsOpen": true
     },
     {
       "id": "2",
@@ -104,7 +112,8 @@
       "duration": "06 Months",
       "description": "Introduction to Computer\nWindows Operating System\nMS Word\nMS Excel\nMS PowerPoint\nInternet & Email\nTyping Skills\nBasic Networking\nBasic Graphic Introduction\nFinal Practical Work",
       "icon": "ShieldCheck",
-      "featured": true
+      "featured": true,
+      "admissionsOpen": true
     },
     {
       "id": "3",
@@ -113,7 +122,8 @@
       "duration": "06 Months",
       "description": "Introduction to Graphic Design & Media\nAdobe Photoshop (Image Editing)\nAdobe Illustrator (Vector Design)\nVideo Editing (Premiere Pro / CapCut)\nMotion Graphics (After Effects Basics)\nSocial Media Content Creation\nFreelancing & Portfolio Development",
       "icon": "Palette",
-      "featured": true
+      "featured": true,
+      "admissionsOpen": true
     },
     {
       "id": "4",
@@ -122,7 +132,8 @@
       "duration": "06 Months",
       "description": "HTML\nCSS\nBootstrap\nJavaScript\nResponsive Web Design\nUI/UX Basics\nWordPress Development\nPHP Basics\nMySQL Database\nWebsite Hosting & Domain\nFinal Website Project",
       "icon": "Code",
-      "featured": true
+      "featured": true,
+      "admissionsOpen": true
     },
     {
       "id": "6",
@@ -131,7 +142,8 @@
       "duration": "12 Months",
       "description": "Introduction to Computer & Composing Field\nTyping Practice (English & Urdu)\nMS Word Advanced (Professional Documents)\nPage Formatting & Layout Designing\nUrdu InPage Software (Complete Training)\nComposition of Books & Assignments\nCV / Resume Designing\nOfficial Letter Writing\nNewspaper & Magazine Designing (Basic)\nScanning & Image Editing Basics\nAdobe Photoshop for Composing Work\nAdobe Illustrator (Basic Designing Tools)\nPrinting Setup & File Preparation\nBrochure, Flyer & Poster Designing\nFinal Practical Project (Complete Composing Work)",
       "icon": "BookOpen",
-      "featured": false
+      "featured": false,
+      "admissionsOpen": true
     },
     {
       "id": "7",
@@ -140,7 +152,8 @@
       "duration": "04 Months",
       "description": "MS Word (Basic to Advanced)\nMS Excel (Formulas, Charts, Pivot Tables)\nMS PowerPoint (Professional Presentation)\nMS Access Database\nData Entry & Office Work\nBusiness Reports Writing\nCloud Tools (Google Drive, OneDrive)\nOffice Management Skills\nFinal Office Project",
       "icon": "Monitor",
-      "featured": false
+      "featured": false,
+      "admissionsOpen": true
     },
     {
       "id": "8",
@@ -149,7 +162,8 @@
       "duration": "04 Months",
       "description": "Introduction to Digital Marketing\nSEO (On Page & Off Page)\nKeyword Research\nGoogle Ads Basics\nFacebook & Instagram Marketing\nContent Marketing\nYouTube Marketing\nEmail Marketing\nGoogle Analytics\nFinal Marketing Campaign",
       "icon": "TrendingUp",
-      "featured": true
+      "featured": true,
+      "admissionsOpen": true
     },
     {
       "id": "9",
@@ -158,7 +172,8 @@
       "duration": "04 Months",
       "description": "Introduction to Freelancing\nFreelancing Platforms Overview (Upwork, Fiverr, Freelancer)\nCreating Freelancing Accounts\nProfile Setup & Optimization\nGig Creation (Fiverr)\nProposal Writing Skills (Upwork Jobs)\nFinding Clients & Job Applications\nCommunication Skills with Clients\nPricing Strategy & Service Packages\nSkill Selection (Graphic Design, Writing, Web, etc.)\nOrder Management & Delivery Process\nClient Reviews & Rating System\nPayment Methods (Payoneer, Bank Transfer, etc.)\nTime Management & Project Handling\nHandling Revisions & Client Feedback\nFreelancing Ethics & Professional Behavior\nAvoiding Scams & Platform Rules\nBuilding Portfolio for Freelancing\nPersonal Branding (Social Media & LinkedIn)\nFinal Practical Project (Live Freelancing Profile + First Gig/Proposal)",
       "icon": "DollarSign",
-      "featured": true
+      "featured": true,
+      "admissionsOpen": true
     },
     {
       "title": "E-Commerce",
@@ -167,6 +182,7 @@
       "description": "Introduction to E-Commerce\nTypes of E-Commerce (B2B, B2C, C2C, C2B)\nOnline Business Models Overview\nE-Commerce Website Basics\nProduct Research & Selection\nProduct Listing & Optimization\nProduct Description Writing Skills\nPricing Strategy & Profit Calculation\nPayment Methods (Online Payments, COD)\nOrder Management System\nInventory & Stock Management\nShipping & Delivery Process\nCustomer Service & Handling Queries\nDigital Marketing for E-Commerce\nSocial Media Selling (Facebook, Instagram, TikTok)\nMarketplace Training (Daraz, Amazon Basics, Shopify Intro)\nDropshipping Basics\nBranding & Store Management\nReturn & Refund Policies\nFinal Practical Project (Complete E-Commerce Store Setup)",
       "icon": "BookOpen",
       "featured": false,
+      "admissionsOpen": true,
       "id": "8f1acb30-3213-4c08-a08c-cbcdb679cc7a"
     },
     {
@@ -176,6 +192,7 @@
       "description": "Photoshop Basics\nIllustrator Basics\nColor Theory & Typography\nLogo Design\nBanner & Poster Design\nSocial Media Post Design\nPhoto Editing & Retouching\nBranding Design\nPortfolio Development\nFinal Design Project",
       "icon": "BookOpen",
       "featured": false,
+      "admissionsOpen": true,
       "id": "37eb8721-c1dc-4356-9727-13ba6142dac5"
     },
     {
@@ -185,6 +202,7 @@
       "description": "Introduction to Computerized Accounting\nBasics of Accounting Concepts\nMS Excel Basics for Accounting\nData Entry in Excel Sheets\nAccounting Spreadsheet Design\nJournal Entries (Manual & Excel Based)\nLedger Preparation in Excel\nCash Book & Bank Book Management\nTrial Balance Preparation\nProfit & Loss Statement (Excel)\nBalance Sheet Preparation\nInventory Management in Excel\nSalary & Payroll Sheet\nInvoice & Billing System\nTax Calculation Basics (Excel Work)\nBank Reconciliation Statement\nAccounting Templates Creation\nOffice Documentation for Accounts\nReporting & Financial Analysis in Excel\nFinal Practical Project (Complete Excel Accounting System)",
       "icon": "BookOpen",
       "featured": false,
+      "admissionsOpen": true,
       "id": "ae57a7cc-0e69-489d-acba-fe59d027efe7"
     },
     {
@@ -194,6 +212,7 @@
       "description": "Introduction to AI\nMachine Learning Basics\nData Basics\nAI Tools (ChatGPT, etc.)\nPrompt Engineering\nAutomation Tools\nAI in Business\nEthics of AI\nMini Projects\nFinal AI Project",
       "icon": "BookOpen",
       "featured": false,
+      "admissionsOpen": true,
       "id": "39aeb14d-c6df-4522-9a59-3e62ace340ce"
     }
   ],
@@ -348,5 +367,90 @@
       "rating": 5
     }
   ],
-  "admissions": []
+  "admissions": [],
+  "layout": {
+    "navbar": {
+      "logoText": "Super Sys-Tech",
+      "logoSubText": "Computers Centre Umerkot",
+      "links": [
+        {
+          "label": "Home",
+          "href": "/"
+        },
+        {
+          "label": "About",
+          "href": "/about"
+        },
+        {
+          "label": "Courses",
+          "href": "/courses"
+        },
+        {
+          "label": "Gallery",
+          "href": "/gallery"
+        },
+        {
+          "label": "Faculty",
+          "href": "/team"
+        },
+        {
+          "label": "Admissions",
+          "href": "/admissions"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact"
+        }
+      ],
+      "ctaLabel": "Apply Now",
+      "ctaHref": "/admissions",
+      "showTopBar": true
+    },
+    "footer": {
+      "aboutText": "Your premier gateway to technical excellence and professional IT training in Umerkot.",
+      "quickLinksTitle": "Quick Links",
+      "programsTitle": "Programs",
+      "contactTitle": "Contact",
+      "copyrightText": "Affiliated with NAVTTC, STEVTA & SBTE."
+    }
+  },
+  "homepage": {
+    "sections": [
+      {
+        "id": "hero",
+        "enabled": true,
+        "label": "Hero Section"
+      },
+      {
+        "id": "about",
+        "enabled": true,
+        "label": "Principal's Message"
+      },
+      {
+        "id": "courses",
+        "enabled": true,
+        "label": "Featured Courses"
+      },
+      {
+        "id": "why-us",
+        "enabled": true,
+        "label": "Why Choose Us"
+      },
+      {
+        "id": "testimonials",
+        "enabled": true,
+        "label": "Testimonials"
+      },
+      {
+        "id": "cta",
+        "enabled": true,
+        "label": "Call to Action"
+      }
+    ]
+  },
+  "pageHeroes": {
+    "gallery": {
+      "title": "Journey of Skills & Growth"
+    }
+  }
 }

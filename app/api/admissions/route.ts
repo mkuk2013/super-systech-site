@@ -13,6 +13,16 @@ export async function POST(request: NextRequest) {
     }
 
     const data = await readContent();
+    const selectedCourse = data.courses.find((c: any) => c.title === course);
+    
+    if (!selectedCourse) {
+      return NextResponse.json({ error: "Invalid course selected" }, { status: 400 });
+    }
+
+    if (selectedCourse.admissionsOpen === false) {
+      return NextResponse.json({ error: "Admissions are currently closed for this course" }, { status: 400 });
+    }
+
     const admission = {
       id: uuidv4(),
       studentName,

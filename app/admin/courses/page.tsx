@@ -73,7 +73,7 @@ export default function AdminCoursesPage() {
 
   const newCourse = () => {
     setEditing({
-      title: "", board: "", duration: "", description: "", icon: "BookOpen", featured: false,
+      title: "", board: "", duration: "", description: "", icon: "BookOpen", featured: false, admissionsOpen: true
     });
   };
 
@@ -105,6 +105,11 @@ export default function AdminCoursesPage() {
                     </Typography>
                     {course.featured && (
                       <Chip label="FEATURED" size="small" color="secondary" sx={{ height: 20, fontSize: '0.625rem', fontWeight: 700 }} />
+                    )}
+                    {course.admissionsOpen === false ? (
+                      <Chip label="ADMISSIONS CLOSED" size="small" color="error" variant="outlined" sx={{ height: 20, fontSize: '0.625rem', fontWeight: 700 }} />
+                    ) : (
+                      <Chip label="ADMISSIONS OPEN" size="small" color="success" variant="outlined" sx={{ height: 20, fontSize: '0.625rem', fontWeight: 700 }} />
                     )}
                   </Box>
                   <Typography variant="body2" color="text.secondary">
@@ -187,6 +192,15 @@ export default function AdminCoursesPage() {
                   />
                 }
                 label={<Typography variant="body2" sx={{ fontWeight: 700 }}>Featured on Home</Typography>}
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={editing?.admissionsOpen !== false}
+                    onChange={(e) => setEditing({ ...editing, admissionsOpen: e.target.checked })}
+                  />
+                }
+                label={<Typography variant="body2" sx={{ fontWeight: 700 }}>Admissions Open</Typography>}
               />
             </Box>
           </Box>

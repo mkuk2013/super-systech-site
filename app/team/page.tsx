@@ -5,7 +5,12 @@ import AnimatedSection from "@/components/AnimatedSection";
 export const dynamic = "force-dynamic";
 
 export default async function TeamPage() {
-  const { team } = await readContent();
+  const { team, pageHeroes } = await readContent();
+  const hero = pageHeroes?.team || {
+    badge: "OUR TEAM",
+    title: "Meet Our Faculty",
+    subtitle: "Experienced professionals dedicated to shaping the next generation of tech leaders."
+  };
 
   return (
     <div className="bg-white min-h-screen">
@@ -14,12 +19,12 @@ export default async function TeamPage() {
         <div className="absolute bottom-10 right-10 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 lg:px-6 text-center relative z-10">
           <AnimatedSection>
-            <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">OUR TEAM</p>
+            <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">{hero.badge}</p>
             <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-4">
-              Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Faculty</span>
+              {hero.title}
             </h1>
             <p className="text-slate-300 max-w-2xl mx-auto">
-              Experienced professionals dedicated to shaping the next generation of tech leaders.
+              {hero.subtitle}
             </p>
           </AnimatedSection>
         </div>

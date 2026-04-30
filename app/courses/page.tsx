@@ -14,7 +14,12 @@ const iconMap: Record<string, any> = {
 export const dynamic = "force-dynamic";
 
 export default async function CoursesPage() {
-  const { courses, settings } = await readContent();
+  const { courses, settings, pageHeroes } = await readContent();
+  const hero = pageHeroes?.courses || {
+    badge: "ACADEMIC CATALOG 2025",
+    title: "Board Certified Programs",
+    subtitle: `Select from our government-authorized programs designed by industry experts at ${settings.siteName}.`
+  };
 
   return (
     <div className="bg-white min-h-screen">
@@ -23,12 +28,12 @@ export default async function CoursesPage() {
         <div className="absolute bottom-10 left-10 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 lg:px-6 text-center relative z-10">
           <AnimatedSection>
-            <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">ACADEMIC CATALOG 2025</p>
+            <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">{hero.badge}</p>
             <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-4">
-              Board Certified <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Programs</span>
+              {hero.title}
             </h1>
             <p className="text-slate-300 max-w-2xl mx-auto">
-              Select from our government-authorized programs designed by industry experts at {settings.siteName}.
+              {hero.subtitle}
             </p>
           </AnimatedSection>
         </div>
@@ -65,15 +70,40 @@ export default async function CoursesPage() {
                         <Icon size={80} className="text-white" />
                       </div>
                     </div>
-                    <div className="p-6 flex flex-col">
+                    <div className="p-6 flex flex-col h-full">
+                      <div className="flex items-center gap-2 mb-3">
+                        {course.admissionsOpen === false ? (
+                          <span className="bg-red-50 text-red-600 text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded border border-red-100">
+                            Admissions Closed
+                          </span>
+                        ) : (
+                          <span className="bg-green-50 text-green-600 text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded border border-green-100">
+                            Admissions Open
+                          </span>
+                        )}
+                        {course.featured && (
+                          <span className="bg-amber-50 text-amber-600 text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded border border-amber-100">
+                            Popular
+                          </span>
+                        )}
+                      </div>
                       <p className="text-gray-500 text-sm leading-relaxed mb-6">{course.description}</p>
                       <div className="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center">
                         <span className="font-medium text-gray-400 text-xs flex items-center gap-1.5">
                           <Clock size={13} className="text-cyan-600" /> {course.duration}
                         </span>
-                        <Link href="/admissions" className="btn-gold text-xs px-5 py-2">
-                          Enroll <ChevronRight size={12} className="inline" />
-                        </Link>
+                        {course.admissionsOpen !== false ? (
+                          <Link 
+                            href={`/admissions?course=${encodeURIComponent(course.title)}`} 
+                            className="btn-gold text-xs px-5 py-2"
+                          >
+                            Enroll <ChevronRight size={12} className="inline" />
+                          </Link>
+                        ) : (
+                          <span className="bg-gray-100 text-gray-400 text-xs px-5 py-2 rounded cursor-not-allowed font-bold">
+                            Closed
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>

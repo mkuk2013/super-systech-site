@@ -1,11 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { GraduationCap, CheckCircle, AlertCircle, Sparkles } from "lucide-react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { GraduationCap, CheckCircle, AlertCircle, Sparkles, X } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 
-export default function AdmissionsPage() {
+function AdmissionsForm() {
+  const searchParams = useSearchParams();
+  const preSelectedCourse = searchParams.get("course");
+  
   const [courses, setCourses] = useState<any[]>([]);
+  const [hero, setHero] = useState({
+    badge: "JOIN STC UMERKOT",
+    title: "Online Admission",
+    subtitle: "Apply now for the 2026 academic session. Fill in the form below to submit your admission application."
+  });
   const [form, setForm] = useState({
     studentName: "",
     fatherName: "",
@@ -18,11 +27,28 @@ export default function AdmissionsPage() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("/api/content?section=courses")
+    fetch("/api/content")
       .then((r) => r.json())
-      .then(setCourses)
-      .catch((err) => console.error("Failed to fetch courses in Admissions:", err));
-  }, []);
+      .then((data) => {
+        setCourses(data.courses || []);
+        if (data.pageHeroes?.admissions) {
+          setHero(data.pageHeroes.admissions);
+        }
+        if (preSelectedCourse) {
+          const found = data.courses?.find((c: any) => c.title === preSelectedCourse || c.id === preSelectedCourse);
+          if (found && found.admissionsOpen !== false) {
+            setForm(prev => ({ ...prev, course: found.title }));
+          }
+        }
+      })
+      .catch((err) => console.error("Failed to fetch admissions content:", err));
+  }, [preSelectedCourse]);
+
+  // Filter courses based on pre-selection
+  const availableCourses = courses.filter((c: any) => c.admissionsOpen !== false);
+  const filteredCourses = preSelectedCourse 
+    ? availableCourses.filter(c => c.title === preSelectedCourse || c.id === preSelectedCourse)
+    : availableCourses;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,12 +87,12 @@ export default function AdmissionsPage() {
         <div className="absolute bottom-10 right-10 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 lg:px-6 text-center relative z-10">
           <AnimatedSection>
-            <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">JOIN STC UMERKOT</p>
+            <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">{hero.badge}</p>
             <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-4">
-              Online <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Admission</span>
+              {hero.title}
             </h1>
             <p className="text-slate-300 max-w-2xl mx-auto">
-              Apply now for the 2025 academic session. Fill in the form below to submit your admission application.
+              {hero.subtitle}
             </p>
           </AnimatedSection>
         </div>
@@ -158,7 +184,23 @@ export default function AdmissionsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold text-navy mb-2">Select Course</label>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="block text-sm font-bold text-navy">Select Course</label>
+                    {preSelectedCourse && (
+                      <button 
+                        type="button"
+                        onClick={() => {
+                          window.history.replaceState(null, "", "/admissions");
+                          setForm(prev => ({ ...prev, course: "" }));
+                          // Refresh to clear pre-selection logic
+                          window.location.reload();
+                        }}
+                        className="text-red-500 text-[10px] font-bold flex items-center gap-1 hover:underline"
+                      >
+                        <X size={10} /> CLEAR FILTER
+                      </button>
+                    )}
+                  </div>
                   <select
                     className="admin-input"
                     value={form.course}
@@ -166,7 +208,7 @@ export default function AdmissionsPage() {
                     required
                   >
                     <option value="">-- Select a Program --</option>
-                    {courses.map((c: any) => (
+                    {filteredCourses.map((c: any) => (
                       <option key={c.id} value={c.title}>{c.title}</option>
                     ))}
                   </select>
@@ -198,5 +240,17 @@ export default function AdmissionsPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function AdmissionsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-500"></div>
+      </div>
+    }>
+      <AdmissionsForm />
+    </Suspense>
   );
 }

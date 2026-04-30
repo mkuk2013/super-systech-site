@@ -34,8 +34,12 @@ export async function PUT(request: NextRequest) {
 
     const updated = await updateSection(section, data);
     return NextResponse.json({ success: true, data: updated });
-  } catch (error) {
-    console.error("PUT Error:", error);
-    return NextResponse.json({ error: "Failed to update content", details: String(error) }, { status: 500 });
+  } catch (error: any) {
+    console.error("PUT Error (Full):", error);
+    return NextResponse.json({ 
+      error: "Failed to update content", 
+      details: error.message || String(error),
+      stack: error.stack
+    }, { status: 500 });
   }
 }

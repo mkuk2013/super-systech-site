@@ -5,7 +5,12 @@ import AnimatedSection from "@/components/AnimatedSection";
 export const dynamic = "force-dynamic";
 
 export default async function AboutPage() {
-  const { about, settings } = await readContent();
+  const { about, settings, pageHeroes } = await readContent();
+  const hero = pageHeroes?.about || {
+    badge: "OUR STORY",
+    title: "About STC Umerkot",
+    subtitle: "Established in 1997, Super Sys-Tech Computers Centre Umerkot has been providing world-class technical education to thousands of students across the region."
+  };
 
   return (
     <div className="bg-white min-h-screen">
@@ -14,13 +19,12 @@ export default async function AboutPage() {
         <div className="absolute top-10 right-10 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 lg:px-6 text-center relative z-10">
           <AnimatedSection>
-            <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">OUR STORY</p>
+            <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">{hero.badge}</p>
             <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-4">
-              About <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">STC Umerkot</span>
+              {hero.title}
             </h1>
             <p className="text-slate-300 max-w-2xl mx-auto">
-              Established in 1997, Super Sys-Tech Computers Centre Umerkot has been providing world-class
-              technical education to thousands of students across the region.
+              {hero.subtitle}
             </p>
           </AnimatedSection>
         </div>

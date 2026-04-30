@@ -9,23 +9,26 @@ import { Menu, X, Phone, Mail, MapPin } from "lucide-react";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [settings, setSettings] = useState<any>(null);
+  const [data, setData] = useState<any>(null);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     
-    // Fetch settings
-    fetch("/api/content?section=settings")
+    // Fetch settings and layout
+    fetch("/api/content")
       .then((r) => r.json())
-      .then(setSettings)
-      .catch((err) => console.error("Failed to fetch settings in Navbar:", err));
+      .then(setData)
+      .catch((err) => console.error("Failed to fetch data in Navbar:", err));
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
+  const settings = data?.settings;
+  const layout = data?.layout?.navbar;
+
+  const navLinks = layout?.links || [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/courses", label: "Courses" },
@@ -43,18 +46,20 @@ export default function Navbar() {
   return (
     <>
       {/* Top Info Bar */}
-      <div className="bg-slate-900 text-white/60 text-xs py-2 hidden lg:block">
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5"><Phone size={11} className="text-cyan-400" /> {settings?.phone || "0300-3198050"}</span>
-            <span className="flex items-center gap-1.5"><Mail size={11} className="text-cyan-400" /> {settings?.email || "supersystechumk@gmail.com"}</span>
-            <span className="flex items-center gap-1.5"><MapPin size={11} className="text-cyan-400" /> {settings?.address || "Jameel Market, Umerkot"}</span>
-          </div>
-          <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-amber-400/70 uppercase">
-            {settings?.affiliations?.map((a: any) => typeof a === 'string' ? a : a.name).join(" \u2022 ") || "SBTE \u2022 NAVTTC \u2022 STEVTA \u2022 TTB"}
+      {layout?.showTopBar !== false && (
+        <div className="bg-slate-900 text-white/60 text-xs py-2 hidden lg:block">
+          <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div className="flex items-center gap-6">
+              <span className="flex items-center gap-1.5"><Phone size={11} className="text-cyan-400" /> {settings?.phone || "0332-3350790"}</span>
+              <span className="flex items-center gap-1.5"><Mail size={11} className="text-cyan-400" /> {settings?.email || "stcuk1997@gmail.com"}</span>
+              <span className="flex items-center gap-1.5"><MapPin size={11} className="text-cyan-400" /> {settings?.address || "Jameel Market, Umerkot"}</span>
+            </div>
+            <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest text-amber-400/70 uppercase">
+              {settings?.affiliations?.map((a: any) => typeof a === 'string' ? a : a.name).join(" \u2022 ") || "SBTE \u2022 NAVTTC \u2022 STEVTA \u2022 TTB"}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Main Navbar */}
       <nav
@@ -70,24 +75,24 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-3 no-underline">
               <Image
                 src="/images/logo_ssc.png"
-                alt="Super Sys-Tech Computers"
+                alt="Logo"
                 width={48}
                 height={48}
                 className="rounded-lg shadow-sm"
               />
               <div className="flex flex-col justify-center">
                 <h1 className="text-base sm:text-lg font-bold text-slate-900 leading-tight font-heading">
-                  Super Sys-Tech
+                  {layout?.logoText || "Super Sys-Tech"}
                 </h1>
                 <p className="text-[10px] sm:text-xs text-cyan-700 font-medium uppercase tracking-wider">
-                  Computers Centre Umerkot
+                  {layout?.logoSubText || "Computers Centre Umerkot"}
                 </p>
               </div>
             </Link>
 
             {/* Desktop Links */}
             <div className="hidden lg:flex items-center gap-0.5">
-              {navLinks.map((link) => (
+              {navLinks.map((link: any) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -104,8 +109,8 @@ export default function Navbar() {
 
             {/* CTA + Mobile Toggle */}
             <div className="flex items-center gap-3">
-              <Link href="/admissions" className="btn-gold text-xs hidden md:inline-flex">
-                Apply Now
+              <Link href={layout?.ctaHref || "/admissions"} className="btn-gold text-xs hidden md:inline-flex">
+                {layout?.ctaLabel || "Apply Now"}
               </Link>
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -120,7 +125,7 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <div className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}>
           <div className="px-4 py-4 space-y-1 bg-white/90 backdrop-blur-xl border-t border-gray-100 shadow-inner">
-            {navLinks.map((link) => (
+            {navLinks.map((link: any) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -135,8 +140,8 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="pt-2">
-              <Link href="/admissions" onClick={() => setIsOpen(false)} className="btn-gold w-full text-center">
-                Apply Now
+              <Link href={layout?.ctaHref || "/admissions"} onClick={() => setIsOpen(false)} className="btn-gold w-full text-center">
+                {layout?.ctaLabel || "Apply Now"}
               </Link>
             </div>
           </div>

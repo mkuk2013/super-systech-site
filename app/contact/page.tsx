@@ -5,7 +5,12 @@ import AnimatedSection from "@/components/AnimatedSection";
 export const dynamic = "force-dynamic";
 
 export default async function ContactPage() {
-  const { settings } = await readContent();
+  const { settings, pageHeroes } = await readContent();
+  const hero = pageHeroes?.contact || {
+    badge: "GET IN TOUCH",
+    title: "Contact Us",
+    subtitle: "Have a question? We'd love to hear from you. Reach out via any method below."
+  };
 
   const contactCards = [
     { 
@@ -41,12 +46,12 @@ export default async function ContactPage() {
         <div className="absolute top-10 left-10 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 lg:px-6 text-center relative z-10">
           <AnimatedSection>
-            <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">GET IN TOUCH</p>
+            <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">{hero.badge}</p>
             <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-4">
-              Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Us</span>
+              {hero.title}
             </h1>
             <p className="text-slate-300 max-w-2xl mx-auto">
-              Have a question? We&apos;d love to hear from you. Reach out via any method below.
+              {hero.subtitle}
             </p>
           </AnimatedSection>
         </div>

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import {
   Menu as MenuIcon, Dashboard, Home, Info, Book, Group, Photo, Star,
-  School, Settings, Logout
+  School, Settings, Logout, ViewQuilt, ViewModule
 } from "@mui/icons-material";
 import ThemeProviderRegistry from "./ThemeProviderRegistry";
 
@@ -17,7 +17,10 @@ const drawerWidth = 260;
 
 const sidebarLinks = [
   { href: "/admin", label: "Dashboard", icon: <Dashboard /> },
+  { href: "/admin/layout-settings", label: "Layout & Navbar", icon: <ViewQuilt /> },
+  { href: "/admin/homepage", label: "Homepage Sections", icon: <ViewModule /> },
   { href: "/admin/hero", label: "Hero Section", icon: <Home /> },
+  { href: "/admin/pages", label: "Page Headers", icon: <ViewQuilt /> },
   { href: "/admin/about", label: "About / Principal", icon: <Info /> },
   { href: "/admin/courses", label: "Courses", icon: <Book /> },
   { href: "/admin/team", label: "Faculty / Team", icon: <Group /> },

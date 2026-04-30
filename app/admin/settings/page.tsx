@@ -35,8 +35,10 @@ export default function AdminSettingsPage() {
       } else {
         throw new Error("Failed to save");
       }
-    } catch (error) {
-      setToast({ open: true, message: "Error saving settings", severity: "error" });
+    } catch (error: any) {
+      console.error("Save Error:", error);
+      const msg = error.details || error.message || "Unknown error";
+      setToast({ open: true, message: `Error saving settings: ${msg}`, severity: "error" });
     }
     setSaving(false);
   };
@@ -168,20 +170,37 @@ export default function AdminSettingsPage() {
             </Box>
             
             <Stack spacing={3}>
-              <FormControlLabel
-                control={
-                  <Switch 
-                    checked={settings.marqueeShow || false} 
-                    onChange={(e) => updateField("marqueeShow", e.target.checked)}
-                    color="secondary"
-                  />
-                }
-                label={
-                  <Typography sx={{ fontWeight: 'bold' }}>
-                    {settings.marqueeShow ? "Marquee is ACTIVE" : "Marquee is HIDDEN"}
-                  </Typography>
-                }
-              />
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                <FormControlLabel
+                  control={
+                    <Switch 
+                      checked={settings.marqueeShow || false} 
+                      onChange={(e) => updateField("marqueeShow", e.target.checked)}
+                      color="secondary"
+                    />
+                  }
+                  label={
+                    <Typography sx={{ fontWeight: 'bold' }}>
+                      {settings.marqueeShow ? "Marquee is ACTIVE" : "Marquee is HIDDEN"}
+                    </Typography>
+                  }
+                />
+
+                <FormControlLabel
+                  control={
+                    <Switch 
+                      checked={settings.showAdmissionsInMarquee || false} 
+                      onChange={(e) => updateField("showAdmissionsInMarquee", e.target.checked)}
+                      color="warning"
+                    />
+                  }
+                  label={
+                    <Typography sx={{ fontWeight: 'bold' }}>
+                      Auto-show Open Admissions
+                    </Typography>
+                  }
+                />
+              </Box>
               
               <TextField 
                 fullWidth 
