@@ -236,7 +236,7 @@ export default async function Home() {
             <div className="w-full max-w-7xl mx-auto px-4 lg:px-6 relative z-10">
               <AnimatedSection>
                 <div className="text-center mb-16">
-                  <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">WHY STC UMERKOT</p>
+                  <p className="text-amber-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">WHY STC UMERKOT Sindh Pakistan</p>
                   <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
                     Why Students{" "}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Choose Us</span>
