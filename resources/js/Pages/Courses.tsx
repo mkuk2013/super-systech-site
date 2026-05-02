@@ -4,7 +4,7 @@ import AnimatedSection from "@/Components/AnimatedSection";
 import MainLayout from "@/Layouts/MainLayout";
 
 const iconMap: Record<string, any> = {
-  GraduationCap, ShieldCheck, BookOpen, Award, Code, Palette, GraduationCap, Briefcase,
+  GraduationCap, ShieldCheck, BookOpen, Award, Code, Palette, Briefcase,
 };
 
 interface CoursesProps {
