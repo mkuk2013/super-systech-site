@@ -1,0 +1,113 @@
+{
+  "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
+  "resources/js/Components/AnimatedCounter.tsx": [
+    "/build/assets/Home-SfA-Ofoc.js"
+  ],
+  "resources/js/Components/AnimatedSection.tsx": [
+    "/build/assets/MainLayout-BoZ6Yae8.js",
+    "/build/assets/MainLayout-BeWPE9e8.css"
+  ],
+  "resources/js/Components/CookieConsent.tsx": [
+    "/build/assets/MainLayout-BoZ6Yae8.js",
+    "/build/assets/MainLayout-BeWPE9e8.css"
+  ],
+  "resources/js/Components/ExpandingGallery.tsx": [
+    "/build/assets/Gallery-BW0m4sd8.js"
+  ],
+  "resources/js/Components/FloatingActions.tsx": [
+    "/build/assets/MainLayout-BoZ6Yae8.js",
+    "/build/assets/MainLayout-BeWPE9e8.css"
+  ],
+  "resources/js/Components/Footer.tsx": [
+    "/build/assets/MainLayout-BoZ6Yae8.js",
+    "/build/assets/MainLayout-BeWPE9e8.css"
+  ],
+  "resources/js/Components/Marquee.css": [
+    "/build/assets/MainLayout-BoZ6Yae8.js",
+    "/build/assets/MainLayout-BeWPE9e8.css"
+  ],
+  "resources/js/Components/Marquee.tsx": [
+    "/build/assets/MainLayout-BoZ6Yae8.js",
+    "/build/assets/MainLayout-BeWPE9e8.css"
+  ],
+  "resources/js/Components/Navbar.tsx": [
+    "/build/assets/MainLayout-BoZ6Yae8.js",
+    "/build/assets/MainLayout-BeWPE9e8.css"
+  ],
+  "resources/js/Components/PromotionalModal.tsx": [
+    "/build/assets/MainLayout-BoZ6Yae8.js",
+    "/build/assets/MainLayout-BeWPE9e8.css"
+  ],
+  "resources/js/Layouts/AdminLayout.tsx": [
+    "/build/assets/AdminLayout-IFBoMDoz.js"
+  ],
+  "resources/js/Layouts/MainLayout.tsx": [
+    "/build/assets/MainLayout-BoZ6Yae8.js",
+    "/build/assets/MainLayout-BeWPE9e8.css"
+  ],
+  "resources/js/Pages/About.tsx": [
+    "/build/assets/About-Ckos4zj-.js"
+  ],
+  "resources/js/Pages/Admin/Dashboard.tsx": [
+    "/build/assets/Dashboard-rxYPQ5yi.js"
+  ],
+  "resources/js/Pages/Admin/ManageAbout.tsx": [
+    "/build/assets/ManageAbout-CJ-TyKcd.js"
+  ],
+  "resources/js/Pages/Admin/ManageAdmissions.tsx": [
+    "/build/assets/ManageAdmissions-7t0Bizgl.js"
+  ],
+  "resources/js/Pages/Admin/ManageAnnouncement.tsx": [
+    "/build/assets/ManageAnnouncement-DnXZC856.js"
+  ],
+  "resources/js/Pages/Admin/ManageCourses.tsx": [
+    "/build/assets/ManageCourses-bTy8vQPn.js"
+  ],
+  "resources/js/Pages/Admin/ManageGallery.tsx": [
+    "/build/assets/ManageGallery-D7HYPF3v.js"
+  ],
+  "resources/js/Pages/Admin/ManageHero.tsx": [
+    "/build/assets/ManageHero-DtbquL7P.js"
+  ],
+  "resources/js/Pages/Admin/ManageHomepage.tsx": [
+    "/build/assets/ManageHomepage-C05asmrN.js"
+  ],
+  "resources/js/Pages/Admin/ManagePageHeroes.tsx": [
+    "/build/assets/ManagePageHeroes-Cs2ZyzbD.js"
+  ],
+  "resources/js/Pages/Admin/ManageSettings.tsx": [
+    "/build/assets/ManageSettings-m7WuqokG.js"
+  ],
+  "resources/js/Pages/Admin/ManageTeam.tsx": [
+    "/build/assets/ManageTeam-BYvi88nH.js"
+  ],
+  "resources/js/Pages/Admin/ManageTestimonials.tsx": [
+    "/build/assets/ManageTestimonials-Dpgn9S5U.js"
+  ],
+  "resources/js/Pages/Admissions.tsx": [
+    "/build/assets/Admissions-D4EcAy2m.js"
+  ],
+  "resources/js/Pages/Contact.tsx": [
+    "/build/assets/Contact-2IbQyCzs.js"
+  ],
+  "resources/js/Pages/Courses.tsx": [
+    "/build/assets/Courses-ClSp4Q0p.js"
+  ],
+  "resources/js/Pages/Gallery.tsx": [
+    "/build/assets/Gallery-BW0m4sd8.js"
+  ],
+  "resources/js/Pages/Home.tsx": [
+    "/build/assets/Home-SfA-Ofoc.js"
+  ],
+  "resources/js/Pages/PrivacyPolicy.tsx": [
+    "/build/assets/PrivacyPolicy-B9JhnCcJ.js"
+  ],
+  "resources/js/Pages/Team.tsx": [
+    "/build/assets/Team-GDMIE1y6.js"
+  ],
+  "resources/js/Pages/TermsOfService.tsx": [
+    "/build/assets/TermsOfService-dva6Mq_4.js"
+  ],
+  "resources/js/ssr.tsx": [],
+  "vendor/tightenco/ziggy/dist/index.js": []
+}
